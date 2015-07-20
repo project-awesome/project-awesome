@@ -4,7 +4,7 @@
   "description": "Library to create practice questions for Computer Science problems",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "./node_modules/.bin/mocha --reporter spec"
   },
   "repository": {
     "type": "git",
@@ -21,5 +21,13 @@
   "bugs": {
     "url": "https://github.com/wolfenbarger/project-awesome/issues"
   },
-  "homepage": "https://github.com/wolfenbarger/project-awesome#readme"
+  "homepage": "https://github.com/wolfenbarger/project-awesome#readme",
+  "dependencies": {
+    "mocha": "^2.2.5"
+  },
+  "devDependencies": {
+    "chai": "^3.2.0",
+    "mocha": "^2.2.5",
+    "underscore": "^1.8.3"
+  }
 }
