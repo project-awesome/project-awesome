@@ -7,8 +7,10 @@ var _und = require("underscore")._;
  * @param  {Object} object
  * @return {Boolean}
  */
-module.exports = {
-	isValidQuizDescriptorQuestion: function(object) {
+module.exports = {};
+
+
+module.exports.isValidQuizDescriptorQuestion = function(object) {
 
 
 		if (!(_und.has(object, 'question'))) return false;
@@ -22,9 +24,8 @@ module.exports = {
 		if ((object.repeat < 1)) return false;
 
 		return true;
- }
-
 };
+
 
 /**
  * Is this JSON for a valid QuizDescriptorQuestion object
