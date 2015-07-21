@@ -68,7 +68,7 @@ module.exports.isValidQuizDescriptor = function (object) {
 
 		for (var i=0; i<object.quiz.length; i++) {
 			console.log("object.quiz[i] = " + JSON.stringify(object.quiz[i]));
-		    if (!(isValidQuestion(object.quiz[i]))) return false;
+		    if (!(module.exports.isValidQuestion(object.quiz[i]))) return false;
 		} 
 
 		return true;
