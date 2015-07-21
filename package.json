@@ -23,11 +23,10 @@
   },
   "homepage": "https://github.com/wolfenbarger/project-awesome#readme",
   "dependencies": {
-    "mocha": "^2.2.5"
+    "underscore": "^1.8.3"
   },
   "devDependencies": {
     "chai": "^3.2.0",
-    "mocha": "^2.2.5",
-    "underscore": "^1.8.3"
+    "mocha": "^2.2.5"
   }
 }
