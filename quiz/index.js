@@ -69,3 +69,14 @@ module.exports.buildQuiz = function() {
         $("#json").html(linkJSON);
     }
 }
+
+/*
+function formatPts(pts) {
+    if (pts == 0)
+	return "";
+    if (pts == 1)
+	return "(1 pt) ";
+
+    return "(" + pts + " pts) ";
+}
+*/

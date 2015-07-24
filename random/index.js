@@ -1,5 +1,3 @@
-
-
 module.exports = {};
 
 module.exports.random = function(seed) {
@@ -92,4 +90,25 @@ with a contract similar to that of the Random object in Java SE 7
     };
     
 };
+
+module.exports.randIntBetweenInclusive = function(min, max) {
+    return Math.floor(Math.random() * (max - min + 1)) + min;
+};
+
+
+
+module.exports.determineSeed = function(rawTextSeed) {
+
+    // return seed as a hex number converted from rawTextSeed,
+    // or if that is not possible, return a random seed that is a
+    // legit positive integer between 0 and 2^32-1.
+    
+    var seedToReturn = parseInt(rawTextSeed,16);
+
+    // Use the alternative if the seed passed in was not a legit number
+    if (isNaN(seedToReturn))
+	return module.exports.randIntBetweenInclusive(0,0xFFFFFFFF);
+
+    return seedToReturn;
+}
 

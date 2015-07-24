@@ -4,7 +4,7 @@
   "description": "Library to create practice questions for Computer Science problems",
   "main": "index.js",
   "scripts": {
-    "pretest" : "cd html; browserify -r ./x.js > bundle.js",
+    "pretest" : "cd html; browserify -r ./pa.js > pa-bundle.js",
     "test": "./node_modules/.bin/mocha --reporter spec"
   },
   "repository": {

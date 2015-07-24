@@ -17,16 +17,38 @@ describe('#random',function() {
 		expect(r.currentSeed.lowBits).to.equal(0xDEECE66D);
 	    });
 
-     it('should be that you can create a random object and set its seed', function(){
+     it('should be that you can create a random object and set its seed using 48 bits', function(){
 		var r = new random.random(0xABC000000000);
 		expect(r.currentSeed.highBits).to.equal(0xABC5);
 		expect(r.currentSeed.lowBits).to.equal(0xDEECE66D);
 	    });
 
+     it('should have a determineSeed method', function() {
+	     expect(random.determineSeed).is.a('function');
+	 });
+
+     it('should have a determineSeed method that takes hex input', function() {
+	     expect(random.determineSeed("0xA")).to.equal(10);
+	     expect(random.determineSeed("10")).to.equal(16);
+	 });
+
+     it('should have a determineSeed method that if given bad input chooses a random int', function() {
+	     expect(random.determineSeed("bar")).to.be.a("number");
+	 });
+
+     it('should have a determineSeed method that returns a random when no parameter is used',
+	function() {
+	    var result=random.determineSeed();
+	     expect(result).to.be.a("number");
+	     expect(result>=0);
+	     expect(result<=0xFFFFFFFF);
+
+	 });
+
 
     });	
 
-
+   
 
 
 // Mocha cheatsheet
