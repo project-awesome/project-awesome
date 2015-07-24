@@ -33,7 +33,7 @@ module.exports.Quiz = function (quizDescriptor,params) {
 
 };
 
-module.exports.buildQuiz = function() {
+module.exports.putQuizInWebPage = function() {
 
     var url = require('url');
     var parts = url.parse(window.location.href,true);
@@ -43,31 +43,32 @@ module.exports.buildQuiz = function() {
     var showKey = parts.query.showKey;
     var showJson = parts.query.showJson;
 
-    var seed = determineSeed(parts.query.seed);
+    var seed = randomModule.determineSeed(parts.query.seed);
 
     var quizDescriptor = JSON.parse(jsonString);
 
-    var quiz = new Quiz(seed,quizDescriptor);
+    var quiz = new module.exports.Quiz(quizDescriptor,{"seed" : seed});
 
     $("#quizname").html(quiz.quizname);
-
+    
     if (showQuestions=="yes") { 
-        $("#questions").html("<h2>Questions</h2>\n" + quiz.formatQuestionsHTML()); 
-    } else {
-        $("#questions").html(linkQuestions);
+	var questionHTML = "<h2>Questions</h2>\n<ol>\n";
+	for (var i=0; i<quiz.questions.length; i++) {
+	    questionHTML += "<li>"+quiz.questions[i].question.html + "</li>";	    
+	}
+	questionHTML += "</ol>";
+        $("#questions").html(questionHTML); 
     }
 
     if (showKey=="yes") { 
-        $("#key").html("<h2>Key</h2>\n" +  quiz.formatAnswersHTML());
-    } else {
-        $("#key").html(linkKey);
+	var answerHTML = "<h2>Key</h2>\n<ol>\n";
+	for (var i=0; i<quiz.questions.length; i++) {
+	    answerHTML += "<li>" + quiz.questions[i].answer.html + "</li>";	    
+	}
+	answerHTML += "</ol>";
+        $("#key").html(answerHTML); 
     }
 
-    if (showJson=="yes") { 
-        $("#json").html("<h2>Json</h2>\n" +  "<textarea id='jsontextarea' rows='10' cols='30'>" + jsonString + "</textarea>");
-    } else {
-        $("#json").html(linkJSON);
-    }
 }
 
 /*

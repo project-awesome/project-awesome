@@ -116,14 +116,9 @@ module.exports.produceArrayOfQuestions = function(quizObject, randomStream) {
     //Loop through the array of generating objects
     for(var i = 0; i < n; ++i) {
 
-
-
 	var item = quizObject.quiz[i];
-
 	
 	if("question" in item) { //If this object is a question generator
-	    
-
 
 	    var questionType = item.question;
 	    var params = (("params" in item) ? item.params : {});
@@ -131,7 +126,6 @@ module.exports.produceArrayOfQuestions = function(quizObject, randomStream) {
 	    
 	    var question = ((questionType in questionsModule.questionTypes) ? questionsModule.questionTypes[questionType] : null);
 
-	    
 	    //Generate the specified number of the specified type of question, add them to the array
 	    if(question != null) {
 		for(var j=0; j<repeat; j++) {
