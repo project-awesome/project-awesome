@@ -40,7 +40,7 @@ module.exports.questionTypes =  {
 
 
 module.exports.addOptionForEachQuestionType = function(e) {
-    $.each(questionTypes, function(key, val) {
+    $.each(module.exports.questionTypes, function(key, val) {
 	    e.append($('<option></option>').val(key).html(val.title));
 	});
 };

@@ -7,6 +7,10 @@ module.exports = {}
 var randomModule = require("../random");
 var quizDescriptorModule = require("../quizDescriptor");
 
+var questionsModule = require("../questions");
+
+module.exports.addOptionForEachQuestionType = questionsModule.addOptionForEachQuestionType;
+
 module.exports.Quiz = function (quizDescriptor,params) {
 
     if (typeof(params)!=='object') {
