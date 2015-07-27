@@ -1,1 +1,1 @@
-
+module.exports.qd = require('./quizDescriptor');
