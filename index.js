@@ -1,1 +1,1 @@
-module.exports.isValidQuizDescriptorJSON = require('./quizDescriptor').isValidQuizDescriptorJSON;
+module.exports.isValidQuizDescriptor = require('./quizDescriptor').isValidQuizDescriptor;

@@ -14,17 +14,17 @@ module.exports.addOptionForEachQuestionType = questionsModule.addOptionForEachQu
 module.exports.Quiz = function (quizDescriptor,params) {
 
     if (typeof(params)!=='object') {
-	throw new Error("2nd parameter to Quiz constructor should be an object");
+        throw new Error("2nd parameter to Quiz constructor should be an object");
     }
     
     if ('seed' in params) {
-	this.seed = params.seed
+        this.seed = params.seed;
         this.randomStream = new randomModule.random(params.seed);
     } else if ('randomStream' in params) {
         this.randomStream = params.randomStream;
         this.seed = params.randomStream.currentSeed;
     } else {
-	throw new Error("2nd parameter to quiz constructor must contain either seed or randomStream");
+	   throw new Error("2nd parameter to quiz constructor must contain either seed or randomStream");
     }
 
     this.jsonObject = quizDescriptor;
