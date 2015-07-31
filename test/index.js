@@ -4,4 +4,5 @@ require("./quizDescriptor");
 require("./questions");
 require("./quiz");
 require("./validators");
+require("./QuizBuilder");
 

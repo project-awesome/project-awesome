@@ -6,13 +6,14 @@ var QuizValidator = require("../../validators/QuizValidator");
 
 describe('QuizValidator', function() {
 	var validQuestion = {
+		format: "multiple-choice",
 		question: "Why are you looking at the sample test question?",
-		answers: [
+		choices: [
 			"Because I am confused.",
 			"To see what a valid question is.",
 			"All of the above."
 		],
-		correct: 1
+		answer: 1
 	};
 	var validQuiz = {
 		qd: 1,
@@ -118,7 +119,7 @@ describe('QuizValidator', function() {
 			it('should reject quizzes that contain an invalid question', function() {
 				var q = _und.clone(validQuiz);
 				var question = _und.clone(validQuestion);
-				delete question.answers;
+				delete question.choices;
 				q.questions.push(question);
 				expect(QuizValidator.isValid(q)).to.be.false;
 			});
