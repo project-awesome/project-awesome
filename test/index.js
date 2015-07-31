@@ -1,6 +1,7 @@
-require("./bits/index");
-require("./random/index");
-require("./quizDescriptor/index");
-require("./questions/index");
-require("./quiz/index");
+require("./bits");
+require("./random");
+require("./quizDescriptor");
+require("./questions");
+require("./quiz");
+require("./validators");
 
