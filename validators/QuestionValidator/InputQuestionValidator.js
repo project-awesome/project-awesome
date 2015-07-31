@@ -7,7 +7,7 @@ function isPositiveInteger(x) {
 function isValid(q) {
 
 	// q.answer (must be a string - for now)
-	if (!(_und.has(q, 'answer'))) return false;
+	if (typeof q.answer !== 'string') return false;
 
 	return true;
 }

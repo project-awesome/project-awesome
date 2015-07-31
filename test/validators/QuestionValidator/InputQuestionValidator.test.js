@@ -20,6 +20,20 @@ describe('QuestionValidator', function() {
 
 	});
 
+	describe('Rejecting Invalid Questions', function() {
+
+		describe('Invalid answer property', function() {
+
+			it('should reject a question with a non-string answer property', function() {
+				var q = _und.clone(validInputQuestion);
+				q.answer = 1;
+				expect(QuestionValidator.isValid(q)).to.be.false;
+			});
+
+		});
+
+	});
+
 });
 
 
