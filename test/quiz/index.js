@@ -55,8 +55,8 @@ describe('#quiz', function() {
 	       var q = new quizModule.Quiz(qd,{randomStream:mockRS});
 	       expect(q).to.be.an('object');
 	       expect(q.questions).to.be.an('array');
-	       expect(q.questions[0].question.html).to.equal('<p>Convert 5 from base 10 to base 2.</p>');
-	       expect(q.questions[0].answer.html).to.equal('101');
+	       expect(q.questions[0].question).to.equal('Convert 5 from base 10 to base 2.');
+	       expect(q.questions[0].answer).to.equal('101');
 	   });
 	
 

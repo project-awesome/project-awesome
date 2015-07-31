@@ -54,17 +54,17 @@ describe('#binHexOctDec',function() {
 	it('should be that [0,5,0,0] is Convert 5 from base 10 to base 2', function(){	
 		retVals = [0,5,0,0];
 		var q = new binHexOctDec.binHexOctDecQuestion(mockRS);
-		var expected="<p>Convert 5 from base 10 to base 2.</p>";
-		expect(q.question.html).to.equal(expected);
-		expect(q.answer.html).to.equal("101");
+		var expected="Convert 5 from base 10 to base 2.";
+		expect(q.question).to.equal(expected);
+		expect(q.answer).to.equal("101");
 	    });
 
 	it('should be that [1,5,1,1] is Convert 101 from binary to decimal', function(){
                 retVals = [1,5,1,1];
 		var q = new binHexOctDec.binHexOctDecQuestion(mockRS);
-		var expected="<p>Convert 101 from binary to decimal.</p>";
-		expect(q.question.html).to.equal(expected);
-		expect(q.answer.html).to.equal("5");
+		var expected="Convert 101 from binary to decimal.";
+		expect(q.question).to.equal(expected);
+		expect(q.answer).to.equal("5");
 	    });
 
 

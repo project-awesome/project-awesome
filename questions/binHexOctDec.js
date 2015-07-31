@@ -55,8 +55,9 @@ module.exports.binHexOctDecQuestion = function(randomStream) {
     
     var answer = numToConvert.toString(toRad)
     
-    this.question = {"html": "<p>Convert " + from + " from " + fromDesc + " to " + toDesc + ".</p>"}; 
-    this.answer = {"html": answer};
+    this.question = "Convert " + from + " from " + fromDesc + " to " + toDesc + "."; 
+    this.answer = answer;
+    this.format = "input";
 };
 
 
