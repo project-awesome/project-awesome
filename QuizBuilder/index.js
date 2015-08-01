@@ -1,7 +1,7 @@
 var tempQuizBuilder = require('../quiz');
 
-function buildQuizFromQuizDescriptor(descriptor, id, seed) {
-	var tmpQuiz = new tempQuizBuilder.Quiz(descriptor, { seed : seed });
+function buildQuizFromQuizDescriptor(descriptor, id, s) {
+	var tmpQuiz = new tempQuizBuilder.Quiz(descriptor, { seed : s });
 
     var showQuestions = 1;
     var showKey = 1;
@@ -11,7 +11,7 @@ function buildQuizFromQuizDescriptor(descriptor, id, seed) {
 
     quiz.title = descriptor.title;
     quiz.qd = id;
-    quiz.seed = seed;
+    quiz.seed = s;
     quiz.questions = [];
 
 
