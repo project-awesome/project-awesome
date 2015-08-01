@@ -10,17 +10,16 @@ function buildQuizFromQuizDescriptor(descriptor, id, seed) {
     var quiz = {};
 
     quiz.title = descriptor.title;
-    quiz.id = id;
+    quiz.qd = id;
     quiz.seed = seed;
     quiz.questions = [];
 
 
 	for (var i = 0; i < tmpQuiz.questions.length; i++) {
-    	console.log("got here!");
     	var q = { 
-    		question : tmpQuiz.questions[i].question.html,
-    		answers : [ tmpQuiz.questions[i].answer.html ],
-    		correct : 0
+    		question : tmpQuiz.questions[i].question,
+    		answer : tmpQuiz.questions[i].answer,
+            format : tmpQuiz.questions[i].format
     	};
     	quiz.questions.push(q);
 
