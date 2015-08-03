@@ -1,6 +1,8 @@
 var tempQuizBuilder = require('../quiz');
 
 function buildQuizFromQuizDescriptor(descriptor, id, hexStringSeed) {
+    var quiz = {};
+    quiz.seed = hexStringSeed;
     var s = parseInt(hexStringSeed, 16);
 	var tmpQuiz = new tempQuizBuilder.Quiz(descriptor, { seed : s });
 
@@ -8,11 +10,9 @@ function buildQuizFromQuizDescriptor(descriptor, id, hexStringSeed) {
     var showKey = 1;
     var showJson = 1;
 
-    var quiz = {};
 
     quiz.title = descriptor.title;
     quiz.qd = id;
-    quiz.seed = hexStringSeed;
     quiz.questions = [];
 
 
