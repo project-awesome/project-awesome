@@ -15,7 +15,6 @@ describe('QuizBuilder', function() {
 		}; 
 
 		var quiz = QuizBuilder.build(qd, 1, 1);
-		console.log(quiz);
 		expect(QuizValidator.isValid(quiz)).to.be.true;
 	});
 
