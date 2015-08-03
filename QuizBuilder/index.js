@@ -12,7 +12,7 @@ function buildQuizFromQuizDescriptor(descriptor, id, hexStringSeed) {
 
     quiz.title = descriptor.title;
     quiz.qd = id;
-    quiz.seed = s;
+    quiz.seed = hexStringSeed;
     quiz.questions = [];
 
 
