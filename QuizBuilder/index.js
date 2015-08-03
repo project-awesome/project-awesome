@@ -2,6 +2,7 @@ var tempQuizBuilder = require('../quiz');
 
 function buildQuizFromQuizDescriptor(descriptor, id, hexStringSeed) {
     var quiz = {};
+    console.log(hexStringSeed);
     quiz.seed = hexStringSeed;
     var s = parseInt(hexStringSeed, 16);
 	var tmpQuiz = new tempQuizBuilder.Quiz(descriptor, { seed : s });

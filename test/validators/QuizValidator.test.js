@@ -17,10 +17,30 @@ describe('QuizValidator', function() {
 	};
 	var validQuiz = {
 		qd: 1,
-		seed: 1,
+		seed: '1234abcd',
 		title: "Sample Quiz Title",
 		questions: [ _und.clone(validQuestion) ]
 	};
+
+	describe('isStringValidSeed', function() {
+		it('should reject any non string', function() {
+			expect(QuizValidator.isStringValidSeed(parseInt('ABCD1234', 16))).to.be.false;
+			expect(QuizValidator.isStringValidSeed(null)).to.be.false;
+			expect(QuizValidator.isStringValidSeed(undefined)).to.be.false;
+			expect(QuizValidator.isStringValidSeed(true)).to.be.false;
+		});
+
+		it('should reject strings that are not of length 8', function() {
+			expect(QuizValidator.isStringValidSeed("1234567")).to.be.false;
+			expect(QuizValidator.isStringValidSeed("12345678A")).to.be.false;
+		});
+
+		it('should accept hex strings of length 8', function() {
+			expect(QuizValidator.isStringValidSeed("12345678")).to.be.true;
+			expect(QuizValidator.isStringValidSeed("abcdef00")).to.be.true;
+		});
+
+	});
 
 	describe('Accepting Valid Quizzes', function() {
 

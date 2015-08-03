@@ -14,7 +14,7 @@ describe('QuizBuilder', function() {
 			}]
 		}; 
 
-		var quiz = QuizBuilder.build(qd, 1, 1);
+		var quiz = QuizBuilder.build(qd, 1, '1234abef');
 		expect(QuizValidator.isValid(quiz)).to.be.true;
 	});
 
