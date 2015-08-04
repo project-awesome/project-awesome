@@ -1,13 +1,13 @@
 // NEW-QUESTION-TYPE: add to questionFunctions dictionary below
 
 var binHexOctDec = require("./binHexOctDec");
-
-module.exports = {}
+var binHexOctDec = require("./changeOfBase");
 
 module.exports.questionTypes =  {
 
 
 	"binHexOctDec":          {"f": binHexOctDec.binHexOctDecQuestion,        title: "Bin Hex Oct Dec"},
+    "changeOfBase":          {"f": changeOfBase.changeOfBaseQuestion,        title: "Bin Hex Oct Dec"},
 };
 
 // To QA a new question type:

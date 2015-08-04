@@ -1,7 +1,3 @@
-
-module.exports = {};
-
-
 /**
    Given a radix (8,16,2,10), randomly choose either to describe that as, for example,
    "base 8" or as "octal".     This is so that you can check whether students can 
