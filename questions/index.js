@@ -1,7 +1,7 @@
 // NEW-QUESTION-TYPE: add to questionFunctions dictionary below
 
 var binHexOctDec = require("./binHexOctDec");
-var binHexOctDec = require("./changeOfBase");
+var changeOfBase = require("./changeOfBase");
 
 module.exports.questionTypes =  {
 
