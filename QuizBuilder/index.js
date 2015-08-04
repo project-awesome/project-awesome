@@ -56,7 +56,7 @@ function getQuestions(descriptor, randomStream) {
         */
 
     }
-    
+
     return questions; 
 
 };
@@ -71,19 +71,6 @@ function build(descriptor, id, hexStringSeed) {
     quiz.title = descriptor.title;
     quiz.qd = id;
     quiz.questions = getQuestions(descriptor, randomStream);
-
-    /*
-	for (var i = 0; i < questions.length; i++) {
-    	var q = { 
-    		question : questions[i].question,
-    		answer : questions[i].answer,
-            format : questions[i].format
-    	};
-    	quiz.questions.push(q);
-
-	}
-    */
-
 	return quiz;
 
 }

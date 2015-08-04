@@ -7,7 +7,7 @@ module.exports.questionTypes =  {
 
 
 	"binHexOctDec":          {"f": binHexOctDec.binHexOctDecQuestion,        title: "Bin Hex Oct Dec"},
-    "changeOfBase":          {"f": changeOfBase.changeOfBaseQuestion,        title: "Bin Hex Oct Dec"},
+    "changeOfBase":          {"f": changeOfBase.changeOfBaseQuestion,        title: "Change of Base"},
 };
 
 // To QA a new question type:
