@@ -30,6 +30,7 @@ module.exports.changeOfBaseQuestion = function(randomStream) {
 		return c.value;
 	});
 	this.format = 'multiple-choice';
+	this.question = "Convert " + this.a.value + " from " + this.a.base + " to " + this.b.base + ".";
 };
 
 
