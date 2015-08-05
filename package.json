@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "pretest": "cd html; browserify -r ./pa.js > pa-bundle.js",
-    "test": "./node_modules/.bin/mocha --reporter spec"
+    "test": "mocha --recursive"
   },
   "repository": {
     "type": "git",
