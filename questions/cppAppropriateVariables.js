@@ -169,6 +169,11 @@ function CppApproVar(randomStream, params) {
     this.correctIndex = typeAnswer;
     this.answer = typeAnswer;
     this.format = 'multiple-choice';
+    for (var i = 0; this.answerChoices.length > i; i++)
+        if (this.answerChoices[i].flag === true) {
+            this.answer = i;
+            break;
+        }
     this.choices = this.answerChoices.map(function(c) {
         return c.value;
     });
