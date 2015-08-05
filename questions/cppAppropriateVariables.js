@@ -124,7 +124,7 @@ function CppApproVar(randomStream, params) {
 
     typeAnswer = randomStream.nextIntRange(4);
 
-    this.typeQuestion = "<p>" + formatPts(this.pts);
+    this.typeQuestion = "<p>" ;
 
     // 2 types of question
     if(randomStream.nextIntRange(2) === 0) // given statement, choose type
