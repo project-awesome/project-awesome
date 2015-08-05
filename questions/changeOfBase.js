@@ -6,31 +6,31 @@ module.exports.changeOfBaseQuestion = function(randomStream) {
 
 	randomStream.shuffle(baseArray);
 
-	this.a = baseArray[0];
-	this.b = baseArray[1];
+	var a = baseArray[0];
+	var b = baseArray[1];
 
 	//Array of {String, bool} pairs: the string representation of a number in a particular base
 	//and a flag indicating whether or not it is the correct answer.
-	this.answerChoices = [ 
-		{value: this.b.value, flag: true}, 
-		{value: (randomStream.nextIntRange(240)+15).toString(this.b.radix), flag: false},
-		{value: (randomStream.nextIntRange(240)+15).toString(this.b.radix), flag: false},
-		{value: (randomStream.nextIntRange(240)+15).toString(this.b.radix), flag: false} 
+
+	var answerChoices = [ 
+		{value: b.value, flag: true}, 
+		{value: (randomStream.nextIntRange(240)+15).toString(b.radix), flag: false},
+		{value: (randomStream.nextIntRange(240)+15).toString(b.radix), flag: false},
+		{value: (randomStream.nextIntRange(240)+15).toString(b.radix), flag: false} 
 	];
 
-	randomStream.shuffle(this.answerChoices);
+	randomStream.shuffle(answerChoices);
 
 	//Find the correct answer
-	this.answer = 0;
-	for(var i=0; i<this.answerChoices.length; i++) {
-		if(this.answerChoices[i].flag == true)
+	for(var i=0; i<answerChoices.length; i++) {
+		if(answerChoices[i].flag == true)
 			this.answer = i;           
 	}
-	this.choices = this.answerChoices.map(function(c) {
+	this.choices = answerChoices.map(function(c) {
 		return c.value;
 	});
 	this.format = 'multiple-choice';
-	this.question = "Convert " + this.a.value + " from " + this.a.base + " to " + this.b.base + ".";
+	this.question = "Convert " + a.value + " from " + a.base + " to " + b.base + ".";
 };
 
 
