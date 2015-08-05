@@ -2,12 +2,12 @@
 
 var binHexOctDec = require("./binHexOctDec");
 var changeOfBase = require("./changeOfBase");
+var cppAppropriateVariables = require("./cppAppropriateVariables");
 
-module.exports.questionTypes =  {
-
-
-	"binHexOctDec":          {"f": binHexOctDec.binHexOctDecQuestion,        title: "Bin Hex Oct Dec"},
-    "changeOfBase":          {"f": changeOfBase.changeOfBaseQuestion,        title: "Change of Base"},
+module.exports.questionTypes = {
+    "binHexOctDec":             {"f": binHexOctDec.binHexOctDecQuestion,        title: "Bin Hex Oct Dec"},
+    "changeOfBase":             {"f": changeOfBase.changeOfBaseQuestion,        title: "Change of Base"},
+    "cppAppropriateVariables":  {"f": cppAppropriateVariablesQuestion,          title: "C++ Variable Types"},
 };
 
 // To QA a new question type:
