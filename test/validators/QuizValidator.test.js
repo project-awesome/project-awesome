@@ -16,7 +16,7 @@ describe('QuizValidator', function() {
 		answer: 1
 	};
 	var validQuiz = {
-		qd: 1,
+		id: 1,
 		seed: '1234abcd',
 		title: "Sample Quiz Title",
 		questions: [ _und.clone(validQuestion) ]
@@ -56,23 +56,23 @@ describe('QuizValidator', function() {
 			expect(QuizValidator.isValid("non object")).to.be.false;
 		});
 
-		describe('Invalid qd property', function() {
+		describe('Invalid id property', function() {
 
-			it('should reject quizzes with no qd property', function() {
+			it('should reject quizzes with no id property', function() {
 				var q = _und.clone(validQuiz);
-				delete q.qd;
+				delete q.id;
 				expect(QuizValidator.isValid(q)).to.be.false;
 			});
 
-			it('should reject quizzes with non-integer qd property', function() {
+			it('should reject quizzes with non-integer id property', function() {
 				var q = _und.clone(validQuiz);
-				q.qd = 1.1;
+				q.id = 1.1;
 				expect(QuizValidator.isValid(q)).to.be.false;
 			});
 
-			it('should reject quizzes with negative integer qd property', function() {
+			it('should reject quizzes with negative integer id property', function() {
 				var q = _und.clone(validQuiz);
-				q.qd = -1;
+				q.id = -1;
 				expect(QuizValidator.isValid(q)).to.be.false;
 			});
 

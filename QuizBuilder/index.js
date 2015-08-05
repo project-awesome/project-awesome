@@ -69,7 +69,7 @@ function build(descriptor, id, hexStringSeed) {
 	//var tmpQuiz = new tempQuizBuilder.Quiz(descriptor, { seed : s });
 
     quiz.title = descriptor.title;
-    quiz.qd = id;
+    quiz.id = id;
     quiz.questions = getQuestions(descriptor, randomStream);
 	return quiz;
 
