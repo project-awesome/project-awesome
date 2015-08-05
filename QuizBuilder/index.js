@@ -18,12 +18,12 @@ function getQuestions(descriptor, randomStream) {
             
             var question = ((questionType in questionsModule.questionTypes) ? questionsModule.questionTypes[questionType] : null);
 
+            if (question == null) throw "Invalid Question Type: " + questionType + " is not a defined quesiton.";
             //Generate the specified number of the specified type of question, add them to the array
-            if(question != null) {
-                for(var j=0; j<repeat; j++) {
-                    var newQuestion = new question.f(randomStream,params);
-                    questions.push(newQuestion); 
-                }
+            
+            for(var j=0; j<repeat; j++) {
+                var newQuestion = new question.f(randomStream,params);
+                questions.push(newQuestion); 
             }
         }
 
