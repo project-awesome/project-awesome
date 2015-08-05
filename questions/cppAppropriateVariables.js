@@ -171,10 +171,10 @@ function CppApproVar(randomStream, params) {
     this.correctIndex = typeAnswer;
     this.answer = typeAnswer;
     this.format = 'multiple-choice';
-    this.choices = this.answerChoice.map(function(c) {
+    this.choices = this.answerChoices.map(function(c) {
         return c.value;
     });
-    this.question = thos.typeQuestion;
+    this.question = this.typeQuestion;
 
     this.formatQuestion = function(format) {
         switch (format) {
