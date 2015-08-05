@@ -124,12 +124,12 @@ function CppApproVar(randomStream, params) {
 
     typeAnswer = randomStream.nextIntRange(4);
 
-    this.typeQuestion = "<p>" ;
+    this.typeQuestion = "" ;
 
     // 2 types of question
     if(randomStream.nextIntRange(2) === 0) // given statement, choose type
     {
-        this.typeQuestion += "Choose the type that would be appropriate for the following expression or literal: <code>";
+        this.typeQuestion += "Choose the type that would be appropriate for the following expression or literal: ";
         switch(typeAnswer) {
             case 0:
                 this.typeQuestion += cppGenerateIntAnswer(randomStream);
@@ -143,7 +143,6 @@ function CppApproVar(randomStream, params) {
             default:
                 this.typeQuestion += cppGenerateBoolAnswer(randomStream);
         }
-        this.typeQuestion += "</code></p>";
 
         this.answerChoices = [
             { value: testVarTypes[0], flag: false },
@@ -156,8 +155,7 @@ function CppApproVar(randomStream, params) {
     }
     else // given type, choose statement
     {
-        this.typeQuestion += "Choose the expression or literal that is of the following type: <code>" +
-            testVarTypes[typeAnswer] + "</code></p>";
+        this.typeQuestion += "Choose the expression or literal that is of the following type: " + testVarTypes[typeAnswer];
 
         this.answerChoices = [
             { value: cppGenerateIntAnswer(randomStream), flag: (typeAnswer===0) },
@@ -175,38 +173,6 @@ function CppApproVar(randomStream, params) {
         return c.value;
     });
     this.question = this.typeQuestion;
-
-    this.formatQuestion = function(format) {
-        switch (format) {
-            case "HTML": return this.formatQuestionHTML();
-        }
-        return "unknown format";
-    };
-
-    this.formatQuestionHTML = function () {
-
-
-        var questionText = this.typeQuestion;
-
-        questionText += "<p><strong>a) </strong>"
-            + this.answerChoices[0].value + "<br><strong>b) </strong>"
-            + this.answerChoices[1].value + "<br><strong>c) </strong>"
-            + this.answerChoices[2].value + "<br><strong>d) </strong>"
-            + this.answerChoices[3].value + "</p>";
-
-        return questionText;
-    };
-
-    this.formatAnswer = function(format) {
-        switch (format) {
-            case "HTML": return this.formatAnswerHTML();
-        }
-        return "unknown format";
-    };
-
-    this.formatAnswerHTML = function () {
-        return String.fromCharCode(this.correctIndex+97); //0 = 'a', 1 = 'b', 2 = 'c', etc...
-    };
 
 }
 
