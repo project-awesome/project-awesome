@@ -42,3 +42,7 @@ module.exports.addOptionForEachQuestionType = function(e) {
 	    e.append($('<option></option>').val(key).html(val.title));
 	});
 };
+
+module.exports.isValidQuestionType = function(questionType) {
+    return (module.exports.questionTypes[questionType] !== undefined);
+}
