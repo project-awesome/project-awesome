@@ -6,17 +6,10 @@ function paQuestionToMoodleJSON(question, questionName) {
 		throw new Error("Question Format Conversion Error: questionName bust be defined.");
 	if (question.format == 'multiple-choice') {
 		
-		var moodleQuestion = [
+		var moodleMultichoiceQuestion = [
 			{ _attr: { type: 'multichoice'} }, 
 			{ name: [ { text: questionName } ] },
-			{ questiontext: [ { text: question.question } ] }, 
-			/*
-			{ defaultgrade: 1.0 },
-			{ penalty: 0.0 },
-			{ hidden: 0 },
-			{ single: true },
-			*/
-			{ shuffleanswers: true },
+			{ questiontext: [ { text: question.question } ] },
 			{ answernumbering: 'abc' },
 			{ correctfeedback: [ { text: 'Your answer is correct.' } ] },
 			{ partiallycorrectfeedback: [ { text: 'Your answer is partially correct.' } ] },
@@ -26,21 +19,32 @@ function paQuestionToMoodleJSON(question, questionName) {
 			var moodleChoice = { 
 				answer: [
 					{ _attr: { fraction: (i == question.answer ? '100' : '0') } },
-					{ text: question.choices[i] },
-					{ feedback: [ { text: '' } ] }
+					{ text: question.choices[i] }
 				]
 			};
-			moodleQuestion.push(moodleChoice);
+			moodleMultichoiceQuestion.push(moodleChoice);
 		}
-		return moodleQuestion;
+		return moodleMultichoiceQuestion;
 
+	} else if (question.format == 'input') {
+		var moodleNumericalQuestion = [
+			{ _attr: { type: 'numerical'} }, 
+			{ name: [ { text: questionName } ] },
+			{ questiontext: [ { text: question.question } ] },
+			{ answer: [
+					{ _attr: { fraction: '100' } },
+					{ text: question.answer }
+				]
+			}
+		];
+		return moodleNumericalQuestion;
 	} else {
 		throw new Error("Question Format Conversion Error: " + question.format + " is not yet supported by the project awesome QuizConverter");
 	}
 }
 
 function generateMoodleXML(questionType, count, questionName) {
-	if (questionType != 'changeOfBase') 
+	if (questionType != 'changeOfBase' && questionType != 'binHexOctDec') 
 		throw new Error("Question Type Conversion Error: " + questionType + " to Moodle conversion is not yet implemented.");
 	var qd = {
 	    "version" : "0.1",
