@@ -28,7 +28,7 @@ function paQuestionToMoodleJSON(question, questionName) {
 
 	} else if (question.format == 'input') {
 		var moodleNumericalQuestion = [
-			{ _attr: { type: 'numerical'} }, 
+			{ _attr: { type: 'shortanswer'} }, 
 			{ name: [ { text: questionName } ] },
 			{ questiontext: [ { text: question.question } ] },
 			{ answer: [

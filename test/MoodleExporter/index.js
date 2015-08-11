@@ -82,7 +82,7 @@ describe('MoodleExporter', function() {
 					});
 				});
 
-				describe('numerical input format', function() {
+				describe('input format', function() {
 
 					beforeEach(function(done) {
 						questionType = 'binHexOctDec';
@@ -97,9 +97,9 @@ describe('MoodleExporter', function() {
 
 					describe('xml question type property', function() {
 
-						it('should have set the question type attribute to numerical', function() {
+						it('should have set the question type attribute to shortanswer', function() {
 							for (var i = 0; xmlResult.quiz.question.length > i; i++)
-								expect(xmlResult.quiz.question[i].$.type).to.equal('numerical');
+								expect(xmlResult.quiz.question[i].$.type).to.equal('shortanswer');
 						});
 
 					});
