@@ -43,7 +43,7 @@ function paQuestionToMoodleJSON(question, questionName) {
 	}
 }
 
-function generateMoodleXML(questionType, count, questionName) {
+function generateMoodleXML(questionType, count, questionName, seed) {
 	if (questionType != 'changeOfBase' && questionType != 'binHexOctDec') 
 		throw new Error("Question Type Conversion Error: " + questionType + " to Moodle conversion is not yet implemented.");
 	var qd = {
@@ -54,7 +54,7 @@ function generateMoodleXML(questionType, count, questionName) {
 		    "repeat": count,
 		}]
 	};
-	var paQuiz = QuizBuilder.build(qd, 0, 0);
+	var paQuiz = QuizBuilder.build(qd, 0, seed);
 	var moodleQuizJSON = {};
 
 	moodleQuizJSON.quiz = paQuiz.questions.map(function(q) {

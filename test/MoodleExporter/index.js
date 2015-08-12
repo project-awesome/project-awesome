@@ -3,6 +3,7 @@ var MoodleExporter = require('../../MoodleExporter');
 var xml2js = require('xml2js');
 
 describe('MoodleExporter', function() {
+	var seed = 'abcd1234';
 
 	describe('generateMoodleXML(questionType, count, questionName)', function() {
 
@@ -11,16 +12,16 @@ describe('MoodleExporter', function() {
 			describe('unimplemented questionType', function() {
 
 				it('should throw an error.', function() {
-					expect(function(){MoodleExporter.generateMoodleXML('someRandomQuestionType', 1, 'Question Name')})
+					expect(function(){MoodleExporter.generateMoodleXML('someRandomQuestionType', 1, 'Question Name', seed)})
 					.to.throw(Error);
 				});
 
 			});
 
-			describe('undefined questionName', function() {
+			describe('invalid seed', function() {
 
 				it("should throw an error", function() {
-					expect(function() { MoodleExporter.generateMoodleXML('changeOfBase', 1);})
+					expect(function() { MoodleExporter.generateMoodleXML('changeOfBase', 1, 'Question Name', '1234');})
 					.to.throw(Error);
 				});
 
@@ -38,7 +39,7 @@ describe('MoodleExporter', function() {
 					questionType = 'changeOfBase';
 					count = 2;
 					questionName = 'Sample Question Name';
-					xmlString = MoodleExporter.generateMoodleXML(questionType, count, questionName);
+					xmlString = MoodleExporter.generateMoodleXML(questionType, count, questionName, seed);
 					xml2js.parseString(xmlString, function (err, result) {
 						xmlResult = result;
 						done();
@@ -67,7 +68,7 @@ describe('MoodleExporter', function() {
 						questionType = 'changeOfBase';
 						count = 2;
 						questionName = 'Sample Question Name';
-						xmlString = MoodleExporter.generateMoodleXML(questionType, count, questionName);
+						xmlString = MoodleExporter.generateMoodleXML(questionType, count, questionName, seed);
 						xml2js.parseString(xmlString, function (err, result) {
 							xmlResult = result;
 							done();
@@ -88,7 +89,7 @@ describe('MoodleExporter', function() {
 						questionType = 'binHexOctDec';
 						count = 2;
 						questionName = 'Sample Question Name';
-						xmlString = MoodleExporter.generateMoodleXML(questionType, count, questionName);
+						xmlString = MoodleExporter.generateMoodleXML(questionType, count, questionName, seed);
 						xml2js.parseString(xmlString, function (err, result) {
 							xmlResult = result;
 							done();

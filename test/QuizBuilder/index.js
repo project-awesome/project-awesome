@@ -20,6 +20,12 @@ describe('QuizBuilder', function() {
 			expect(QuizValidator.isValid(quiz)).to.be.true;
 		});
 
+		describe('invalid seed', function() {
+			it('should throw an error', function() {
+				expect(function(){ QuizBuilder.build(qd, 1, '1234'); }).to.throw(Error);
+			});
+		});
+
 	});
 
 
