@@ -22,22 +22,22 @@ describe('QuizValidator', function() {
 		questions: [ _und.clone(validQuestion) ]
 	};
 
-	describe('isStringValidSeed', function() {
+	describe('isSeedValid', function() {
 		it('should reject any non string', function() {
-			expect(QuizValidator.isStringValidSeed(parseInt('ABCD1234', 16))).to.be.false;
-			expect(QuizValidator.isStringValidSeed(null)).to.be.false;
-			expect(QuizValidator.isStringValidSeed(undefined)).to.be.false;
-			expect(QuizValidator.isStringValidSeed(true)).to.be.false;
+			expect(QuizValidator.isSeedValid(parseInt('ABCD1234', 16))).to.be.false;
+			expect(QuizValidator.isSeedValid(null)).to.be.false;
+			expect(QuizValidator.isSeedValid(undefined)).to.be.false;
+			expect(QuizValidator.isSeedValid(true)).to.be.false;
 		});
 
 		it('should reject strings that are not of length 8', function() {
-			expect(QuizValidator.isStringValidSeed("1234567")).to.be.false;
-			expect(QuizValidator.isStringValidSeed("12345678A")).to.be.false;
+			expect(QuizValidator.isSeedValid("1234567")).to.be.false;
+			expect(QuizValidator.isSeedValid("12345678A")).to.be.false;
 		});
 
 		it('should accept hex strings of length 8', function() {
-			expect(QuizValidator.isStringValidSeed("12345678")).to.be.true;
-			expect(QuizValidator.isStringValidSeed("abcdef00")).to.be.true;
+			expect(QuizValidator.isSeedValid("12345678")).to.be.true;
+			expect(QuizValidator.isSeedValid("abcdef00")).to.be.true;
 		});
 
 	});

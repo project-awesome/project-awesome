@@ -5,7 +5,7 @@ function isPositiveInteger(x) {
     return (typeof x === 'number') && (x % 1 === 0) && x >= 0;
 }
 
-function isStringValidSeed(seed) {
+function isSeedValid(seed) {
 	return (typeof seed === 'string' && seed.match(/^[a-fA-F0-9]{8}$/) !== null && seed.length == 8);
 }
 
@@ -19,7 +19,7 @@ function isValid(q) {
 
 	// q.seed
 	if (!(_und.has(q, 'seed'))) return false;
-	if (!isStringValidSeed(q.seed)) return false;
+	if (!isSeedValid(q.seed)) return false;
 
 	// q.title
 	if (!(_und.has(q, 'title'))) return false;
@@ -37,7 +37,7 @@ function isValid(q) {
 }
 
 module.exports.isValid = isValid;
-module.exports.isStringValidSeed = isStringValidSeed;
+module.exports.isSeedValid = isSeedValid;
 
 
 
