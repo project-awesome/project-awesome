@@ -1,0 +1,36 @@
+{
+  "name": "project-awesome",
+  "version": "1.0.0",
+  "description": "Library to create practice questions for Computer Science problems",
+  "main": "index.js",
+  "scripts": {
+    "pretest": "cd html; browserify -r ./pa.js > pa-bundle.js",
+    "test": "mocha --recursive"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/wolfenbarger/project-awesome.git"
+  },
+  "keywords": [
+    "awesome",
+    "ucsb",
+    "computer-science",
+    "education"
+  ],
+  "author": "Phill Conrad and many other students at UCSB",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/wolfenbarger/project-awesome/issues"
+  },
+  "homepage": "https://github.com/wolfenbarger/project-awesome#readme",
+  "dependencies": {
+    "underscore": "^1.8.3",
+    "xml": "^1.0.0"
+  },
+  "devDependencies": {
+    "browserify": "^11.0.0",
+    "chai": "^3.2.0",
+    "mocha": "^2.2.5",
+    "xml2js": "^0.4.10"
+  }
+}
