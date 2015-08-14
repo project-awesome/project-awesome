@@ -108,7 +108,6 @@ describe('MoodleExporter', function() {
 					describe('question.answer.text', function() {
 
 						it('should exist', function() {
-							console.log(JSON.stringify(xmlResult.quiz.question[0]));
 							expect(xmlResult.quiz.question[0].answer[0].text).to.exist;
 						});
 
