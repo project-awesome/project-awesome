@@ -12,3 +12,4 @@ module.exports.QuizBuilder = require('./QuizBuilder');
 module.exports.isValidQuestionType = questions.isValidQuestionType;
 
 module.exports.generateMoodleXML = MoodleExporter.generateMoodleXML;
+
