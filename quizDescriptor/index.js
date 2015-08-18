@@ -19,15 +19,17 @@ module.exports.isValidQDParams = function(params, questionType) {
 		for (var i = 0; length > i; i++) {
 			var conversion = params.conversions[i];
 
-			// must be 2, 10, 8, or 16
+			// must be [1-10] | [16]
 			if (!(_und.has(conversion, 'fromRad'))) return false;
 			if (!(Number.isSafeInteger(conversion.fromRad))) return false;
 			if (conversion.fromRad < 1) return false;
+			if (conversion.fromRad > 10 && conversion.fromRad != 16) return false;
 
-			// must be 2, 10, 8, or 16
+			// must be [1-10] | [16]
 			if (!(_und.has(conversion, 'toRad'))) return false;
 			if (!(Number.isSafeInteger(conversion.toRad))) return false;
 			if (conversion.toRad < 1) return false;
+			if (conversion.toRad > 10 && conversion.toRad != 16) return false;
 
 			// must be integer >= 0
 			if (!(_und.has(conversion, 'minVal'))) return false;
