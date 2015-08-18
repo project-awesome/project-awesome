@@ -206,7 +206,7 @@ describe('isValidQuizDescriptorQuestion', function() {
                 spy = sinon.spy(quizDescriptor, 'isValidQDParams');
             });
             after(function() {
-                quizDescriptor.isValidQDParams.restore();
+                spy.restore();
             });
             it('should not call isValidQDParams', function() {
                 isValid(qdQuestion);
@@ -224,7 +224,7 @@ describe('isValidQuizDescriptorQuestion', function() {
                 spy = sinon.spy(quizDescriptor, 'isValidQDParams');
             });
             after(function() {
-                quizDescriptor.isValidQDParams.restore();
+                spy.restore();
             });
             it('should call isValidQDParams once', function() {
                 isValid(qdQuestion);
