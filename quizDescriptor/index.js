@@ -21,13 +21,13 @@ module.exports.isValidQDParams = function(params, questionType) {
 
 			// must be 2, 10, 8, or 16
 			if (!(_und.has(conversion, 'fromRad'))) return false;
-			if (conversion.fromRad != 2 && conversion.fromRad != 10 && conversion.fromRad != 8 && conversion.fromRad != 16)
-				return false;
+			if (!(Number.isSafeInteger(conversion.fromRad))) return false;
+			if (conversion.fromRad < 1) return false;
 
 			// must be 2, 10, 8, or 16
 			if (!(_und.has(conversion, 'toRad'))) return false;
-			if (conversion.toRad != 2 && conversion.toRad != 10 && conversion.toRad != 8 && conversion.toRad != 16)
-				return false;
+			if (!(Number.isSafeInteger(conversion.toRad))) return false;
+			if (conversion.toRad < 1) return false;
 
 			// must be integer >= 0
 			if (!(_und.has(conversion, 'minVal'))) return false;
@@ -43,7 +43,7 @@ module.exports.isValidQDParams = function(params, questionType) {
 			if (conversion.fromRad == conversion.toRad) return false;
 
 			// maxVal must be > minVal
-			if (conversion.maxVal <= conversion.minVal) return false;
+			if (conversion.maxVal < conversion.minVal) return false;
 		}
 
 	} else {

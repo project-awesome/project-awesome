@@ -51,6 +51,26 @@ describe('isValidQDParams', function() {
                     expect(quizDescriptor.isValidQDParams(params, questionType)).to.be.true;
                 });
             });
+            describe('when minVal equals maxVal', function() {
+                before(function() {
+                    params.conversions = [
+                        {'fromRad': 2, 'toRad': 10, 'minVal': 10, 'maxVal': 10 },
+                    ];
+                });
+                it('should return true', function() {
+                    expect(quizDescriptor.isValidQDParams(params, questionType)).to.be.true;
+                });
+            });
+            describe('when fromRad is 1 and toRad is 100', function() {
+                before(function() {
+                    params.conversions = [
+                        {'fromRad': 1, 'toRad': 100, 'minVal': 1, 'maxVal': 1000 },
+                    ];
+                });
+                it('should return true', function() {
+                    expect(quizDescriptor.isValidQDParams(params, questionType)).to.be.true;
+                });
+            });
         });
 
 
@@ -89,9 +109,17 @@ describe('isValidQDParams', function() {
                         expect(quizDescriptor.isValidQDParams(params, questionType)).to.be.false;
                     });
                 });
-                describe('when not 2, 8, 10, or 16', function() {
+                describe('when not an integer', function() {
                     before(function() {
-                        params.conversions = [{'fromRad': 3, 'toRad': 10, 'minVal': 0, 'maxVal': 10 }];
+                        params.conversions = [{'fromRad': 3.1, 'toRad': 10, 'minVal': 0, 'maxVal': 10 }];
+                    });
+                    it('should return false', function() {
+                        expect(quizDescriptor.isValidQDParams(params, questionType)).to.be.false;
+                    });
+                });
+                describe('when less than 1', function() {
+                    before(function() {
+                        params.conversions = [{'fromRad': 0, 'toRad': 10, 'minVal': 0, 'maxVal': 10 }];
                     });
                     it('should return false', function() {
                         expect(quizDescriptor.isValidQDParams(params, questionType)).to.be.false;
@@ -108,9 +136,17 @@ describe('isValidQDParams', function() {
                         expect(quizDescriptor.isValidQDParams(params, questionType)).to.be.false;
                     });
                 });
-                describe('when not 2, 8, 10, or 16', function() {
+                describe('when not an integer', function() {
                     before(function() {
-                        params.conversions = [{'fromRad': 2, 'toRad': 11, 'minVal': 0, 'maxVal': 10 }];
+                        params.conversions = [{'fromRad': 2, 'toRad': 11.1, 'minVal': 0, 'maxVal': 10 }];
+                    });
+                    it('should return false', function() {
+                        expect(quizDescriptor.isValidQDParams(params, questionType)).to.be.false;
+                    });
+                });
+                describe('when less than 1', function() {
+                    before(function() {
+                        params.conversions = [{'fromRad': 2, 'toRad': 0, 'minVal': 0, 'maxVal': 10 }];
                     });
                     it('should return false', function() {
                         expect(quizDescriptor.isValidQDParams(params, questionType)).to.be.false;
