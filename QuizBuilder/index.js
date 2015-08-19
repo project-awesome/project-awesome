@@ -1,4 +1,3 @@
-var tempQuizBuilder = require('../quiz');
 var randomModule = require("../random");
 var questionsModule =  require("../questions");
 var isSeedValid = require('../validators/QuizValidator.js').isSeedValid;
@@ -14,7 +13,7 @@ function getQuestions(descriptor, randomStream) {
         if("question" in item) { //If this object is a question generator
 
             var questionType = item.question;
-            var params = (("params" in item) ? item.params : {});
+            var params = (("parameters" in item) ? item.parameters : null);
             var repeat = (("repeat" in item) ? item.repeat : 1);
             
             var question = ((questionType in questionsModule.questionTypes) ? questionsModule.questionTypes[questionType] : null);
@@ -23,7 +22,7 @@ function getQuestions(descriptor, randomStream) {
             //Generate the specified number of the specified type of question, add them to the array
             
             for(var j=0; j<repeat; j++) {
-                var newQuestion = new question.f(randomStream,params);
+                var newQuestion = new question.f(randomStream, params);
                 questions.push(newQuestion); 
             }
         }
@@ -70,7 +69,6 @@ function build(descriptor, id, hexStringSeed) {
     quiz.seed = hexStringSeed;
     var s = parseInt(hexStringSeed, 16);
     var randomStream = new randomModule.random(s);
-	//var tmpQuiz = new tempQuizBuilder.Quiz(descriptor, { seed : s });
 
     quiz.title = descriptor.title;
     quiz.id = id;
