@@ -81,6 +81,16 @@ describe('isValidQDParams', function() {
                     expect(quizDescriptor.isValidQDParams(params, questionType)).to.be.true;
                 });
             });
+            describe('when fromRad is 35 and toRad is 36', function() {
+                before(function() {
+                    params.conversions = [
+                        {'fromRad': 35, 'toRad': 36, 'minVal': 1, 'maxVal': 1000 },
+                    ];
+                });
+                it('should return true', function() {
+                    expect(quizDescriptor.isValidQDParams(params, questionType)).to.be.true;
+                });
+            });
         });
 
 
@@ -135,9 +145,9 @@ describe('isValidQDParams', function() {
                         expect(quizDescriptor.isValidQDParams(params, questionType)).to.be.false;
                     });
                 });
-                describe('when greater than 10 and not equal to 16', function() {
+                describe('when greater than 36', function() {
                     before(function() {
-                        params.conversions = [{'fromRad': 2, 'toRad': 11, 'minVal': 0, 'maxVal': 10 }];
+                        params.conversions = [{'fromRad': 37, 'toRad': 2, 'minVal': 0, 'maxVal': 10 }];
                     });
                     it('should return false', function() {
                         expect(quizDescriptor.isValidQDParams(params, questionType)).to.be.false;
@@ -170,9 +180,9 @@ describe('isValidQDParams', function() {
                         expect(quizDescriptor.isValidQDParams(params, questionType)).to.be.false;
                     });
                 });
-                describe('when greater than 10 but not equal to 16', function() {
+                describe('when greater than 36', function() {
                     before(function() {
-                        params.conversions = [{'fromRad': 2, 'toRad': 11, 'minVal': 0, 'maxVal': 10 }];
+                        params.conversions = [{'fromRad': 2, 'toRad': 37, 'minVal': 0, 'maxVal': 10 }];
                     });
                     it('should return false', function() {
                         expect(quizDescriptor.isValidQDParams(params, questionType)).to.be.false;
