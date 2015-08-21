@@ -37,7 +37,7 @@ module.exports.radixDescription = function(radix, randomStream) {
 
 module.exports.binHexOctDecQuestion = function(randomStream, params) {
 
-    var conversions = params ? params.conversions : defaultConversions;
+    var conversions = (params && params.conversions) ? params.conversions : defaultConversions;
     
     var whichConversion = randomStream.nextIntRange(conversions.length)
 
@@ -48,12 +48,12 @@ module.exports.binHexOctDecQuestion = function(randomStream, params) {
     var fromRad = conversions[whichConversion].fromRad;
     var toRad = conversions[whichConversion].toRad;      
     
-    var from = numToConvert.toString(fromRad)
+    var from = numToConvert.toString(fromRad);
     
-    var fromDesc = module.exports.radixDescription(fromRad, randomStream)
+    var fromDesc = module.exports.radixDescription(fromRad, randomStream);
     var toDesc = module.exports.radixDescription(toRad, randomStream);
     
-    var answer = numToConvert.toString(toRad)
+    var answer = numToConvert.toString(toRad);
     
     this.question = "Convert " + from + " from " + fromDesc + " to " + toDesc + "."; 
     this.answer = answer;
