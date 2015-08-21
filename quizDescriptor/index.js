@@ -9,47 +9,47 @@ module.exports.isValidQDParams = function(params, questionType) {
 	if (typeof(params) !== "object") return false;
 
 	if (questionType == 'binHexOctDec') {
-		if (!(_und.has(params, 'conversions'))) return false;
-		if (!(Array.isArray(params.conversions))) return false;
-		if (params.conversions.length < 1) return false;
-
-		// validating each conversion object
-
-		var length = params.conversions.length;
-		for (var i = 0; length > i; i++) {
-			var conversion = params.conversions[i];
-
-			// must be [2-10] | [16]
-			if (!(_und.has(conversion, 'fromRad'))) return false;
-			if (!(Number.isSafeInteger(conversion.fromRad))) return false;
-			if (conversion.fromRad < 2) return false;
-			if (conversion.fromRad > 36) return false;
-
-			// must be [2-10] | [16]
-			if (!(_und.has(conversion, 'toRad'))) return false;
-			if (!(Number.isSafeInteger(conversion.toRad))) return false;
-			if (conversion.toRad < 2) return false;
-			if (conversion.toRad > 36) return false;
-
-			// must be integer >= 0
-			if (!(_und.has(conversion, 'minVal'))) return false;
-			if (!(Number.isSafeInteger(conversion.minVal))) return false;
-			if (conversion.minVal < 0) return false;
-
-			// must be integer >= 0
-			if (!(_und.has(conversion, 'maxVal'))) return false;
-			if (!(Number.isSafeInteger(conversion.maxVal))) return false;
-			if (conversion.maxVal < 0) return false;
-
-			// fromRad and toRad must be different
-			if (conversion.fromRad == conversion.toRad) return false;
-
-			// maxVal must be > minVal
-			if (conversion.maxVal < conversion.minVal) return false;
+		if (_und.has(params, 'spaceBinary')) {
+			if (typeof params.spaceBinary !== 'boolean') return false;
 		}
+		if (_und.has(params, 'conversions')) {
+			if (!(Array.isArray(params.conversions))) return false;
+			if (params.conversions.length < 1) return false;
 
-	} else {
-		return false;
+			// validating each conversion object
+			var length = params.conversions.length;
+			for (var i = 0; length > i; i++) {
+				var conversion = params.conversions[i];
+
+				// must be [2-10] | [16]
+				if (!(_und.has(conversion, 'fromRad'))) return false;
+				if (!(Number.isSafeInteger(conversion.fromRad))) return false;
+				if (conversion.fromRad < 2) return false;
+				if (conversion.fromRad > 36) return false;
+
+				// must be [2-10] | [16]
+				if (!(_und.has(conversion, 'toRad'))) return false;
+				if (!(Number.isSafeInteger(conversion.toRad))) return false;
+				if (conversion.toRad < 2) return false;
+				if (conversion.toRad > 36) return false;
+
+				// must be integer >= 0
+				if (!(_und.has(conversion, 'minVal'))) return false;
+				if (!(Number.isSafeInteger(conversion.minVal))) return false;
+				if (conversion.minVal < 0) return false;
+
+				// must be integer >= 0
+				if (!(_und.has(conversion, 'maxVal'))) return false;
+				if (!(Number.isSafeInteger(conversion.maxVal))) return false;
+				if (conversion.maxVal < 0) return false;
+
+				// fromRad and toRad must be different
+				if (conversion.fromRad == conversion.toRad) return false;
+
+				// maxVal must be > minVal
+				if (conversion.maxVal < conversion.minVal) return false;
+			}
+		}
 	}
 	return true;
 }
