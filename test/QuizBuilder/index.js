@@ -38,24 +38,4 @@ describe('QuizBuilder', function() {
 	});
 
 
-	describe('getQuestions(descriptor, randomStream)', function() {
-		var retVals = [];
-		var mockRS = {
-			nextIntRange: function(n) { 
-				return retVals.shift();
-			}
-		};
-
-		it('should produce known set of questions when given randomStream', function() {
-			retVals = [0,5,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
-			var questions = QuizBuilder.getQuestions(qd, mockRS);
-			expect(questions).to.be.an('array');
-			expect(questions.length).to.equal(qd.quiz[0].repeat);
-			expect(questions[0].question).to.equal('Convert 5 from base 10 to base 2.');
-			expect(questions[0].answer).to.equal('101');
-		});
-
-	});
-
-
 });

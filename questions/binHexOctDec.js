@@ -17,6 +17,29 @@ var defaultConversions = [
     {fromRad: 16, toRad: 2, minVal: 0, maxVal: 65535} 
 ];
 
+function shouldFormatFrom(params, fromRad, toRad) {
+    if (fromRad != 2 || (toRad != 8 && toRad != 16)) return false;
+    if (params && params.spaceBinary == false) return false;
+    return true;
+}
+
+function nZeros(n) {
+    return Array(n+1).join("0");
+}
+function formatBinary(str, groupSize) {
+    if (str.length % groupSize != 0)
+        str = nZeros(groupSize - str.length % groupSize) + str;
+    return str.match(new RegExp('.{1,' + groupSize + '}', 'g')).join(" ");
+}
+
+function shouldFormatAnswer(params, fromRad, toRad) {
+    if (toRad != 2 || (fromRad != 8 && fromRad != 16)) return false;
+    console.log(JSON.stringify(params));
+    if (params && params.spaceBinary == false) return false;
+    console.log("got here");
+    return true;
+}
+
 module.exports.radixDescription = function(radix, randomStream) {
 
     // choose "base 16" or "hexademical" ?
@@ -37,7 +60,7 @@ module.exports.radixDescription = function(radix, randomStream) {
 
 module.exports.binHexOctDecQuestion = function(randomStream, params) {
 
-    var conversions = params ? params.conversions : defaultConversions;
+    var conversions = (params && params.conversions && params.conversions.length > 0) ? params.conversions : defaultConversions;
     
     var whichConversion = randomStream.nextIntRange(conversions.length)
 
@@ -48,12 +71,20 @@ module.exports.binHexOctDecQuestion = function(randomStream, params) {
     var fromRad = conversions[whichConversion].fromRad;
     var toRad = conversions[whichConversion].toRad;      
     
-    var from = numToConvert.toString(fromRad)
+    var from = numToConvert.toString(fromRad);
     
-    var fromDesc = module.exports.radixDescription(fromRad, randomStream)
+    var fromDesc = module.exports.radixDescription(fromRad, randomStream);
     var toDesc = module.exports.radixDescription(toRad, randomStream);
-    
-    var answer = numToConvert.toString(toRad)
+    var answer = numToConvert.toString(toRad);
+
+    if (shouldFormatFrom(params, fromRad, toRad))
+        from = formatBinary(from, (toRad == 8) ? 3 : 4);
+    if (shouldFormatAnswer(params, fromRad, toRad))
+        answer = formatBinary(answer, (fromRad == 8) ? 3 : 4);
+
+
+
+
     
     this.question = "Convert " + from + " from " + fromDesc + " to " + toDesc + "."; 
     this.answer = answer;
