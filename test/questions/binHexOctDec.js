@@ -346,6 +346,17 @@ describe('binHexOctDec', function() {
 				});
 			});
 			describe('conversions', function() {
+				describe("when conversions is an empty array", function() {
+					before(function() {
+						params = { conversions: []}
+						retVals = [0, 0, 0, 0, 0, 0, 0];
+					});
+					it('should still work and use the default conversions', function() {
+						var q = new binHexOctDec.binHexOctDecQuestion(mockRS, params);
+						expect(q.question).to.equal('Convert 0 from base 10 to base 2.');
+						expect(q.answer).to.equal("0");
+					});
+				});
 				describe("when params == {'fromRad': 2, 'toRad': 10, 'minVal': 5, 'maxVal': 5 }", function() {
 					before(function() {
 						params = { conversions: [{'fromRad': 2, 'toRad': 10, 'minVal': 5, 'maxVal': 5 }]}

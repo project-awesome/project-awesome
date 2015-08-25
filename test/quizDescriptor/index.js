@@ -144,17 +144,17 @@ describe('isValidQDParams', function() {
                             expect(quizDescriptor.isValidQDParams(params, questionType)).to.be.true;
                         });
                     });
+                    describe('when conversions is an empty array', function() {
+                        it('should return true', function() {
+                            expect(quizDescriptor.isValidQDParams({ conversions: []}, questionType)).to.be.true;
+                        });
+                    });
                 });
 
                 describe('invalid conversions values', function() {
                     describe('when conversions is not an array', function() {
                         it('should return false', function() {
                             expect(quizDescriptor.isValidQDParams({ conversions: {}}, questionType)).to.be.false;
-                        });
-                    });
-                    describe('when conversions is an empty array', function() {
-                        it('should return false', function() {
-                            expect(quizDescriptor.isValidQDParams({ conversions: []}, questionType)).to.be.false;
                         });
                     });
                     describe('conversion properties', function() {

@@ -14,7 +14,6 @@ module.exports.isValidQDParams = function(params, questionType) {
 		}
 		if (_und.has(params, 'conversions')) {
 			if (!(Array.isArray(params.conversions))) return false;
-			if (params.conversions.length < 1) return false;
 
 			// validating each conversion object
 			var length = params.conversions.length;

@@ -60,7 +60,7 @@ module.exports.radixDescription = function(radix, randomStream) {
 
 module.exports.binHexOctDecQuestion = function(randomStream, params) {
 
-    var conversions = (params && params.conversions) ? params.conversions : defaultConversions;
+    var conversions = (params && params.conversions && params.conversions.length > 0) ? params.conversions : defaultConversions;
     
     var whichConversion = randomStream.nextIntRange(conversions.length)
 
