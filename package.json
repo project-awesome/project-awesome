@@ -9,7 +9,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/wolfenbarger/project-awesome.git"
+    "url": "git+https://github.com/project-awesome/project-awesome.git"
   },
   "keywords": [
     "awesome",
@@ -20,9 +20,9 @@
   "author": "Phill Conrad and many other students at UCSB",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/wolfenbarger/project-awesome/issues"
+    "url": "https://github.com/project-awesome/project-awesome/issues"
   },
-  "homepage": "https://github.com/wolfenbarger/project-awesome#readme",
+  "homepage": "https://github.com/project-awesome/project-awesome#readme",
   "dependencies": {
     "underscore": "^1.8.3",
     "xml": "^1.0.0"
