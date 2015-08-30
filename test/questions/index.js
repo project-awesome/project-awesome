@@ -11,12 +11,8 @@ describe('questions',function() {
 
 	describe('isValidQuestionType(questionType)', function() {
 
-		it('should return true for binHexOctDec', function() {
+		it('should return true when the question type is a property in questionTypes', function() {
 			expect(questions.isValidQuestionType('binHexOctDec')).to.be.true;
-		});
-
-		it('should return true for changeOfBase', function() {
-			expect(questions.isValidQuestionType('changeOfBase')).to.be.true;
 		});
 
 		it('should return false for one that does not exist', function() {

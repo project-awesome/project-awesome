@@ -80,10 +80,6 @@ module.exports.binHexOctDecQuestion = function(randomStream, params) {
     if (shouldFormatAnswer(params, fromRad, toRad))
         answer = formatBinary(answer, (fromRad == 8) ? 3 : 4);
 
-
-
-
-    
     this.question = "Convert " + from + " from " + fromDesc + " to " + toDesc + "."; 
     this.answer = answer;
     this.format = "input";

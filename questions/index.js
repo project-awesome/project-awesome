@@ -4,8 +4,8 @@ var binHexOctDec = require("./binHexOctDec");
 var changeOfBase = require("./changeOfBase");
 
 module.exports.questionTypes = {
-    "binHexOctDec":             {"f": binHexOctDec.binHexOctDecQuestion,        title: "Bin Hex Oct Dec"},
-    "changeOfBase":             {"f": changeOfBase.changeOfBaseQuestion,        title: "Change of Base"},
+    "binHexOctDec": {"f": binHexOctDec.binHexOctDecQuestion, title: "Bin Hex Oct Dec", validateParameters: binHexOctDec.validateParameters },
+    "changeOfBase": {"f": changeOfBase.changeOfBaseQuestion, title: "Change of Base", validateParameters: changeOfBase.validateParameters },
 };
 
 // To QA a new question type:
