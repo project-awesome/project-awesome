@@ -86,11 +86,81 @@ module.exports.binHexOctDecQuestion = function(randomStream, params) {
 };
 
 module.exports.validateParameters = function(params) {
+    var errors = [];
     if (params === undefined) return [];
     if (typeof params !== 'object') return [{ type: 'ExpectedObjectError', path: []}];
-    if ('spaceBinary' in params && (params.spaceBinary !== true && params.spaceBinary !== false))
-        return [{ type: 'ExpectedBooleanError', path: ['spaceBinary']}];
-    return [];
+
+    // spaceBinary validation
+    if ('spaceBinary' in params) {
+        if (params.spaceBinary !== true && params.spaceBinary !== false)
+            errors.unshift({ type: 'ExpectedBooleanError', path: ['spaceBinary']});
+    }
+    
+    // conversions validation
+    if ('conversions' in params) {
+        if (!Array.isArray(params.conversions)) {
+            errors.unshift({ type: 'ExpectedArrayError', path: ['conversions']});
+        } else {
+            for (var i = 0; params.conversions.length > i; i++) {
+                var conversion = params.conversions[i];
+
+                // must be [2-10] | [16]
+                if (!('fromRad' in conversion)) {
+                    errors.unshift({ type: 'RequiredError', path: ['conversions', i, 'fromRad']});
+                } else {
+                    if (!(Number.isSafeInteger(conversion.fromRad))) 
+                        errors.unshift({ type: 'ExpectedIntegerError', path: ['conversions', i, 'fromRad']});
+                    if (conversion.fromRad < 2) 
+                        errors.unshift({ type: 'MinimumValueError', path: ['conversions', i, 'fromRad']});
+                    if (conversion.fromRad > 36)
+                        errors.unshift({ type: 'MaximumValueError', path: ['conversions', i, 'fromRad']});
+                }
+
+                if (!('toRad' in conversion)) {
+                    errors.unshift({ type: 'RequiredError', path: ['conversions', i, 'toRad']});
+                } else {
+                    if (!(Number.isSafeInteger(conversion.toRad))) 
+                        errors.unshift({ type: 'ExpectedIntegerError', path: ['conversions', i, 'toRad']});
+                    if (conversion.toRad < 2) 
+                        errors.unshift({ type: 'MinimumValueError', path: ['conversions', i, 'toRad']});
+                    if (conversion.toRad > 36)
+                        errors.unshift({ type: 'MaximumValueError', path: ['conversions', i, 'toRad']});
+                }
+
+                if (!('minVal' in conversion)) {
+                    errors.unshift({ type: 'RequiredError', path: ['conversions', i, 'minVal']});
+                } else {
+                    if (!(Number.isSafeInteger(conversion.minVal))) 
+                        errors.unshift({ type: 'ExpectedIntegerError', path: ['conversions', i, 'minVal']});
+                    if (conversion.minVal < 0) 
+                        errors.unshift({ type: 'MinimumValueError', path: ['conversions', i, 'minVal']});
+                }
+
+                if (!('maxVal' in conversion)) {
+                    errors.unshift({ type: 'RequiredError', path: ['conversions', i, 'maxVal']});
+                } else {
+                    if (!(Number.isSafeInteger(conversion.maxVal))) 
+                        errors.unshift({ type: 'ExpectedIntegerError', path: ['conversions', i, 'maxVal']});
+                    if (conversion.maxVal < 0) 
+                        errors.unshift({ type: 'MinimumValueError', path: ['conversions', i, 'maxVal']});
+                }
+
+                if (('maxVal' in conversion) && ('minVal' in conversion)) {
+                    if (conversion.minVal > conversion.maxVal) {
+                        errors.unshift({ type: 'InvalidIntervalError', path: ['conversions', i]});
+                    }
+                }
+
+                if (('fromRad' in conversion) && ('toRad' in conversion)) {
+                    if (conversion.fromRad === conversion.toRad) {
+                        errors.unshift({ type: 'ToFromEqualError', path: ['conversions', i]});
+                    }
+                }
+            }
+        }
+    }
+
+    return errors;
 }
 
 
