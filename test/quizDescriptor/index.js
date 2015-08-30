@@ -8,26 +8,14 @@ var expect = chai.expect;
 
 var _und = require("underscore")._;
 
+var questions = require('../../questions');
 var quizDescriptor = require("../../quizDescriptor/index");
 var isValid = quizDescriptor.isValidQuizDescriptorQuestion;
 var isValidJSON = quizDescriptor.isValidQuizDescriptorQuestionJSON;
 
 
+/*
 describe('isValidQDParams', function() {
-    describe('changeOfBase', function() {
-        it('should return true', function() {
-            expect(quizDescriptor.isValidQDParams({}, "changeOfBase")).to.be.true;
-        });
-    });
-
-    describe('when parameters not an object', function() {
-        it('should return false', function() {
-            expect(quizDescriptor.isValidQDParams(undefined, "changeOfBase")).to.be.false;
-        });
-        it('should return false', function() {
-            expect(quizDescriptor.isValidQDParams('', "changeOfBase")).to.be.false;
-        });
-    });
 
     describe('binHexOctDec', function() {
         var questionType;
@@ -51,38 +39,8 @@ describe('isValidQDParams', function() {
                     expect(quizDescriptor.isValidQDParams({}, questionType)).to.be.true;
                 });
             });
-            describe('spaceBinary', function() {
-                describe('valid cases', function() {
-                    describe('when value is true', function() {
-                        it('should return true', function() {
-                            params.spaceBinary = true;
-                            expect(quizDescriptor.isValidQDParams(params, questionType)).to.be.true;
-                        });
-                    });
-                    describe('when value is false', function() {
-                        it('should return true', function() {
-                            params.spaceBinary = false;
-                            expect(quizDescriptor.isValidQDParams(params, questionType)).to.be.true;
-                        });
-                    });
-                });
-                describe('invalid cases', function() {
-                    describe('when typeof spaceBinary is not boolean', function() {
-                        it('should return false for strings', function() {
-                            params.spaceBinary = 'true';
-                            expect(quizDescriptor.isValidQDParams(params, questionType)).to.be.false;
-                        });
-                        it('should return false for integers', function() {
-                            params.spaceBinary = '1';
-                            expect(quizDescriptor.isValidQDParams(params, questionType)).to.be.false;
-                        });
-                        it('should return false for objects', function() {
-                            params.spaceBinary = {};
-                            expect(quizDescriptor.isValidQDParams(params, questionType)).to.be.false;
-                        });
-                    });
-                });
-            });
+
+            
             describe('conversions', function() {
                 describe('valid conversions values', function() {
                     describe('when params is array of size 1', function() {
@@ -313,7 +271,7 @@ describe('isValidQDParams', function() {
         
     });
 });
-
+*/
 describe('isValidQuizDescriptorQuestion', function() {
 
     describe('params property', function() {

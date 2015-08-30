@@ -85,5 +85,22 @@ module.exports.binHexOctDecQuestion = function(randomStream, params) {
     this.format = "input";
 };
 
+module.exports.validateParameters = function(params) {
+    if (params === undefined) return [];
+    if (typeof params !== 'object') return [{ type: 'ExpectedObjectError', path: []}];
+    if ('spaceBinary' in params && (params.spaceBinary !== true && params.spaceBinary !== false))
+        return [{ type: 'ExpectedBooleanError', path: ['spaceBinary']}];
+    return [];
+}
+
+
+
+
+
+
+
+
+
+
 
 

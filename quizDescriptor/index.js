@@ -6,8 +6,12 @@ var questionsModule =  require("../questions");
 
 
 module.exports.isValidQDParams = function(params, questionType) {
+	if (params == undefined) return true;
 	if (typeof(params) !== "object") return false;
 
+	var errors = questionsModule.questionTypes[questionType].validateParameters(params);
+	return (errors.length === 0);
+	/*
 	if (questionType == 'binHexOctDec') {
 		if (_und.has(params, 'spaceBinary')) {
 			if (typeof params.spaceBinary !== 'boolean') return false;
@@ -51,6 +55,7 @@ module.exports.isValidQDParams = function(params, questionType) {
 		}
 	}
 	return true;
+	*/
 }
 
 /**

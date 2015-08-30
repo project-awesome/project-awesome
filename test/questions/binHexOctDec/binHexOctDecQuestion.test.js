@@ -1,6 +1,6 @@
 var expect = require("chai").expect;
-var questions = require("../../questions");
-var binHexOctDec = require("../../questions/binHexOctDec");
+var questions = require("../../../questions");
+var binHexOctDec = require("../../../questions/binHexOctDec");
 
 describe('binHexOctDecQuestion(randomStream, params)', function() {
 
