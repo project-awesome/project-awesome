@@ -34,9 +34,7 @@ function formatBinary(str, groupSize) {
 
 function shouldFormatAnswer(params, fromRad, toRad) {
     if (toRad != 2 || (fromRad != 8 && fromRad != 16)) return false;
-    console.log(JSON.stringify(params));
     if (params && params.spaceBinary == false) return false;
-    console.log("got here");
     return true;
 }
 
