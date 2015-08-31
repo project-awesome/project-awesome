@@ -58,6 +58,46 @@ describe('questions',function() {
 			});
 		});
 		describe('invalid cases', function() {
+			describe('when undefined', function() {
+				var errors;
+				before(function() {
+					errors = questions.validateQuestionDescriptor();
+				});
+				it('should return an array of length 1', function() {
+					expect(errors).to.be.an('array');
+					expect(errors.length).to.equal(1);
+				});
+				describe('error type', function() {
+					it('should be RequiredError', function() {
+						expect(errors[0].type).to.equal('RequiredError');
+					});
+				});
+				describe('error path', function() {
+					it('should be []', function() {
+						expect(errors[0].path).to.eql([]);
+					});
+				});
+			});
+			describe('when not an object', function() {
+				var errors;
+				before(function() {
+					errors = questions.validateQuestionDescriptor('string');
+				});
+				it('should return an array of length 1', function() {
+					expect(errors).to.be.an('array');
+					expect(errors.length).to.equal(1);
+				});
+				describe('error type', function() {
+					it('should be ExpectedObjectError', function() {
+						expect(errors[0].type).to.equal('ExpectedObjectError');
+					});
+				});
+				describe('error path', function() {
+					it('should be []', function() {
+						expect(errors[0].path).to.eql([]);
+					});
+				});
+			});
 			describe('question', function() {
 				describe('when question is missing', function() {
 					var errors;

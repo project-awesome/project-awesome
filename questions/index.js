@@ -42,6 +42,10 @@ function isValidQuestionType(questionType) {
 
 function validateQuestionDescriptor(questionDescriptor) {
     var errors = [];
+    if (questionDescriptor === undefined)
+        return [{type:'RequiredError', path:[]}];
+    if (typeof questionDescriptor !== 'object')
+        return [{type:'ExpectedObjectError', path:[]}];
     if (!('question' in questionDescriptor)) {
         errors.unshift({ type: 'RequiredError', path:['question'] });
     } else if(typeof(questionDescriptor.question) !== "string") {
