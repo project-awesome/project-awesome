@@ -42,13 +42,13 @@ describe('questions.binHexOctDec.validateParameters(parameters)', function() {
 	describe('spaceBinary', function() {
         describe('valid cases', function() {
             describe('when value is true', function() {
-                it('should return true', function() {
+                it('should return an empty array', function() {
                 	var errors = validateParameters({ spaceBinary: true });
                     expect(errors).to.eql([]);
                 });
             });
             describe('when value is false', function() {
-                it('should return true', function() {
+                it('should return an empty array', function() {
                 	var errors = validateParameters({ spaceBinary: false });
                     expect(errors).to.eql([]);
                 });
@@ -150,7 +150,7 @@ describe('questions.binHexOctDec.validateParameters(parameters)', function() {
                         before(function() {
                             params.conversions = [{'toRad': 10, 'minVal': 0, 'maxVal': 10 }];
                         });
-                        it('should return false', function() {
+                        it('should contain a RequiredError', function() {
 		                	var errors = validateParameters(params);
 		                	expect(errors.length).to.equal(1);
 		                    expect(errors[0].type).to.equal('RequiredError');
@@ -161,7 +161,7 @@ describe('questions.binHexOctDec.validateParameters(parameters)', function() {
                         before(function() {
                             params.conversions = [{'fromRad': 3.1, 'toRad': 10, 'minVal': 0, 'maxVal': 10 }];
                         });
-                        it('should return false', function() {
+                        it('should contain a ExpectedIntegerError', function() {
 		                	var errors = validateParameters(params);
 		                	expect(errors.length).to.equal(1);
 		                    expect(errors[0].type).to.equal('ExpectedIntegerError');
@@ -172,7 +172,7 @@ describe('questions.binHexOctDec.validateParameters(parameters)', function() {
                         before(function() {
                             params.conversions = [{'fromRad': 1, 'toRad': 10, 'minVal': 0, 'maxVal': 10 }];
                         });
-                        it('should return false', function() {
+                        it('should contain a MinimumValueError', function() {
 		                	var errors = validateParameters(params);
 		                	expect(errors.length).to.equal(1);
 		                    expect(errors[0].type).to.equal('MinimumValueError');
@@ -183,7 +183,7 @@ describe('questions.binHexOctDec.validateParameters(parameters)', function() {
                         before(function() {
                             params.conversions = [{'fromRad': 37, 'toRad': 2, 'minVal': 0, 'maxVal': 10 }];
                         });
-                        it('should return false', function() {
+                        it('should contain a MaximumValueError', function() {
 		                	var errors = validateParameters(params);
 		                	expect(errors.length).to.equal(1);
 		                    expect(errors[0].type).to.equal('MaximumValueError');
@@ -197,7 +197,7 @@ describe('questions.binHexOctDec.validateParameters(parameters)', function() {
                         before(function() {
                             params.conversions = [{'fromRad': 2, 'minVal': 0, 'maxVal': 10 }];
                         });
-                        it('should return false', function() {
+                        it('should contain a RequiredError', function() {
 		                	var errors = validateParameters(params);
 		                	expect(errors.length).to.equal(1);
 		                    expect(errors[0].type).to.equal('RequiredError');
@@ -208,7 +208,7 @@ describe('questions.binHexOctDec.validateParameters(parameters)', function() {
                         before(function() {
                             params.conversions = [{'fromRad': 2, 'toRad': 9.1, 'minVal': 0, 'maxVal': 10 }];
                         });
-                        it('should return false', function() {
+                        it('should contain a ExpectedIntegerError', function() {
 		                	var errors = validateParameters(params);
 		                	expect(errors.length).to.equal(1);
 		                    expect(errors[0].type).to.equal('ExpectedIntegerError');
@@ -219,7 +219,7 @@ describe('questions.binHexOctDec.validateParameters(parameters)', function() {
                         before(function() {
                             params.conversions = [{'fromRad': 2, 'toRad': 1, 'minVal': 0, 'maxVal': 10 }];
                         });
-                        it('should return false', function() {
+                        it('should contain a MinimumValueError', function() {
 		                	var errors = validateParameters(params);
 		                	expect(errors.length).to.equal(1);
 		                    expect(errors[0].type).to.equal('MinimumValueError');
@@ -230,7 +230,7 @@ describe('questions.binHexOctDec.validateParameters(parameters)', function() {
                         before(function() {
                             params.conversions = [{'fromRad': 2, 'toRad': 37, 'minVal': 0, 'maxVal': 10 }];
                         });
-                        it('should return false', function() {
+                        it('should contain a MaximumValueError', function() {
 		                	var errors = validateParameters(params);
 		                	expect(errors.length).to.equal(1);
 		                    expect(errors[0].type).to.equal('MaximumValueError');
@@ -243,7 +243,7 @@ describe('questions.binHexOctDec.validateParameters(parameters)', function() {
                         before(function() {
                             params.conversions = [{'fromRad': 2, 'toRad': 2, 'minVal': 0, 'maxVal': 10 }];
                         });
-                    it('shoudl return false', function() {
+                    it('should contain a ToFromEqualError', function() {
 	                	var errors = validateParameters(params);
 		                expect(errors.length).to.equal(1);
 	                    expect(errors[0].type).to.equal('ToFromEqualError');
@@ -256,7 +256,7 @@ describe('questions.binHexOctDec.validateParameters(parameters)', function() {
                         before(function() {
                             params.conversions = [{'fromRad': 2, 'toRad': 10, 'maxVal': 10 }];
                         });
-                        it('should return false', function() {
+                        it('should contain a RequiredError', function() {
 		                	var errors = validateParameters(params);
 		                	expect(errors.length).to.equal(1);
 		                    expect(errors[0].type).to.equal('RequiredError');
@@ -267,7 +267,7 @@ describe('questions.binHexOctDec.validateParameters(parameters)', function() {
                         before(function() {
                             params.conversions = [{'fromRad': 2, 'toRad': 10, 'minVal': 1.1, 'maxVal': 10 }];
                         });
-                        it('should return false', function() {
+                        it('should contain a ExpectedIntegerError', function() {
 		                	var errors = validateParameters(params);
 		                	expect(errors.length).to.equal(1);
 		                    expect(errors[0].type).to.equal('ExpectedIntegerError');
@@ -278,7 +278,7 @@ describe('questions.binHexOctDec.validateParameters(parameters)', function() {
                         before(function() {
                             params.conversions = [{'fromRad': 2, 'toRad': 10, 'minVal': -1, 'maxVal': 10 }];
                         });
-                        it('should return false', function() {
+                        it('should contain a MinimumValueError', function() {
 		                	var errors = validateParameters(params);
 		                	expect(errors.length).to.equal(1);
 		                    expect(errors[0].type).to.equal('MinimumValueError');
@@ -292,7 +292,7 @@ describe('questions.binHexOctDec.validateParameters(parameters)', function() {
                         before(function() {
                             params.conversions = [{'fromRad': 2, 'toRad': 10, 'minVal': 0 }];
                         });
-                        it('should return false', function() {
+                        it('should contain a RequiredError', function() {
 		                	var errors = validateParameters(params);
 		                	expect(errors.length).to.equal(1);
 		                    expect(errors[0].type).to.equal('RequiredError');
@@ -303,7 +303,7 @@ describe('questions.binHexOctDec.validateParameters(parameters)', function() {
                         before(function() {
                             params.conversions = [{'fromRad': 2, 'toRad': 10, 'minVal': 0, 'maxVal': 10.1 }];
                         });
-                        it('should return false', function() {
+                        it('should contain a ExpectedIntegerError', function() {
 		                	var errors = validateParameters(params);
 		                	expect(errors.length).to.equal(1);
 		                    expect(errors[0].type).to.equal('ExpectedIntegerError');
@@ -329,7 +329,7 @@ describe('questions.binHexOctDec.validateParameters(parameters)', function() {
                     before(function() {
                         params.conversions = [{'fromRad': 2, 'toRad': 10, 'minVal': 10, 'maxVal': 5 }];
                     });
-                    it('should return false', function() {
+                    it('should contain a InvalidIntervalError', function() {
 	                	var errors = validateParameters(params);
 		                	expect(errors.length).to.equal(1);
 	                    expect(errors[0].type).to.equal('InvalidIntervalError');
