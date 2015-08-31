@@ -49,7 +49,7 @@ function generateMoodleXML(questionType, count, questionName, seed) {
 	var qd = {
 	    "version" : "0.1",
 	    "title" : "Example QuizJSON 1",
-	    "quiz": [{
+	    "questions": [{
 		    "question": questionType,
 		    "repeat": count,
 		}]

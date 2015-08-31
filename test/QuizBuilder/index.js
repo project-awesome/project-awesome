@@ -7,7 +7,7 @@ describe('QuizBuilder', function() {
 	var qd = {
 	    "version" : "0.1",
 	    "title" : "Example QuizJSON 1",
-	    "quiz": [{
+	    "questions": [{
 		    "question": "binHexOctDec",
 		    "repeat": 5,
 		}]
@@ -44,7 +44,7 @@ describe('QuizBuilder', function() {
 				errors = QuizBuilder.validateQuizDescriptor({
 					title: 'Sample Title',
 					version: '0.1',
-					quiz: [
+					questions: [
 						{
 							question: 'binHexOctDec',
 							repeat: 1,
@@ -107,7 +107,7 @@ describe('QuizBuilder', function() {
 					before(function() {
 						errors = QuizBuilder.validateQuizDescriptor({
 							version: '0.1',
-							quiz: []
+							questions: []
 						});
 					});
 					it('should return an array of length 1', function() {
@@ -130,7 +130,7 @@ describe('QuizBuilder', function() {
 					before(function() {
 						errors = QuizBuilder.validateQuizDescriptor({
 							title: true,
-							quiz: [],
+							questions: [],
 							version: '0.1'
 						});
 					});
@@ -156,7 +156,7 @@ describe('QuizBuilder', function() {
 					before(function() {
 						errors = QuizBuilder.validateQuizDescriptor({
 							title: "Sample Title",
-							quiz: []
+							questions: []
 						});
 					});
 					it('should return an array of length 1', function() {
@@ -180,7 +180,7 @@ describe('QuizBuilder', function() {
 						errors = QuizBuilder.validateQuizDescriptor({
 							title: 'Sample Title',
 							version: true,
-							quiz: []
+							questions: []
 						});
 					});
 					it('should return an array of length 1', function() {
@@ -199,7 +199,7 @@ describe('QuizBuilder', function() {
 					});
 				});
 			});
-			describe('quiz', function() {
+			describe('questions', function() {
 				describe('when undefined', function() {
 					var errors;
 					before(function() {
@@ -218,8 +218,8 @@ describe('QuizBuilder', function() {
 						});
 					});
 					describe('error path', function() {
-						it('should be ["quiz"]', function() {
-							expect(errors[0].path).to.eql(['quiz']);
+						it('should be ["questions"]', function() {
+							expect(errors[0].path).to.eql(['questions']);
 						});
 					});
 				});
@@ -229,7 +229,7 @@ describe('QuizBuilder', function() {
 						errors = QuizBuilder.validateQuizDescriptor({
 							title: 'Sample Title',
 							version: "0.1",
-							quiz: {}
+							questions: {}
 						});
 					});
 					it('should return an array of length 1', function() {
@@ -242,8 +242,8 @@ describe('QuizBuilder', function() {
 						});
 					});
 					describe('error path', function() {
-						it('should be ["quiz"]', function() {
-							expect(errors[0].path).to.eql(['quiz']);
+						it('should be ["questions"]', function() {
+							expect(errors[0].path).to.eql(['questions']);
 						});
 					});
 				});
@@ -255,7 +255,7 @@ describe('QuizBuilder', function() {
 						errors = QuizBuilder.validateQuizDescriptor({
 							title: "Sample Title",
 							version: "0.1",
-							quiz: [
+							questions: [
 								{ question: 'changeOfBase', repeat:1 },
 								{
 									question: 'binHexOctDec',
@@ -280,8 +280,8 @@ describe('QuizBuilder', function() {
 						});
 					});
 					describe('error path', function() {
-						it('should be ["quiz", 1, "parameters", "conversions", 1, "fromRad"]', function() {
-							expect(errors[0].path).to.eql(["quiz", 1, "parameters", "conversions", 1, "fromRad"]);
+						it('should be ["questions", 1, "parameters", "conversions", 1, "fromRad"]', function() {
+							expect(errors[0].path).to.eql(["questions", 1, "parameters", "conversions", 1, "fromRad"]);
 						});
 					});
 				});

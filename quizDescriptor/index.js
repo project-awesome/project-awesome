@@ -1,8 +1,6 @@
-
 var _und = require("underscore")._;
 
 var questionsModule =  require("../questions");
-
 
 
 module.exports.isValidQDParams = function(params, questionType) {
@@ -60,13 +58,13 @@ module.exports.isValidQuizDescriptor = function (object) {
 		if (!(_und.has(object, 'title'))) return false;
 		if (typeof(object.title) !== "string") return false;
 
-		if (!(_und.has(object, 'quiz'))) return false;
-		if (!(Array.isArray(object.quiz))) return false;
+		if (!(_und.has(object, 'questions'))) return false;
+		if (!(Array.isArray(object.questions))) return false;
 
-		if (object.quiz.length <= 0) return false;
+		if (object.questions.length <= 0) return false;
 
-		for (var i=0; i<object.quiz.length; i++) {
-		    if (!(module.exports.isValidQuizDescriptorQuestion(object.quiz[i]))) return false;
+		for (var i=0; i<object.questions.length; i++) {
+		    if (!(module.exports.isValidQuizDescriptorQuestion(object.questions[i]))) return false;
 		} 
 
 		return true;
@@ -105,13 +103,13 @@ module.exports.produceArrayOfQuestions = function(quizObject, randomStream) {
 //TODO: Sanitize, validate, and otherwise protect against user error.
 
     var questions = [];
-    var n = quizObject["quiz"].length;
+    var n = quizObject["questions"].length;
 
 
     //Loop through the array of generating objects
     for(var i = 0; i < n; ++i) {
 
-	var item = quizObject.quiz[i];
+	var item = quizObject.questions[i];
 	
 	if("question" in item) { //If this object is a question generator
 

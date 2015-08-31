@@ -4,11 +4,11 @@ var isSeedValid = require('../validators/QuizValidator.js').isSeedValid;
 
 function getQuestions(descriptor, randomStream) {
     var questions = [];
-    var n = descriptor["quiz"].length;
+    var n = descriptor["questions"].length;
 
     for(var i = 0; i < n; ++i) {
 
-        var item = descriptor.quiz[i];
+        var item = descriptor.questions[i];
 
         if("question" in item) { //If this object is a question generator
 
@@ -58,7 +58,6 @@ function getQuestions(descriptor, randomStream) {
     }
 
     return questions; 
-
 };
 
 function build(descriptor, id, hexStringSeed) {
@@ -93,15 +92,15 @@ function validateQuizDescriptor(qd) {
     else if (typeof qd.version !== 'string')
         errors.unshift({ type: 'ExpectedStringError', path:['version']});
     
-    if (!('quiz' in qd))
-        errors.unshift({ type: 'RequiredError', path:['quiz']});
-    else if (!Array.isArray(qd.quiz))
-        errors.unshift({ type: 'ExpectedArrayError', path:['quiz']});
+    if (!('questions' in qd))
+        errors.unshift({ type: 'RequiredError', path:['questions']});
+    else if (!Array.isArray(qd.questions))
+        errors.unshift({ type: 'ExpectedArrayError', path:['questions']});
     else {
-        for (var i = 0; qd.quiz.length > i; i++) {
-            var qErrors = questionsModule.validateQuestionDescriptor(qd.quiz[i]);
+        for (var i = 0; qd.questions.length > i; i++) {
+            var qErrors = questionsModule.validateQuestionDescriptor(qd.questions[i]);
             qErrors = qErrors.map(function(qError) {
-                qError.path = ['quiz',i].concat(qError.path);
+                qError.path = ['questions',i].concat(qError.path);
                 return qError;
             });
             errors = errors.concat(qErrors);
