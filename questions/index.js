@@ -36,13 +36,42 @@ module.exports.questionTypes = {
 // "cStrings":              {"f": cStringsQuestion,            title: "C Strings"},
 // "pyStrings":             {"f": pyStringsQuestion,           title: "Python Strings"},
 
-
-module.exports.addOptionForEachQuestionType = function(e) {
-    $.each(module.exports.questionTypes, function(key, val) {
-	    e.append($('<option></option>').val(key).html(val.title));
-	});
-};
-
-module.exports.isValidQuestionType = function(questionType) {
+function isValidQuestionType(questionType) {
     return (module.exports.questionTypes[questionType] !== undefined);
 }
+
+function validateQuestionDescriptor(questionDescriptor) {
+    var errors = [];
+    if (!('question' in questionDescriptor)) {
+        errors.unshift({ type: 'RequiredError', path:['question'] });
+    } else if(typeof(questionDescriptor.question) !== "string") {
+        errors.unshift({ type: 'ExpectedStringError', path:['question'] });
+    } else if (!isValidQuestionType(questionDescriptor.question)) {
+        errors.unshift({ type: 'InvalidQuestionType', path:['question'] });
+    } else {
+        var parameterErrors = module.exports.questionTypes[questionDescriptor.question].validateParameters(questionDescriptor.parameters);
+        parameterErrors = parameterErrors.map(function(pError) { 
+            pError.path = ['parameters'].concat(pError.path);
+            return pError;
+        });
+        errors = errors.concat(parameterErrors);
+    }
+
+    if (!('repeat' in questionDescriptor)) {
+        errors.unshift({ type: 'RequiredError', path:['repeat'] });
+    } else if (!(Number.isSafeInteger(questionDescriptor.repeat))) {
+        errors.unshift({ type: 'ExpectedIntegerError', path:['repeat'] });
+    } else if (questionDescriptor.repeat < 1) {
+        errors.unshift({ type: 'MinimumValueError', path:['repeat'] });
+    }
+    return errors;
+}
+
+module.exports.validateQuestionDescriptor = validateQuestionDescriptor;
+module.exports.isValidQuestionType = isValidQuestionType;
+
+
+
+
+
+
