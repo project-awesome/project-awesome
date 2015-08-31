@@ -74,9 +74,56 @@ function build(descriptor, id, hexStringSeed) {
     quiz.id = id;
     quiz.questions = getQuestions(descriptor, randomStream);
 	return quiz;
-
 }
 
+function validateQuizDescriptor(qd) {
+    var errors = [];
+    if (qd === undefined)
+        return [{type:'UndefinedQuizDescriptor', path:[]}];
+    if (typeof qd !== 'object')
+        return [{type:'ExpectedObjectError', path:[]}];
+
+    if (!('title' in qd))
+        errors.unshift({ type: 'RequiredError', path:['title']});
+    else if (typeof qd.title !== 'string')
+        errors.unshift({ type: 'ExpectedStringError', path:['title']});
+
+    if (!('version' in qd))
+        errors.unshift({ type: 'RequiredError', path:['version']});
+    else if (typeof qd.version !== 'string')
+        errors.unshift({ type: 'ExpectedStringError', path:['version']});
+    
+    if (!('quiz' in qd))
+        errors.unshift({ type: 'RequiredError', path:['quiz']});
+    else if (!Array.isArray(qd.quiz))
+        errors.unshift({ type: 'ExpectedArrayError', path:['quiz']});
+    else {
+        for (var i = 0; qd.quiz.length > i; i++) {
+            var qErrors = questionsModule.validateQuestionDescriptor(qd.quiz[i]);
+            qErrors = qErrors.map(function(qError) {
+                qError.path = ['quiz',i].concat(qError.path);
+                return qError;
+            });
+            errors = errors.concat(qErrors);
+        }
+    }
+
+    return errors;
+}
+
+
+module.exports.validateQuizDescriptor = validateQuizDescriptor;
 module.exports.getQuestions = getQuestions;
 module.exports.build = build;
+
+
+
+
+
+
+
+
+
+
+
 

@@ -21,20 +21,8 @@ module.exports.isValidQDParams = function(params, questionType) {
  */
 
 module.exports.isValidQuizDescriptorQuestion = function(object) {
-
-
-		if (!(_und.has(object, 'question'))) return false;
-		if (typeof(object.question) !== "string") return false;
-
-		if (_und.has(object,'parameters') && !module.exports.isValidQDParams(object.parameters, object.question)) return false;
-
-
-		if (!(_und.has(object, 'repeat'))) return false;
-		if (typeof(object.repeat) !== "number") return false;
-		if (!(Number.isInteger(object.repeat))) return false;
-		if ((object.repeat < 1)) return false;
-
-		return true;
+	var errors = questionsModule.validateQuestionDescriptor(object);
+	return(errors.length === 0);
 };
 
 

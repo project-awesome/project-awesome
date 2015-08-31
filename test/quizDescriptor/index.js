@@ -15,44 +15,6 @@ var isValidJSON = quizDescriptor.isValidQuizDescriptorQuestionJSON;
 
 describe('isValidQuizDescriptorQuestion', function() {
 
-    describe('params property', function() {
-        describe('when undefined', function() {
-            var qdQuestion, spy;
-            before(function() {
-                qdQuestion = {
-                    "question": "binHexOctDec",
-                    "repeat": 1
-                };
-                spy = sinon.spy(quizDescriptor, 'isValidQDParams');
-            });
-            after(function() {
-                spy.restore();
-            });
-            it('should not call isValidQDParams', function() {
-                isValid(qdQuestion);
-                expect(spy.called).to.be.false;
-            });
-        });
-        describe('when defined', function() {
-            var spy, qdQuestion;
-            before(function() {
-                qdQuestion = {
-                    "question": "binHexOctDec",
-                    "parameters": {},
-                    "repeat": 1
-                };
-                spy = sinon.spy(quizDescriptor, 'isValidQDParams');
-            });
-            after(function() {
-                spy.restore();
-            });
-            it('should call isValidQDParams once', function() {
-                isValid(qdQuestion);
-                expect(spy.calledOnce).to.be.true;
-            });
-        });
-    });
-
     var validDescriptors = [
         {
             "question": "binHexOctDec",
