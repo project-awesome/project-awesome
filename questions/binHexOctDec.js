@@ -7,7 +7,7 @@
    @param randomStream an object of type random
    @return either "base n" or "word" where word described the base, e.g. "octal" or "base 8"
 */
-
+/*
 var defaultConversions = [ 
     {fromRad: 10, toRad: 2, minVal: 0, maxVal: 255},
     {fromRad: 2, toRad: 10, minVal: 0, maxVal: 255},
@@ -15,6 +15,15 @@ var defaultConversions = [
     {fromRad: 8, toRad: 2, minVal: 0, maxVal: 63 },
     {fromRad: 2, toRad: 16, minVal: 0, maxVal: 65535},
     {fromRad: 16, toRad: 2, minVal: 0, maxVal: 65535} 
+];
+*/
+var defaultConversions = [ 
+    { radix:{ from: 10, to: 2 }, range:{ min: 0, max: 255} },
+    { radix:{ from: 2, to: 10 }, range:{ min: 0, max: 255} },
+    { radix:{ from: 2, to: 8 }, range:{ min: 0, max: 511 } },
+    { radix:{ from: 8, to: 2 }, range:{ min: 0, max: 63 } },
+    { radix:{ from: 2, to: 16 }, range:{ min: 0, max: 65535} },
+    { radix:{ from: 16, to: 2 }, range:{ min: 0, max: 65535} } 
 ];
 
 function shouldFormatFrom(params, fromRad, toRad) {
@@ -63,11 +72,11 @@ module.exports.binHexOctDecQuestion = function(randomStream, params) {
     var whichConversion = randomStream.nextIntRange(conversions.length)
 
     
-    var numToConvert = conversions[whichConversion].minVal + randomStream.nextIntRange(conversions[whichConversion].maxVal-conversions[whichConversion].minVal + 1)
+    var numToConvert = conversions[whichConversion].range.min + randomStream.nextIntRange(conversions[whichConversion].range.max-conversions[whichConversion].range.min + 1)
     
     
-    var fromRad = conversions[whichConversion].fromRad;
-    var toRad = conversions[whichConversion].toRad;      
+    var fromRad = conversions[whichConversion].radix.from;
+    var toRad = conversions[whichConversion].radix.to;      
     
     var from = numToConvert.toString(fromRad);
     
@@ -104,58 +113,67 @@ module.exports.validateParameters = function(params) {
             for (var i = 0; params.conversions.length > i; i++) {
                 var conversion = params.conversions[i];
 
-                // must be [2-10] | [16]
-                if (!('fromRad' in conversion)) {
-                    errors.unshift({ type: 'RequiredError', path: ['conversions', i, 'fromRad']});
+                if (!('radix' in conversion)) {
+                    errors.unshift({ type: 'RequiredError', path: ['conversions', i, 'radix']});
                 } else {
-                    if (!(Number.isSafeInteger(conversion.fromRad))) 
-                        errors.unshift({ type: 'ExpectedIntegerError', path: ['conversions', i, 'fromRad']});
-                    if (conversion.fromRad < 2) 
-                        errors.unshift({ type: 'MinimumValueError', path: ['conversions', i, 'fromRad']});
-                    if (conversion.fromRad > 36)
-                        errors.unshift({ type: 'MaximumValueError', path: ['conversions', i, 'fromRad']});
-                }
+                    // must be [2-10] | [16]
+                    if (!('from' in conversion.radix)) {
+                        errors.unshift({ type: 'RequiredError', path: ['conversions', i, 'radix', 'from']});
+                    } else {
+                        if (!(Number.isSafeInteger(conversion.radix.from))) 
+                            errors.unshift({ type: 'ExpectedIntegerError', path: ['conversions', i, 'radix', 'from']});
+                        if (conversion.radix.from < 2) 
+                            errors.unshift({ type: 'MinimumValueError', path: ['conversions', i, 'radix', 'from']});
+                        if (conversion.radix.from > 36)
+                            errors.unshift({ type: 'MaximumValueError', path: ['conversions', i, 'radix', 'from']});
+                    }
 
-                if (!('toRad' in conversion)) {
-                    errors.unshift({ type: 'RequiredError', path: ['conversions', i, 'toRad']});
-                } else {
-                    if (!(Number.isSafeInteger(conversion.toRad))) 
-                        errors.unshift({ type: 'ExpectedIntegerError', path: ['conversions', i, 'toRad']});
-                    if (conversion.toRad < 2) 
-                        errors.unshift({ type: 'MinimumValueError', path: ['conversions', i, 'toRad']});
-                    if (conversion.toRad > 36)
-                        errors.unshift({ type: 'MaximumValueError', path: ['conversions', i, 'toRad']});
-                }
+                    if (!('to' in conversion.radix)) {
+                        errors.unshift({ type: 'RequiredError', path: ['conversions', i, 'radix', 'to']});
+                    } else {
+                        if (!(Number.isSafeInteger(conversion.radix.to))) 
+                            errors.unshift({ type: 'ExpectedIntegerError', path: ['conversions', i, 'radix', 'to']});
+                        if (conversion.radix.to < 2) 
+                            errors.unshift({ type: 'MinimumValueError', path: ['conversions', i, 'radix', 'to']});
+                        if (conversion.radix.to > 36)
+                            errors.unshift({ type: 'MaximumValueError', path: ['conversions', i, 'radix', 'to']});
+                    }
 
-                if (!('minVal' in conversion)) {
-                    errors.unshift({ type: 'RequiredError', path: ['conversions', i, 'minVal']});
-                } else {
-                    if (!(Number.isSafeInteger(conversion.minVal))) 
-                        errors.unshift({ type: 'ExpectedIntegerError', path: ['conversions', i, 'minVal']});
-                    if (conversion.minVal < 0) 
-                        errors.unshift({ type: 'MinimumValueError', path: ['conversions', i, 'minVal']});
-                }
-
-                if (!('maxVal' in conversion)) {
-                    errors.unshift({ type: 'RequiredError', path: ['conversions', i, 'maxVal']});
-                } else {
-                    if (!(Number.isSafeInteger(conversion.maxVal))) 
-                        errors.unshift({ type: 'ExpectedIntegerError', path: ['conversions', i, 'maxVal']});
-                    if (conversion.maxVal < 0) 
-                        errors.unshift({ type: 'MinimumValueError', path: ['conversions', i, 'maxVal']});
-                }
-
-                if (('maxVal' in conversion) && ('minVal' in conversion)) {
-                    if (conversion.minVal > conversion.maxVal) {
-                        errors.unshift({ type: 'InvalidIntervalError', path: ['conversions', i]});
+                    if (('from' in conversion.radix) && ('to' in conversion.radix)) {
+                        if (conversion.radix.from === conversion.radix.to) {
+                            errors.unshift({ type: 'ToFromEqualError', path: ['conversions', i, 'radix']});
+                        }
                     }
                 }
 
-                if (('fromRad' in conversion) && ('toRad' in conversion)) {
-                    if (conversion.fromRad === conversion.toRad) {
-                        errors.unshift({ type: 'ToFromEqualError', path: ['conversions', i]});
+                if (!('range' in conversion)) {
+                    errors.unshift({ type: 'RequiredError', path: ['conversions', i, 'range']});
+                } else {
+                    if (!('min' in conversion.range)) {
+                        errors.unshift({ type: 'RequiredError', path: ['conversions', i, 'range', 'min']});
+                    } else {
+                        if (!(Number.isSafeInteger(conversion.range.min))) 
+                            errors.unshift({ type: 'ExpectedIntegerError', path: ['conversions', i, 'range', 'min']});
+                        if (conversion.range.min < 0) 
+                            errors.unshift({ type: 'MinimumValueError', path: ['conversions', i, 'range', 'min']});
+                    }
+
+                    if (!('max' in conversion.range)) {
+                        errors.unshift({ type: 'RequiredError', path: ['conversions', i, 'range', 'max']});
+                    } else {
+                        if (!(Number.isSafeInteger(conversion.range.max))) 
+                            errors.unshift({ type: 'ExpectedIntegerError', path: ['conversions', i, 'range', 'max']});
+                        if (conversion.range.max < 0) 
+                            errors.unshift({ type: 'MinimumValueError', path: ['conversions', i, 'range', 'max']});
+                    }
+
+                    if (('max' in conversion.range) && ('min' in conversion.range)) {
+                        if (conversion.range.min > conversion.range.max) {
+                            errors.unshift({ type: 'InvalidIntervalError', path: ['conversions', i, 'range']});
+                        }
                     }
                 }
+
             }
         }
     }

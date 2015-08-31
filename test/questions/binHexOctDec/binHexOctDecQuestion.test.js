@@ -56,11 +56,11 @@ describe('binHexOctDecQuestion(randomStream, params)', function() {
 				    }
 				};
 			});
-			describe('when fromRad is 2', function() {
-				describe('when toRad is 8', function() {
+			describe('when radix.from is 2', function() {
+				describe('when radix.to is 8', function() {
 					describe('when spaceBinary is true', function() {
 						before(function() { 
-							params = { conversions: [{'fromRad': 2, 'toRad': 8, 'minVal': decimalVal, 'maxVal': decimalVal }]};
+							params = { conversions: [ { radix:{ from:2 , to:8 }, range:{ min:decimalVal, max:decimalVal } } ]};
 							params.spaceBinary = true; 
 						});
 						it('should format the binary number in the question so that digits are in groups of 3', function() {
@@ -70,7 +70,7 @@ describe('binHexOctDecQuestion(randomStream, params)', function() {
 					});
 					describe('when spaceBinary is false', function() {
 						before(function() { 
-							params = { conversions: [{'fromRad': 2, 'toRad': 8, 'minVal': decimalVal, 'maxVal': decimalVal }]};
+							params = { conversions: [ { radix:{ from:2 , to:8 }, range:{ min:decimalVal, max:decimalVal } } ]};
 							params.spaceBinary = false; 
 						});
 						it('should not add spaces to the binary number', function() {
@@ -80,7 +80,7 @@ describe('binHexOctDecQuestion(randomStream, params)', function() {
 					});
 					describe('when spaceBinary is undefined', function() {
 						before(function() { 
-							params = { conversions: [{'fromRad': 2, 'toRad': 8, 'minVal': decimalVal, 'maxVal': decimalVal }]};
+							params = { conversions: [ { radix:{ from:2 , to:8 }, range:{ min:decimalVal, max:decimalVal } } ]};
 						});
 						it('should format as though spaceBinary == true', function() {
 							var q = new binHexOctDec.binHexOctDecQuestion(mockRS, params);
@@ -93,7 +93,7 @@ describe('binHexOctDecQuestion(randomStream, params)', function() {
 				describe('when toRad is 16', function() {
 					describe('when spaceBinary is true', function() {
 						before(function() { 
-							params = { conversions: [{'fromRad': 2, 'toRad': 16, 'minVal': decimalVal, 'maxVal': decimalVal }]};
+							params = { conversions: [ { radix:{ from:2 , to:16 }, range:{ min:decimalVal, max:decimalVal } } ]};
 							params.spaceBinary = true; 
 						}); 
 						it('should format the binary number in the question so that digits are in groups of 4', function() {
@@ -103,7 +103,7 @@ describe('binHexOctDecQuestion(randomStream, params)', function() {
 					});
 					describe('when spaceBinary is false', function() {
 						before(function() { 
-							params = { conversions: [{'fromRad': 2, 'toRad': 16, 'minVal': decimalVal, 'maxVal': decimalVal }]};
+							params = { conversions: [ { radix:{ from:2 , to:16 }, range:{ min:decimalVal, max:decimalVal } } ]};
 							params.spaceBinary = false; 
 						});
 						it('should not add spaces to the binary number', function() {
@@ -113,7 +113,7 @@ describe('binHexOctDecQuestion(randomStream, params)', function() {
 					});
 					describe('when spaceBinary is undefined', function() {
 						before(function() { 
-							params = { conversions: [{'fromRad': 2, 'toRad': 16, 'minVal': decimalVal, 'maxVal': decimalVal }]};
+							params = { conversions: [ { radix:{ from:2 , to:16 }, range:{ min:decimalVal, max:decimalVal } } ]};
 						});
 						it('should format as though spaceBinary == true', function() {
 							var q = new binHexOctDec.binHexOctDecQuestion(mockRS, params);
@@ -126,7 +126,7 @@ describe('binHexOctDecQuestion(randomStream, params)', function() {
 				describe('when toRad is neither 8 nor 16', function() {
 					describe('when spaceBinary is true', function() {
 						before(function() { 
-							params = { conversions: [{'fromRad': 2, 'toRad': 10, 'minVal': decimalVal, 'maxVal': decimalVal }]};
+							params = { conversions: [ { radix:{ from:2 , to:10 }, range:{ min:decimalVal, max:decimalVal } } ]};
 							params.spaceBinary = true; 
 						}); 
 						it('should not add spaces to the binary number', function() {
@@ -136,7 +136,7 @@ describe('binHexOctDecQuestion(randomStream, params)', function() {
 					});
 					describe('when spaceBinary is false', function() {
 						before(function() { 
-							params = { conversions: [{'fromRad': 2, 'toRad': 10, 'minVal': decimalVal, 'maxVal': decimalVal }]};
+							params = { conversions: [ { radix:{ from:2 , to:10 }, range:{ min:decimalVal, max:decimalVal } } ]};
 							params.spaceBinary = false; 
 						}); 
 						it('should not add spaces to the binary number', function() {
@@ -146,7 +146,7 @@ describe('binHexOctDecQuestion(randomStream, params)', function() {
 					});
 					describe('when spaceBinary is undefined', function() {
 						before(function() { 
-							params = { conversions: [{'fromRad': 2, 'toRad': 10, 'minVal': decimalVal, 'maxVal': decimalVal }]};
+							params = { conversions: [ { radix:{ from:2 , to:10 }, range:{ min:decimalVal, max:decimalVal } } ]};
 						}); 
 						it('should format as though spaceBinary == true', function() {
 							var q = new binHexOctDec.binHexOctDecQuestion(mockRS, params);
@@ -157,11 +157,11 @@ describe('binHexOctDecQuestion(randomStream, params)', function() {
 					});
 				});
 			});
-			describe('when toRad is 2', function() {
-				describe('when fromRad is 8', function() {
+			describe('when radix.to is 2', function() {
+				describe('when radix.from is 8', function() {
 					describe('when spaceBinary is true', function() {
 						before(function() { 
-							params = { conversions: [{'fromRad': 8, 'toRad': 2, 'minVal': decimalVal, 'maxVal': decimalVal }]};
+							params = { conversions: [ { radix:{ from:8 , to:2 }, range:{ min:decimalVal, max:decimalVal } } ]};
 							params.spaceBinary = true; 
 						});
 						it('should format the binary answer so that digits are in groups of 3', function() {
@@ -171,7 +171,7 @@ describe('binHexOctDecQuestion(randomStream, params)', function() {
 					});
 					describe('when spaceBinary is false', function() {
 						before(function() { 
-							params = { conversions: [{'fromRad': 8, 'toRad': 2, 'minVal': decimalVal, 'maxVal': decimalVal }]};
+							params = { conversions: [ { radix:{ from:8 , to:2 }, range:{ min:decimalVal, max:decimalVal } } ]};
 							params.spaceBinary = false; 
 						});
 						it('should not add spaces to the binary answer', function() {
@@ -181,7 +181,7 @@ describe('binHexOctDecQuestion(randomStream, params)', function() {
 					});
 					describe('when spaceBinary is undefined', function() {
 						before(function() {
-							params = { conversions: [{'fromRad': 8, 'toRad': 2, 'minVal': decimalVal, 'maxVal': decimalVal }]};
+							params = { conversions: [ { radix:{ from:8 , to:2 }, range:{ min:decimalVal, max:decimalVal } } ]};
 						});
 						it('should format as though spaceBinary == true', function() {
 							var q = new binHexOctDec.binHexOctDecQuestion(mockRS, params);
@@ -194,7 +194,7 @@ describe('binHexOctDecQuestion(randomStream, params)', function() {
 				describe('when fromRad is 16', function() {
 					describe('when spaceBinary is true', function() {
 						before(function() { 
-							params = { conversions: [{'fromRad': 16, 'toRad': 2, 'minVal': decimalVal, 'maxVal': decimalVal }]};
+							params = { conversions: [ { radix:{ from:16 , to:2 }, range:{ min:decimalVal, max:decimalVal } } ]};
 							params.spaceBinary = true; 
 						});
 						it('should format the binary answer so that digits are in groups of 4', function() {
@@ -204,7 +204,7 @@ describe('binHexOctDecQuestion(randomStream, params)', function() {
 					});
 					describe('when spaceBinary is false', function() {
 						before(function() { 
-							params = { conversions: [{'fromRad': 16, 'toRad': 2, 'minVal': decimalVal, 'maxVal': decimalVal }]};
+							params = { conversions: [ { radix:{ from:16 , to:2 }, range:{ min:decimalVal, max:decimalVal } } ]};
 							params.spaceBinary = false; 
 						});
 						it('should not add spaces to the binary answer', function() {
@@ -214,7 +214,7 @@ describe('binHexOctDecQuestion(randomStream, params)', function() {
 					});
 					describe('when spaceBinary is undefined', function() {
 						before(function() { 
-							params = { conversions: [{'fromRad': 16, 'toRad': 2, 'minVal': decimalVal, 'maxVal': decimalVal }]};
+							params = { conversions: [ { radix:{ from:16 , to:2 }, range:{ min:decimalVal, max:decimalVal } } ]};
 						});
 						it('should format as though spaceBinary == true', function() {
 							var q = new binHexOctDec.binHexOctDecQuestion(mockRS, params);
@@ -224,10 +224,10 @@ describe('binHexOctDecQuestion(randomStream, params)', function() {
 						});
 					});
 				});
-				describe('when fromRad is neither 8 nor 16', function() {
+				describe('when radix.from is neither 8 nor 16', function() {
 					describe('when spaceBinary is true', function() {
 						before(function() { 
-							params = { conversions: [{'fromRad': 10, 'toRad': 2, 'minVal': decimalVal, 'maxVal': decimalVal }]};
+							params = { conversions: [ { radix:{ from:10 , to:2 }, range:{ min:decimalVal, max:decimalVal } } ]};
 							params.spaceBinary = true; 
 						}); 
 						it('should not add spaces to the binary answer', function() {
@@ -237,7 +237,7 @@ describe('binHexOctDecQuestion(randomStream, params)', function() {
 					});
 					describe('when spaceBinary is false', function() {
 						before(function() { 
-							params = { conversions: [{'fromRad': 10, 'toRad': 2, 'minVal': decimalVal, 'maxVal': decimalVal }]};
+							params = { conversions: [ { radix:{ from:10 , to:2 }, range:{ min:decimalVal, max:decimalVal } } ]};
 							params.spaceBinary = false; 
 						}); 
 						it('should not add spaces to the binary answer', function() {
@@ -247,7 +247,7 @@ describe('binHexOctDecQuestion(randomStream, params)', function() {
 					});
 					describe('when spaceBinary is undefined', function() {
 						before(function() { 
-							params = { conversions: [{'fromRad': 10, 'toRad': 2, 'minVal': decimalVal, 'maxVal': decimalVal }]};
+							params = { conversions: [ { radix:{ from:10 , to:2 }, range:{ min:decimalVal, max:decimalVal } } ]};
 						}); 
 						it('should format as though spaceBinary == true', function() {
 							var q = new binHexOctDec.binHexOctDecQuestion(mockRS, params);
@@ -271,9 +271,9 @@ describe('binHexOctDecQuestion(randomStream, params)', function() {
 					expect(q.answer).to.equal("0");
 				});
 			});
-			describe("when params == {'fromRad': 2, 'toRad': 10, 'minVal': 5, 'maxVal': 5 }", function() {
+			describe("when conversion is { radix: { from: 2, to: 10}, range: {min: 5, max: 5} }", function() {
 				before(function() {
-					params = { conversions: [{'fromRad': 2, 'toRad': 10, 'minVal': 5, 'maxVal': 5 }]}
+					params = { conversions: [ { radix:{ from:2 , to:10 }, range:{ min:5, max:5 } } ]};
 					retVals = [0, 0, 0, 0];
 				});
 				it('should include "from base 2 to base 10" in the question, and the answer should equal 5', function() {
@@ -282,9 +282,9 @@ describe('binHexOctDecQuestion(randomStream, params)', function() {
 					expect(q.answer).to.equal("5");
 				});
 			});
-			describe("when params == {'fromRad': 5, 'toRad': 7, 'minVal': 1000, 'maxVal': 1000 }", function() {
+			describe("when conversion is { radix: {from: 5, to: 7}, range: {min: 1000, max: 1000} }", function() {
 				before(function() {
-					params = { conversions: [{'fromRad': 5, 'toRad': 7, 'minVal': 1000, 'maxVal': 1000 }]}
+					params = { conversions: [ { radix:{ from:5 , to:7 }, range:{ min:1000, max:1000 } } ]};
 					retVals = [0, 0, 1, 1];
 				});
 				it('should include "from base 5 to base 7" in the question, and the answer should equal 1000', function() {

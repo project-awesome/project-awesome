@@ -69,7 +69,7 @@ describe('questions.binHexOctDec.validateParameters(parameters)', function() {
         describe('valid conversions values', function() {
             describe('when params is array of size 1', function() {
                 before(function() {
-                    params.conversions = [{'fromRad': 2, 'toRad': 10, 'minVal': 0, 'maxVal': 10 }];
+                    params.conversions = [ { radix: {from: 2, to: 10}, range:{min: 0, max: 10} } ];
                 });
                 it('should be valid', function() {
                     expect(validateParameters(params)).to.eql([]);
@@ -78,8 +78,8 @@ describe('questions.binHexOctDec.validateParameters(parameters)', function() {
             describe('when params is array of size greater than 1', function() {
                 before(function() {
                     params.conversions = [
-                        {'fromRad': 2, 'toRad': 10, 'minVal': 0, 'maxVal': 10 },
-                        {'fromRad': 10, 'toRad': 8, 'minVal': 0, 'maxVal': 10 }
+                        { radix: {from: 2, to: 10}, range:{min: 0, max: 10} },
+                        { radix: {from: 10, to: 8}, range:{min: 0, max: 10} }
                     ];
                 });
                 it('should be valid', function() {
@@ -89,7 +89,7 @@ describe('questions.binHexOctDec.validateParameters(parameters)', function() {
             describe('when minVal equals maxVal', function() {
                 before(function() {
                     params.conversions = [
-                        {'fromRad': 2, 'toRad': 10, 'minVal': 10, 'maxVal': 10 },
+                        { radix: {from: 2, to: 10}, range:{min: 0, max: 10} }
                     ];
                 });
                 it('should be valid', function() {
@@ -99,7 +99,7 @@ describe('questions.binHexOctDec.validateParameters(parameters)', function() {
             describe('when fromRad is 2 and toRad is 16', function() {
                 before(function() {
                     params.conversions = [
-                        {'fromRad': 2, 'toRad': 16, 'minVal': 1, 'maxVal': 1000 },
+                        { radix: {from: 2, to: 16}, range:{min: 1, max: 1000} }
                     ];
                 });
                 it('should be valid', function() {
@@ -109,7 +109,7 @@ describe('questions.binHexOctDec.validateParameters(parameters)', function() {
             describe('when fromRad is 3 and toRad is 10', function() {
                 before(function() {
                     params.conversions = [
-                        {'fromRad': 3, 'toRad': 10, 'minVal': 1, 'maxVal': 1000 },
+                        { radix: {from: 3, to: 10}, range:{min: 1, max: 1000} }
                     ];
                 });
                 it('should be valid', function() {
@@ -119,7 +119,7 @@ describe('questions.binHexOctDec.validateParameters(parameters)', function() {
             describe('when fromRad is 35 and toRad is 36', function() {
                 before(function() {
                     params.conversions = [
-                        {'fromRad': 35, 'toRad': 36, 'minVal': 1, 'maxVal': 1000 },
+                        { radix: {from: 35, to: 36}, range:{min: 1, max: 1000} }
                     ];
                 });
                 it('should be valid', function() {
@@ -145,197 +145,202 @@ describe('questions.binHexOctDec.validateParameters(parameters)', function() {
             describe('conversion properties', function() {
                 var params = {};
 
-                describe('fromRad', function() {
-                    describe('when undefined', function() {
-                        before(function() {
-                            params.conversions = [{'toRad': 10, 'minVal': 0, 'maxVal': 10 }];
+                describe('radix', function() {
+                    describe('from', function() {
+                        describe('when undefined', function() {
+                            before(function() {
+                                params.conversions = [ { radix: {to: 10}, range:{min: 0, max: 10} } ];
+                            });
+                            it('should contain a RequiredError', function() {
+                                var errors = validateParameters(params);
+                                expect(errors.length).to.equal(1);
+                                expect(errors[0].type).to.equal('RequiredError');
+                                expect(errors[0].path).to.eql(['conversions', 0, 'radix', 'from']);
+                            });
                         });
-                        it('should contain a RequiredError', function() {
-		                	var errors = validateParameters(params);
-		                	expect(errors.length).to.equal(1);
-		                    expect(errors[0].type).to.equal('RequiredError');
-		                    expect(errors[0].path).to.eql(['conversions', 0, 'fromRad']);
+                        describe('when not an integer', function() {
+                            before(function() {
+                                params.conversions = [ { radix: {from: 3.1, to: 10}, range:{min: 0, max: 10} } ];
+                            });
+                            it('should contain a ExpectedIntegerError', function() {
+                                var errors = validateParameters(params);
+                                expect(errors.length).to.equal(1);
+                                expect(errors[0].type).to.equal('ExpectedIntegerError');
+                                expect(errors[0].path).to.eql(['conversions', 0, 'radix', 'from']);
+                            });
+                        });
+                        describe('when less than 2', function() {
+                            before(function() {
+                                params.conversions = [ { radix: {from: 1, to: 10}, range:{min: 0, max: 10} } ];
+                            });
+                            it('should contain a MinimumValueError', function() {
+                                var errors = validateParameters(params);
+                                expect(errors.length).to.equal(1);
+                                expect(errors[0].type).to.equal('MinimumValueError');
+                                expect(errors[0].path).to.eql(['conversions', 0, 'radix', 'from']);
+                            });
+                        });
+                        describe('when greater than 36', function() {
+                            before(function() {
+                                params.conversions = [ { radix: {from: 37, to: 10}, range:{min: 0, max: 10} } ];
+                            });
+                            it('should contain a MaximumValueError', function() {
+                                var errors = validateParameters(params);
+                                expect(errors.length).to.equal(1);
+                                expect(errors[0].type).to.equal('MaximumValueError');
+                                expect(errors[0].path).to.eql(['conversions', 0, 'radix', 'from']);
+                            });
                         });
                     });
-                    describe('when not an integer', function() {
-                        before(function() {
-                            params.conversions = [{'fromRad': 3.1, 'toRad': 10, 'minVal': 0, 'maxVal': 10 }];
+
+                    describe('to', function() {
+                        describe('when undefined', function() {
+                            before(function() {
+                                params.conversions = [ { radix: {from: 2}, range:{min: 0, max: 10} } ];
+                            });
+                            it('should contain a RequiredError', function() {
+                                var errors = validateParameters(params);
+                                expect(errors.length).to.equal(1);
+                                expect(errors[0].type).to.equal('RequiredError');
+                                expect(errors[0].path).to.eql(['conversions', 0, 'radix', 'to']);
+                            });
                         });
-                        it('should contain a ExpectedIntegerError', function() {
-		                	var errors = validateParameters(params);
-		                	expect(errors.length).to.equal(1);
-		                    expect(errors[0].type).to.equal('ExpectedIntegerError');
-		                    expect(errors[0].path).to.eql(['conversions', 0, 'fromRad']);
+                        describe('when not an integer', function() {
+                            before(function() {
+                                params.conversions = [ { radix: {from: 2, to: 9.1 }, range:{min: 0, max: 10} } ];
+                            });
+                            it('should contain a ExpectedIntegerError', function() {
+                                var errors = validateParameters(params);
+                                expect(errors.length).to.equal(1);
+                                expect(errors[0].type).to.equal('ExpectedIntegerError');
+                                expect(errors[0].path).to.eql(['conversions', 0, 'radix', 'to']);
+                            });
+                        });
+                        describe('when less than 2', function() {
+                            before(function() {
+                                params.conversions = [ { radix: {from: 2, to: 1 }, range:{min: 0, max: 10} } ];
+                            });
+                            it('should contain a MinimumValueError', function() {
+                                var errors = validateParameters(params);
+                                expect(errors.length).to.equal(1);
+                                expect(errors[0].type).to.equal('MinimumValueError');
+                                expect(errors[0].path).to.eql(['conversions', 0, 'radix', 'to']);
+                            });
+                        });
+                        describe('when greater than 36', function() {
+                            before(function() {
+                                params.conversions = [ { radix: {from: 2, to: 37 }, range:{min: 0, max: 10} } ];
+                            });
+                            it('should contain a MaximumValueError', function() {
+                                var errors = validateParameters(params);
+                                expect(errors.length).to.equal(1);
+                                expect(errors[0].type).to.equal('MaximumValueError');
+                                expect(errors[0].path).to.eql(['conversions', 0, 'radix', 'to']);
+                            });
                         });
                     });
-                    describe('when less than 2', function() {
-                        before(function() {
-                            params.conversions = [{'fromRad': 1, 'toRad': 10, 'minVal': 0, 'maxVal': 10 }];
-                        });
-                        it('should contain a MinimumValueError', function() {
-		                	var errors = validateParameters(params);
-		                	expect(errors.length).to.equal(1);
-		                    expect(errors[0].type).to.equal('MinimumValueError');
-		                    expect(errors[0].path).to.eql(['conversions', 0, 'fromRad']);
+
+                    describe('when radix.from is the same as radix.to', function() {
+                            before(function() {
+                                params.conversions = [ { radix: {from: 2, to: 2 }, range:{min: 0, max: 10} } ];
+                            });
+                        it('should contain a ToFromEqualError', function() {
+                            var errors = validateParameters(params);
+                            expect(errors.length).to.equal(1);
+                            expect(errors[0].type).to.equal('ToFromEqualError');
+                            expect(errors[0].path).to.eql(['conversions', 0, 'radix']);
                         });
                     });
-                    describe('when greater than 36', function() {
-                        before(function() {
-                            params.conversions = [{'fromRad': 37, 'toRad': 2, 'minVal': 0, 'maxVal': 10 }];
+                });
+                
+                describe('range', function() {
+                    describe('min', function() {
+                        describe('when undefined', function() {
+                            before(function() {
+                                params.conversions = [ { radix: {from: 2, to: 10 }, range:{max: 10} } ];
+                            });
+                            it('should contain a RequiredError', function() {
+                                var errors = validateParameters(params);
+                                expect(errors.length).to.equal(1);
+                                expect(errors[0].type).to.equal('RequiredError');
+                                expect(errors[0].path).to.eql(['conversions', 0, 'range', 'min']);
+                            });
                         });
-                        it('should contain a MaximumValueError', function() {
-		                	var errors = validateParameters(params);
-		                	expect(errors.length).to.equal(1);
-		                    expect(errors[0].type).to.equal('MaximumValueError');
-		                    expect(errors[0].path).to.eql(['conversions', 0, 'fromRad']);
+                        describe('when not an integer', function() {
+                            before(function() {
+                                params.conversions = [ { radix: {from: 2, to: 10 }, range:{ min: 1.1, max: 10} } ];
+                            });
+                            it('should contain a ExpectedIntegerError', function() {
+                                var errors = validateParameters(params);
+                                expect(errors.length).to.equal(1);
+                                expect(errors[0].type).to.equal('ExpectedIntegerError');
+                                expect(errors[0].path).to.eql(['conversions', 0, 'range', 'min']);
+                            });
+                        });
+                        describe('when less than 0', function() {
+                            before(function() {
+                                params.conversions = [ { radix: {from: 2, to: 10 }, range:{ min: -1, max: 10} } ];
+                            });
+                            it('should contain a MinimumValueError', function() {
+                                var errors = validateParameters(params);
+                                expect(errors.length).to.equal(1);
+                                expect(errors[0].type).to.equal('MinimumValueError');
+                                expect(errors[0].path).to.eql(['conversions', 0, 'range', 'min']);
+                            });
+                        });
+                    });
+
+                    describe('max', function() {
+                        describe('when undefined', function() {
+                            before(function() {
+                                params.conversions = [ { radix: {from: 2, to: 10 }, range:{ min: 0 } } ];
+                            });
+                            it('should contain a RequiredError', function() {
+                                var errors = validateParameters(params);
+                                expect(errors.length).to.equal(1);
+                                expect(errors[0].type).to.equal('RequiredError');
+                                expect(errors[0].path).to.eql(['conversions', 0, 'range', 'max']);
+                            });
+                        });
+                        describe('when not an integer', function() {
+                            before(function() {
+                                params.conversions = [ { radix: {from: 2, to: 10 }, range:{ min: 0, max: 10.1 } } ];
+                            });
+                            it('should contain a ExpectedIntegerError', function() {
+                                var errors = validateParameters(params);
+                                expect(errors.length).to.equal(1);
+                                expect(errors[0].type).to.equal('ExpectedIntegerError');
+                                expect(errors[0].path).to.eql(['conversions', 0, 'range', 'max']);
+                            });
+                        });
+                        describe('when less than 0', function() {
+                            before(function() {
+                                params.conversions = [ { radix: {from: 2, to: 10 }, range:{ min: 0, max: -1 } } ];
+                            });
+                            it('should contain a MinimumValueError and an InvalidIntervalError', function() {
+                                var errors = validateParameters(params);
+                                expect(errors.length).to.equal(2);
+                                expect(errors[0].type).to.equal('InvalidIntervalError');
+                                expect(errors[0].path).to.eql(['conversions', 0, 'range']);
+                                expect(errors[1].type).to.equal('MinimumValueError');
+                                expect(errors[1].path).to.eql(['conversions', 0, 'range', 'max']);
+                            });
+                        });
+                    });
+
+                    describe('when range.max is less than range.min', function() {
+                        before(function() {
+                                params.conversions = [ { radix: {from: 2, to: 10 }, range:{ min: 10, max: 5 } } ];
+                        });
+                        it('should contain a InvalidIntervalError', function() {
+                            var errors = validateParameters(params);
+                                expect(errors.length).to.equal(1);
+                            expect(errors[0].type).to.equal('InvalidIntervalError');
+                            expect(errors[0].path).to.eql(['conversions', 0, 'range']);
                         });
                     });
                 });
 
-                describe('toRad', function() {
-                    describe('when undefined', function() {
-                        before(function() {
-                            params.conversions = [{'fromRad': 2, 'minVal': 0, 'maxVal': 10 }];
-                        });
-                        it('should contain a RequiredError', function() {
-		                	var errors = validateParameters(params);
-		                	expect(errors.length).to.equal(1);
-		                    expect(errors[0].type).to.equal('RequiredError');
-		                    expect(errors[0].path).to.eql(['conversions', 0, 'toRad']);
-                        });
-                    });
-                    describe('when not an integer', function() {
-                        before(function() {
-                            params.conversions = [{'fromRad': 2, 'toRad': 9.1, 'minVal': 0, 'maxVal': 10 }];
-                        });
-                        it('should contain a ExpectedIntegerError', function() {
-		                	var errors = validateParameters(params);
-		                	expect(errors.length).to.equal(1);
-		                    expect(errors[0].type).to.equal('ExpectedIntegerError');
-		                    expect(errors[0].path).to.eql(['conversions', 0, 'toRad']);
-                        });
-                    });
-                    describe('when less than 2', function() {
-                        before(function() {
-                            params.conversions = [{'fromRad': 2, 'toRad': 1, 'minVal': 0, 'maxVal': 10 }];
-                        });
-                        it('should contain a MinimumValueError', function() {
-		                	var errors = validateParameters(params);
-		                	expect(errors.length).to.equal(1);
-		                    expect(errors[0].type).to.equal('MinimumValueError');
-		                    expect(errors[0].path).to.eql(['conversions', 0, 'toRad']);
-                        });
-                    });
-                    describe('when greater than 36', function() {
-                        before(function() {
-                            params.conversions = [{'fromRad': 2, 'toRad': 37, 'minVal': 0, 'maxVal': 10 }];
-                        });
-                        it('should contain a MaximumValueError', function() {
-		                	var errors = validateParameters(params);
-		                	expect(errors.length).to.equal(1);
-		                    expect(errors[0].type).to.equal('MaximumValueError');
-		                    expect(errors[0].path).to.eql(['conversions', 0, 'toRad']);
-                        });
-                    });
-                });
-
-                describe('when fromRad is the same as toRad', function() {
-                        before(function() {
-                            params.conversions = [{'fromRad': 2, 'toRad': 2, 'minVal': 0, 'maxVal': 10 }];
-                        });
-                    it('should contain a ToFromEqualError', function() {
-	                	var errors = validateParameters(params);
-		                expect(errors.length).to.equal(1);
-	                    expect(errors[0].type).to.equal('ToFromEqualError');
-	                    expect(errors[0].path).to.eql(['conversions', 0]);
-                    });
-                });
-
-                describe('minVal', function() {
-                    describe('when undefined', function() {
-                        before(function() {
-                            params.conversions = [{'fromRad': 2, 'toRad': 10, 'maxVal': 10 }];
-                        });
-                        it('should contain a RequiredError', function() {
-		                	var errors = validateParameters(params);
-		                	expect(errors.length).to.equal(1);
-		                    expect(errors[0].type).to.equal('RequiredError');
-		                    expect(errors[0].path).to.eql(['conversions', 0, 'minVal']);
-                        });
-                    });
-                    describe('when not an integer', function() {
-                        before(function() {
-                            params.conversions = [{'fromRad': 2, 'toRad': 10, 'minVal': 1.1, 'maxVal': 10 }];
-                        });
-                        it('should contain a ExpectedIntegerError', function() {
-		                	var errors = validateParameters(params);
-		                	expect(errors.length).to.equal(1);
-		                    expect(errors[0].type).to.equal('ExpectedIntegerError');
-		                    expect(errors[0].path).to.eql(['conversions', 0, 'minVal']);
-                        });
-                    });
-                    describe('when less than 0', function() {
-                        before(function() {
-                            params.conversions = [{'fromRad': 2, 'toRad': 10, 'minVal': -1, 'maxVal': 10 }];
-                        });
-                        it('should contain a MinimumValueError', function() {
-		                	var errors = validateParameters(params);
-		                	expect(errors.length).to.equal(1);
-		                    expect(errors[0].type).to.equal('MinimumValueError');
-		                    expect(errors[0].path).to.eql(['conversions', 0, 'minVal']);
-                        });
-                    });
-                });
-
-                describe('maxVal', function() {
-                    describe('when undefined', function() {
-                        before(function() {
-                            params.conversions = [{'fromRad': 2, 'toRad': 10, 'minVal': 0 }];
-                        });
-                        it('should contain a RequiredError', function() {
-		                	var errors = validateParameters(params);
-		                	expect(errors.length).to.equal(1);
-		                    expect(errors[0].type).to.equal('RequiredError');
-		                    expect(errors[0].path).to.eql(['conversions', 0, 'maxVal']);
-                        });
-                    });
-                    describe('when not an integer', function() {
-                        before(function() {
-                            params.conversions = [{'fromRad': 2, 'toRad': 10, 'minVal': 0, 'maxVal': 10.1 }];
-                        });
-                        it('should contain a ExpectedIntegerError', function() {
-		                	var errors = validateParameters(params);
-		                	expect(errors.length).to.equal(1);
-		                    expect(errors[0].type).to.equal('ExpectedIntegerError');
-		                    expect(errors[0].path).to.eql(['conversions', 0, 'maxVal']);
-                        });
-                    });
-                    describe('when less than 0', function() {
-                        before(function() {
-                            params.conversions = [{'fromRad': 2, 'toRad': 10, 'minVal': 0, 'maxVal': -1 }];
-                        });
-                        it('should contain a MinimumValueError and an InvalidIntervalError', function() {
-		                	var errors = validateParameters(params);
-		                	expect(errors.length).to.equal(2);
-		                    expect(errors[0].type).to.equal('InvalidIntervalError');
-		                    expect(errors[0].path).to.eql(['conversions', 0]);
-		                    expect(errors[1].type).to.equal('MinimumValueError');
-		                    expect(errors[1].path).to.eql(['conversions', 0, 'maxVal']);
-                        });
-                    });
-                });
-
-                describe('when maxVal is not greater than minVal', function() {
-                    before(function() {
-                        params.conversions = [{'fromRad': 2, 'toRad': 10, 'minVal': 10, 'maxVal': 5 }];
-                    });
-                    it('should contain a InvalidIntervalError', function() {
-	                	var errors = validateParameters(params);
-		                	expect(errors.length).to.equal(1);
-	                    expect(errors[0].type).to.equal('InvalidIntervalError');
-	                    expect(errors[0].path).to.eql(['conversions', 0]);
-                    });
-                });
             });
         });
 	});

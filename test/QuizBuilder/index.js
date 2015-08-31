@@ -262,8 +262,8 @@ describe('QuizBuilder', function() {
 									repeat: 1,
 									parameters: {
 										conversions: [
-											{ fromRad:2, toRad:10, minVal:0, maxVal:63 },
-											{ fromRad:1, toRad:10, minVal:0, maxVal:63 }
+											{ radix: { from:2, to:10 }, range: {min:0, max:63} },
+											{ radix: { from:1, to:10 }, range: {min:0, max:63} }
 										]
 									}
 								}
@@ -280,8 +280,8 @@ describe('QuizBuilder', function() {
 						});
 					});
 					describe('error path', function() {
-						it('should be ["questions", 1, "parameters", "conversions", 1, "fromRad"]', function() {
-							expect(errors[0].path).to.eql(["questions", 1, "parameters", "conversions", 1, "fromRad"]);
+						it('should be ["questions", 1, "parameters", "conversions", 1, "radix", "from"]', function() {
+							expect(errors[0].path).to.eql(["questions", 1, "parameters", "conversions", 1, "radix", "from"]);
 						});
 					});
 				});

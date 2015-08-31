@@ -30,7 +30,7 @@ describe('questions',function() {
 						question: 'binHexOctDec',
 						parameters: {
 							conversions: [
-								{ fromRad: 2, toRad: 10, minVal: 0, maxVal: 1024 }
+								{ radix:{ from: 2, to: 10}, range:{ min: 0, max: 1024 } }
 							],
 							spaceBinary: false
 						}

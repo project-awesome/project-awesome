@@ -18,7 +18,7 @@ describe('isValidQuizDescriptorQuestion', function() {
     var validDescriptors = [
         {
             "question": "binHexOctDec",
-            "parameters": { conversions: [ {"fromRad": 2, "toRad": 16, "minVal": 0, "maxVal": 10 }] },
+            "parameters": { conversions: [ { radix: {from: 2, to: 16}, range: {min: 0, max: 10 } }] },
             "repeat": 5
         },
         {
