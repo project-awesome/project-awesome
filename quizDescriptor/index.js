@@ -1,56 +1,14 @@
-
 var _und = require("underscore")._;
 
 var questionsModule =  require("../questions");
 
 
-
 module.exports.isValidQDParams = function(params, questionType) {
+	if (params == undefined) return true;
 	if (typeof(params) !== "object") return false;
 
-	if (questionType == 'binHexOctDec') {
-		if (_und.has(params, 'spaceBinary')) {
-			if (typeof params.spaceBinary !== 'boolean') return false;
-		}
-		if (_und.has(params, 'conversions')) {
-			if (!(Array.isArray(params.conversions))) return false;
-
-			// validating each conversion object
-			var length = params.conversions.length;
-			for (var i = 0; length > i; i++) {
-				var conversion = params.conversions[i];
-
-				// must be [2-10] | [16]
-				if (!(_und.has(conversion, 'fromRad'))) return false;
-				if (!(Number.isSafeInteger(conversion.fromRad))) return false;
-				if (conversion.fromRad < 2) return false;
-				if (conversion.fromRad > 36) return false;
-
-				// must be [2-10] | [16]
-				if (!(_und.has(conversion, 'toRad'))) return false;
-				if (!(Number.isSafeInteger(conversion.toRad))) return false;
-				if (conversion.toRad < 2) return false;
-				if (conversion.toRad > 36) return false;
-
-				// must be integer >= 0
-				if (!(_und.has(conversion, 'minVal'))) return false;
-				if (!(Number.isSafeInteger(conversion.minVal))) return false;
-				if (conversion.minVal < 0) return false;
-
-				// must be integer >= 0
-				if (!(_und.has(conversion, 'maxVal'))) return false;
-				if (!(Number.isSafeInteger(conversion.maxVal))) return false;
-				if (conversion.maxVal < 0) return false;
-
-				// fromRad and toRad must be different
-				if (conversion.fromRad == conversion.toRad) return false;
-
-				// maxVal must be > minVal
-				if (conversion.maxVal < conversion.minVal) return false;
-			}
-		}
-	}
-	return true;
+	var errors = questionsModule.questionTypes[questionType].validateParameters(params);
+	return (errors.length === 0);
 }
 
 /**
@@ -61,20 +19,8 @@ module.exports.isValidQDParams = function(params, questionType) {
  */
 
 module.exports.isValidQuizDescriptorQuestion = function(object) {
-
-
-		if (!(_und.has(object, 'question'))) return false;
-		if (typeof(object.question) !== "string") return false;
-
-		if (_und.has(object,'parameters') && !module.exports.isValidQDParams(object.parameters, object.question)) return false;
-
-
-		if (!(_und.has(object, 'repeat'))) return false;
-		if (typeof(object.repeat) !== "number") return false;
-		if (!(Number.isInteger(object.repeat))) return false;
-		if ((object.repeat < 1)) return false;
-
-		return true;
+	var errors = questionsModule.validateQuestionDescriptor(object);
+	return(errors.length === 0);
 };
 
 
@@ -109,16 +55,13 @@ module.exports.isValidQuizDescriptor = function (object) {
 		if (!(_und.has(object, 'version'))) return false;
 		if (typeof(object.version) !== "string") return false;
 
-		if (!(_und.has(object, 'title'))) return false;
-		if (typeof(object.title) !== "string") return false;
+		if (!(_und.has(object, 'questions'))) return false;
+		if (!(Array.isArray(object.questions))) return false;
 
-		if (!(_und.has(object, 'quiz'))) return false;
-		if (!(Array.isArray(object.quiz))) return false;
+		if (object.questions.length <= 0) return false;
 
-		if (object.quiz.length <= 0) return false;
-
-		for (var i=0; i<object.quiz.length; i++) {
-		    if (!(module.exports.isValidQuizDescriptorQuestion(object.quiz[i]))) return false;
+		for (var i=0; i<object.questions.length; i++) {
+		    if (!(module.exports.isValidQuizDescriptorQuestion(object.questions[i]))) return false;
 		} 
 
 		return true;
@@ -157,13 +100,13 @@ module.exports.produceArrayOfQuestions = function(quizObject, randomStream) {
 //TODO: Sanitize, validate, and otherwise protect against user error.
 
     var questions = [];
-    var n = quizObject["quiz"].length;
+    var n = quizObject["questions"].length;
 
 
     //Loop through the array of generating objects
     for(var i = 0; i < n; ++i) {
 
-	var item = quizObject.quiz[i];
+	var item = quizObject.questions[i];
 	
 	if("question" in item) { //If this object is a question generator
 

@@ -21,10 +21,6 @@ function isValid(q) {
 	if (!(_und.has(q, 'seed'))) return false;
 	if (!isSeedValid(q.seed)) return false;
 
-	// q.title
-	if (!(_und.has(q, 'title'))) return false;
-	if (typeof q.title !== 'string') return false;
-
 	// q.questions
 	if (!(_und.has(q, 'questions'))) return false;
 	if (!Array.isArray(q.questions)) return false;

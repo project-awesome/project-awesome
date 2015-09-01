@@ -35,6 +35,11 @@ module.exports.changeOfBaseQuestion = function(randomStream) {
 	this.question = "Convert " + a.value + " from " + a.base + " to " + b.base + ".";
 };
 
+module.exports.validateParameters = function(params) {
+	if (params === undefined) return [];
+	if (typeof params !== 'object') return [{ type: 'NonObjectParameters', path: []}];
+    return [];
+}
 
 
 

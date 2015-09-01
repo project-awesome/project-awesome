@@ -4,11 +4,11 @@ var isSeedValid = require('../validators/QuizValidator.js').isSeedValid;
 
 function getQuestions(descriptor, randomStream) {
     var questions = [];
-    var n = descriptor["quiz"].length;
+    var n = descriptor["questions"].length;
 
     for(var i = 0; i < n; ++i) {
 
-        var item = descriptor.quiz[i];
+        var item = descriptor.questions[i];
 
         if("question" in item) { //If this object is a question generator
 
@@ -58,7 +58,6 @@ function getQuestions(descriptor, randomStream) {
     }
 
     return questions; 
-
 };
 
 function build(descriptor, id, hexStringSeed) {
@@ -70,13 +69,54 @@ function build(descriptor, id, hexStringSeed) {
     var s = parseInt(hexStringSeed, 16);
     var randomStream = new randomModule.random(s);
 
-    quiz.title = descriptor.title;
     quiz.id = id;
     quiz.questions = getQuestions(descriptor, randomStream);
 	return quiz;
-
 }
 
+function validateQuizDescriptor(qd) {
+    var errors = [];
+    if (qd === undefined)
+        return [{type:'UndefinedQuizDescriptor', path:[]}];
+    if (typeof qd !== 'object')
+        return [{type:'ExpectedObjectError', path:[]}];
+
+    if (!('version' in qd))
+        errors.unshift({ type: 'RequiredError', path:['version']});
+    else if (typeof qd.version !== 'string')
+        errors.unshift({ type: 'ExpectedStringError', path:['version']});
+    
+    if (!('questions' in qd))
+        errors.unshift({ type: 'RequiredError', path:['questions']});
+    else if (!Array.isArray(qd.questions))
+        errors.unshift({ type: 'ExpectedArrayError', path:['questions']});
+    else {
+        for (var i = 0; qd.questions.length > i; i++) {
+            var qErrors = questionsModule.validateQuestionDescriptor(qd.questions[i]);
+            qErrors = qErrors.map(function(qError) {
+                qError.path = ['questions',i].concat(qError.path);
+                return qError;
+            });
+            errors = errors.concat(qErrors);
+        }
+    }
+
+    return errors;
+}
+
+
+module.exports.validateQuizDescriptor = validateQuizDescriptor;
 module.exports.getQuestions = getQuestions;
 module.exports.build = build;
+
+
+
+
+
+
+
+
+
+
+
 
