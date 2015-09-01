@@ -55,9 +55,6 @@ module.exports.isValidQuizDescriptor = function (object) {
 		if (!(_und.has(object, 'version'))) return false;
 		if (typeof(object.version) !== "string") return false;
 
-		if (!(_und.has(object, 'title'))) return false;
-		if (typeof(object.title) !== "string") return false;
-
 		if (!(_und.has(object, 'questions'))) return false;
 		if (!(Array.isArray(object.questions))) return false;
 

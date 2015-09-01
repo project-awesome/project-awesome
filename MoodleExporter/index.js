@@ -48,7 +48,6 @@ function generateMoodleXML(questionType, count, questionName, seed) {
 		throw new Error("Question Type Conversion Error: " + questionType + " to Moodle conversion is not yet implemented.");
 	var qd = {
 	    "version" : "0.1",
-	    "title" : "Example QuizJSON 1",
 	    "questions": [{
 		    "question": questionType,
 		    "repeat": count,

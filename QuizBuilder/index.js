@@ -69,7 +69,6 @@ function build(descriptor, id, hexStringSeed) {
     var s = parseInt(hexStringSeed, 16);
     var randomStream = new randomModule.random(s);
 
-    quiz.title = descriptor.title;
     quiz.id = id;
     quiz.questions = getQuestions(descriptor, randomStream);
 	return quiz;
@@ -81,11 +80,6 @@ function validateQuizDescriptor(qd) {
         return [{type:'UndefinedQuizDescriptor', path:[]}];
     if (typeof qd !== 'object')
         return [{type:'ExpectedObjectError', path:[]}];
-
-    if (!('title' in qd))
-        errors.unshift({ type: 'RequiredError', path:['title']});
-    else if (typeof qd.title !== 'string')
-        errors.unshift({ type: 'ExpectedStringError', path:['title']});
 
     if (!('version' in qd))
         errors.unshift({ type: 'RequiredError', path:['version']});

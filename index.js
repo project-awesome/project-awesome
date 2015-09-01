@@ -6,7 +6,6 @@ module.exports.isValidQuizDescriptor = require('./quizDescriptor').isValidQuizDe
 
 module.exports.QuizValidator = QuizValidator;
 module.exports.isSeedValid = QuizValidator.isSeedValid;
-
 module.exports.QuizBuilder = require('./QuizBuilder');
 
 module.exports.isValidQuestionType = questions.isValidQuestionType;

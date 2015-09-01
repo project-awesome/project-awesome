@@ -18,7 +18,6 @@ describe('QuizValidator', function() {
 	var validQuiz = {
 		id: 1,
 		seed: '1234abcd',
-		title: "Sample Quiz Title",
 		questions: [ _und.clone(validQuestion) ]
 	};
 
@@ -95,22 +94,6 @@ describe('QuizValidator', function() {
 			it('should reject quizzes with negative integer seed property', function() {
 				var q = _und.clone(validQuiz);
 				q.seed = -1;
-				expect(QuizValidator.isValid(q)).to.be.false;
-			});
-
-		});
-
-		describe('Invalid title property', function() {
-
-			it('should reject quizzes with no title property', function() {
-				var q = _und.clone(validQuiz);
-				delete q.title;
-				expect(QuizValidator.isValid(q)).to.be.false;
-			});
-
-			it('should reject quizzes with non-string title property', function() {
-				var q = _und.clone(validQuiz);
-				q.title = 1;
 				expect(QuizValidator.isValid(q)).to.be.false;
 			});
 

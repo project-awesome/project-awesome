@@ -6,7 +6,6 @@ var randomModule = require("../../random");
 describe('QuizBuilder', function() {
 	var qd = {
 	    "version" : "0.1",
-	    "title" : "Example QuizJSON 1",
 	    "questions": [{
 		    "question": "binHexOctDec",
 		    "repeat": 5,
@@ -42,7 +41,6 @@ describe('QuizBuilder', function() {
 			var errors;
 			before(function() {
 				errors = QuizBuilder.validateQuizDescriptor({
-					title: 'Sample Title',
 					version: '0.1',
 					questions: [
 						{
@@ -101,61 +99,11 @@ describe('QuizBuilder', function() {
 					});
 				});
 			});
-			describe('title', function() {
-				describe('when undefined', function() {
-					var errors;
-					before(function() {
-						errors = QuizBuilder.validateQuizDescriptor({
-							version: '0.1',
-							questions: []
-						});
-					});
-					it('should return an array of length 1', function() {
-						expect(errors).to.be.an('array');
-						expect(errors.length).to.equal(1);
-					});
-					describe('error type', function() {
-						it('should be RequiredError', function() {
-							expect(errors[0].type).to.equal('RequiredError');
-						});
-					});
-					describe('error path', function() {
-						it('should be ["title"]', function() {
-							expect(errors[0].path).to.eql(['title']);
-						});
-					});
-				});
-				describe('when not a string', function() {
-					var errors;
-					before(function() {
-						errors = QuizBuilder.validateQuizDescriptor({
-							title: true,
-							questions: [],
-							version: '0.1'
-						});
-					});
-					it('should return an array of length 1', function() {
-						expect(errors).to.be.an('array');
-						expect(errors.length).to.equal(1);
-					});
-					describe('error type', function() {
-						it('should be ExpectedStringError', function() {
-							expect(errors[0].type).to.equal('ExpectedStringError');
-						});
-					});
-					describe('error path', function() {
-						it('should be ["title"]', function() {
-							expect(errors[0].path).to.eql(['title']);
-						});
-					});
-				});
-			});
 			describe('version', function() {
 				describe('when undefined', function() {
 					var errors;
 					before(function() {
 						errors = QuizBuilder.validateQuizDescriptor({
-							title: "Sample Title",
 							questions: []
 						});
 					});
@@ -178,7 +126,6 @@ describe('QuizBuilder', function() {
 					var errors;
 					before(function() {
 						errors = QuizBuilder.validateQuizDescriptor({
-							title: 'Sample Title',
 							version: true,
 							questions: []
 						});
@@ -204,7 +151,6 @@ describe('QuizBuilder', function() {
 					var errors;
 					before(function() {
 						errors = QuizBuilder.validateQuizDescriptor({
-							title: "Sample Title",
 							version: "0.1"
 						});
 					});
@@ -227,7 +173,6 @@ describe('QuizBuilder', function() {
 					var errors;
 					before(function() {
 						errors = QuizBuilder.validateQuizDescriptor({
-							title: 'Sample Title',
 							version: "0.1",
 							questions: {}
 						});
@@ -253,7 +198,6 @@ describe('QuizBuilder', function() {
 					var errors;
 					before(function() {
 						errors = QuizBuilder.validateQuizDescriptor({
-							title: "Sample Title",
 							version: "0.1",
 							questions: [
 								{ question: 'changeOfBase', repeat:1 },

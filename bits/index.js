@@ -1,7 +1,6 @@
 module.exports = {};
 
 /*
-
   bits.js
 
   This is a library that will enable us to perform bitwise and shift operations on numbers that 
