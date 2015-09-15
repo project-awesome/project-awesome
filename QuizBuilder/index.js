@@ -60,7 +60,7 @@ function getQuestions(descriptor, randomStream) {
     return questions; 
 };
 
-function build(descriptor, id, hexStringSeed) {
+function build(descriptor, hexStringSeed) {
     if (!isSeedValid(hexStringSeed)) 
         throw new Error('Invalid Seed: ' + hexStringSeed + ' is not an 8 digit hexadecimal');
     
@@ -69,7 +69,6 @@ function build(descriptor, id, hexStringSeed) {
     var s = parseInt(hexStringSeed, 16);
     var randomStream = new randomModule.random(s);
 
-    quiz.id = id;
     quiz.questions = getQuestions(descriptor, randomStream);
 	return quiz;
 }

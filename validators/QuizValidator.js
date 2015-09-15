@@ -13,10 +13,6 @@ function isValid(q) {
 
 	if (typeof q !== 'object') return false;
 
-	// q.id
-	if (!(_und.has(q, 'id'))) return false;
-	if (!isPositiveInteger(q.id)) return false;
-
 	// q.seed
 	if (!(_und.has(q, 'seed'))) return false;
 	if (!isSeedValid(q.seed)) return false;

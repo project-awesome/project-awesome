@@ -53,7 +53,7 @@ function generateMoodleXML(questionType, count, questionName, seed) {
 		    "repeat": count,
 		}]
 	};
-	var paQuiz = QuizBuilder.build(qd, 0, seed);
+	var paQuiz = QuizBuilder.build(qd, seed);
 	var moodleQuizJSON = {};
 
 	moodleQuizJSON.quiz = paQuiz.questions.map(function(q) {
