@@ -12,10 +12,10 @@ describe('QuizBuilder', function() {
 		}]
 	};
 
-	describe('build(descriptor, id, hexStringSeed)', function() {
+	describe('build(descriptor, hexStringSeed)', function() {
 
 		it('should produce a valid quiz', function() {
-			var quiz = QuizBuilder.build(qd, 1, '1234abef');
+			var quiz = QuizBuilder.build(qd, '1234abef');
 			expect(QuizValidator.isValid(quiz)).to.be.true;
 		});
 
@@ -24,13 +24,13 @@ describe('QuizBuilder', function() {
 			    "ayyyy" : "lmao"
 			};
 			it('should throw an error', function() {
-				expect(function(){ QuizBuilder.build(invalidQD, 1, '1234abcd'); }).to.throw(Error);
+				expect(function(){ QuizBuilder.build(invalidQD, '1234abcd'); }).to.throw(Error);
 			});
 		});
 
 		describe('invalid seed', function() {
 			it('should throw an error', function() {
-				expect(function(){ QuizBuilder.build(qd, 1, '1234'); }).to.throw(Error);
+				expect(function(){ QuizBuilder.build(qd, '1234'); }).to.throw(Error);
 			});
 		});
 
