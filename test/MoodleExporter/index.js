@@ -39,7 +39,16 @@ describe('MoodleExporter', function() {
 					questionType = 'changeOfBase';
 					count = 2;
 					questionName = 'Sample Question Name';
-					xmlString = MoodleExporter.generateMoodleXML(questionType, count, questionName, seed);
+
+					var qd = {
+					    "version" : "0.1",
+					    "questions": [{
+						    "question": questionType,
+						    "repeat": count,
+						}]
+					};
+
+					xmlString = MoodleExporter.generateMoodleXML(qd, seed);
 					xml2js.parseString(xmlString, function (err, result) {
 						xmlResult = result;
 						done();
@@ -68,7 +77,15 @@ describe('MoodleExporter', function() {
 						questionType = 'changeOfBase';
 						count = 2;
 						questionName = 'Sample Question Name';
-						xmlString = MoodleExporter.generateMoodleXML(questionType, count, questionName, seed);
+
+						var qd = {
+						    "version" : "0.1",
+						    "questions": [{
+							    "question": questionType,
+							    "repeat": count,
+							}]
+						};
+						xmlString = MoodleExporter.generateMoodleXML(qd, seed);
 						xml2js.parseString(xmlString, function (err, result) {
 							xmlResult = result;
 							done();
@@ -89,7 +106,14 @@ describe('MoodleExporter', function() {
 						questionType = 'binHexOctDec';
 						count = 2;
 						questionName = 'Sample Question Name';
-						xmlString = MoodleExporter.generateMoodleXML(questionType, count, questionName, seed);
+						var qd = {
+						    "version" : "0.1",
+						    "questions": [{
+							    "question": questionType,
+							    "repeat": count,
+							}]
+						};
+						xmlString = MoodleExporter.generateMoodleXML(qd, seed);
 						xml2js.parseString(xmlString, function (err, result) {
 							xmlResult = result;
 							done();
