@@ -1,10 +1,8 @@
-var QuizValidator = require('./validators/QuizValidator.js');
 var MoodleExporter = require('./MoodleExporter');
 var questions = require('./questions');
 var QuizBuilder = require('./QuizBuilder');
 
-module.exports.QuizValidator = QuizValidator;
-module.exports.isSeedValid = QuizValidator.isSeedValid;
+module.exports.checkSeed = QuizBuilder.checkSeed;
 
 module.exports.isValidQuestionType = questions.isValidQuestionType;
 

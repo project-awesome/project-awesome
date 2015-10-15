@@ -1,6 +1,5 @@
 var randomModule = require("../random");
 var questionsModule =  require("../questions");
-var isSeedValid = require('../validators/QuizValidator.js').isSeedValid;
 
 function getQuestions(descriptor, randomStream) {
     var questions = [];
@@ -61,7 +60,7 @@ function getQuestions(descriptor, randomStream) {
 };
 
 function build(descriptor, hexStringSeed) {
-    if (!isSeedValid(hexStringSeed)) 
+    if (!checkSeed(hexStringSeed)) 
         throw new Error('Invalid Seed: ' + hexStringSeed + ' is not an 8 digit hexadecimal');
     
     var quiz = {};
@@ -103,10 +102,15 @@ function validateQuizDescriptor(qd) {
     return errors;
 }
 
+function checkSeed(seed) {
+    return (typeof seed === 'string' && seed.match(/^[a-fA-F0-9]{8}$/) !== null && seed.length == 8);
+}
+
 
 module.exports.validateQuizDescriptor = validateQuizDescriptor;
 module.exports.getQuestions = getQuestions;
 module.exports.build = build;
+module.exports.checkSeed = checkSeed;
 
 
 
