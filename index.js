@@ -12,14 +12,14 @@ function check(type, value) {
 	return checkers[type](value);
 }
 
-function generate(type, qd) {
+function generate(type, qd, seed) {
 	var generators = {
 		"json": QuizBuilder.build,
 		"moodleXML": MoodleExporter.generateMoodleXML
 	};
 	if (!(type in generators))
 		throw "Illegal Argument: " + type;
-	return generators[type](qd);
+	return generators[type](qd, seed);
 }
 
 function validate(type, value) {
