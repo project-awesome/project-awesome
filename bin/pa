@@ -3,6 +3,7 @@
 var program = require('commander');
 var projectAwesome = require('../');
 var stdinjson = require('./stdinjson');
+var colors = require('colors');
 
 program
   .version('0.0.1')
@@ -45,6 +46,21 @@ program
     });
   });
 
+program
+.command('*', undefined, { "noHelp": true })
+.action(function(env) {
+  console.log(colors.red("Error") + ": %s is not a pa option", env);
+  program.outputHelp();
+});
+
 program.parse(process.argv);
+
+if (!process.argv.slice(2).length) {
+  program.outputHelp();
+}
+
+
+
+
 
 
