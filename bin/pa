@@ -18,6 +18,12 @@ program
     } catch (err) {
       process.stderr.write(err + "\n");
     }
+  })
+  .on('--help', function() {
+    console.log('  Examples:');
+    console.log();
+    console.log('    $ pa check seed abcd1234');
+    console.log('    $ pa check questionType binHexOctDec');
   });
 
 program
@@ -32,6 +38,12 @@ program
     }).catch(function(e) {
       process.stderr.write(e + "\n");
     });
+  })
+  .on('--help', function() {
+    console.log('  Examples:');
+    console.log();
+    console.log('    $ pa generate json < myQD.json');
+    console.log('    $ pa generate moodleXML < myQD.json');
   });
 
 program
@@ -44,6 +56,11 @@ program
     }).catch(function(e) {
       process.stderr.write(e + "\n");
     });
+  })
+  .on('--help', function() {
+    console.log('  Examples:');
+    console.log();
+    console.log('    $ pa validate qd < myQD.json');
   });
 
 program
