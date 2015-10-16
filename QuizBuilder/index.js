@@ -59,16 +59,18 @@ function getQuestions(descriptor, randomStream) {
     return questions; 
 };
 
-function build(descriptor, hexStringSeed) {
-    if (!checkSeed(hexStringSeed)) 
-        throw new Error('Invalid Seed: ' + hexStringSeed + ' is not an 8 digit hexadecimal');
+function build(qd, seed) {
+    var result = validateQuizDescriptor(qd);
+    if (result.length > 0)
+        throw new Error("Invalid Quiz Descriptor");
+    if (!checkSeed(seed)) 
+        throw new Error("Invalid Seed: " + seed);
     
     var quiz = {};
-    quiz.seed = hexStringSeed;
-    var s = parseInt(hexStringSeed, 16);
+    quiz.seed = seed;
+    var s = parseInt(seed, 16);
     var randomStream = new randomModule.random(s);
-
-    quiz.questions = getQuestions(descriptor, randomStream);
+    quiz.questions = getQuestions(qd, randomStream);
 	return quiz;
 }
 

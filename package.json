@@ -24,6 +24,7 @@
   },
   "homepage": "https://github.com/project-awesome/project-awesome#readme",
   "dependencies": {
+    "bluebird": "^2.10.2",
     "commander": "^2.9.0",
     "underscore": "^1.8.3",
     "xml": "^1.0.0"
