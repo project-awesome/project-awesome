@@ -1,3 +1,6 @@
+
+module.exports.title = "Bin Hex Oct Dec";
+
 /*
    Given a radix (8,16,2,10), randomly choose either to describe that as, for example,
    "base 8" or as "octal".     This is so that you can check whether students can 
@@ -65,7 +68,7 @@ module.exports.radixDescription = function(radix, randomStream) {
 
 }
 
-module.exports.binHexOctDecQuestion = function(randomStream, params) {
+module.exports.generate = function(randomStream, params) {
 
     var conversions = (params && params.conversions && params.conversions.length > 0) ? params.conversions : defaultConversions;
     

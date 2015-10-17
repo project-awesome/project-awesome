@@ -20,7 +20,7 @@ describe('binHexOctDecQuestion(randomStream, params)', function() {
 				retVals = [0,5,0,0];
 			});
 			it('should be that [0,5,0,0] is Convert 5 from base 10 to base 2', function() {	
-				var q = new binHexOctDec.binHexOctDecQuestion(mockRS);
+				var q = new binHexOctDec.generate(mockRS);
 				var expected="Convert 5 from base 10 to base 2.";
 				expect(q.question).to.equal(expected);
 				expect(q.answer).to.equal("101");
@@ -31,7 +31,7 @@ describe('binHexOctDecQuestion(randomStream, params)', function() {
 	        	retVals = [1,5,1,1];
 			});
 			it('should be that [1,5,1,1] is Convert 101 from binary to decimal.', function() {	
-				var q = new binHexOctDec.binHexOctDecQuestion(mockRS);
+				var q = new binHexOctDec.generate(mockRS);
 				var expected="Convert 101 from binary to decimal.";
 				expect(q.question).to.equal(expected);
 				expect(q.answer).to.equal("5");
@@ -64,7 +64,7 @@ describe('binHexOctDecQuestion(randomStream, params)', function() {
 							params.spaceBinary = true; 
 						});
 						it('should format the binary number in the question so that digits are in groups of 3', function() {
-							var q = new binHexOctDec.binHexOctDecQuestion(mockRS, params);
+							var q = new binHexOctDec.generate(mockRS, params);
 							expect(q.question).to.equal('Convert ' + binaryStringOct + ' from base 2 to base 8.');
 						});
 					});
@@ -74,7 +74,7 @@ describe('binHexOctDecQuestion(randomStream, params)', function() {
 							params.spaceBinary = false; 
 						});
 						it('should not add spaces to the binary number', function() {
-							var q = new binHexOctDec.binHexOctDecQuestion(mockRS, params);
+							var q = new binHexOctDec.generate(mockRS, params);
 							expect(q.question).to.equal('Convert ' + binaryString + ' from base 2 to base 8.');
 						});
 					});
@@ -83,9 +83,9 @@ describe('binHexOctDecQuestion(randomStream, params)', function() {
 							params = { conversions: [ { radix:{ from:2 , to:8 }, range:{ min:decimalVal, max:decimalVal } } ]};
 						});
 						it('should format as though spaceBinary == true', function() {
-							var q = new binHexOctDec.binHexOctDecQuestion(mockRS, params);
+							var q = new binHexOctDec.generate(mockRS, params);
 							params.spaceBinary = true;
-							var qSpaceBinary = new binHexOctDec.binHexOctDecQuestion(mockRS, params);
+							var qSpaceBinary = new binHexOctDec.generate(mockRS, params);
 							expect(q).to.eql(qSpaceBinary);
 						});
 					});
@@ -97,7 +97,7 @@ describe('binHexOctDecQuestion(randomStream, params)', function() {
 							params.spaceBinary = true; 
 						}); 
 						it('should format the binary number in the question so that digits are in groups of 4', function() {
-							var q = new binHexOctDec.binHexOctDecQuestion(mockRS, params);
+							var q = new binHexOctDec.generate(mockRS, params);
 							expect(q.question).to.equal('Convert ' + binaryStringHex + ' from base 2 to base 16.');
 						});
 					});
@@ -107,7 +107,7 @@ describe('binHexOctDecQuestion(randomStream, params)', function() {
 							params.spaceBinary = false; 
 						});
 						it('should not add spaces to the binary number', function() {
-							var q = new binHexOctDec.binHexOctDecQuestion(mockRS, params);
+							var q = new binHexOctDec.generate(mockRS, params);
 							expect(q.question).to.equal('Convert ' + binaryString + ' from base 2 to base 16.');
 						});
 					});
@@ -116,9 +116,9 @@ describe('binHexOctDecQuestion(randomStream, params)', function() {
 							params = { conversions: [ { radix:{ from:2 , to:16 }, range:{ min:decimalVal, max:decimalVal } } ]};
 						});
 						it('should format as though spaceBinary == true', function() {
-							var q = new binHexOctDec.binHexOctDecQuestion(mockRS, params);
+							var q = new binHexOctDec.generate(mockRS, params);
 							params.spaceBinary = true;
-							var qSpaceBinary = new binHexOctDec.binHexOctDecQuestion(mockRS, params);
+							var qSpaceBinary = new binHexOctDec.generate(mockRS, params);
 							expect(q).to.eql(qSpaceBinary);
 						});
 					});
@@ -130,7 +130,7 @@ describe('binHexOctDecQuestion(randomStream, params)', function() {
 							params.spaceBinary = true; 
 						}); 
 						it('should not add spaces to the binary number', function() {
-							var q = new binHexOctDec.binHexOctDecQuestion(mockRS, params);
+							var q = new binHexOctDec.generate(mockRS, params);
 							expect(q.question).to.equal('Convert ' + binaryString + ' from base 2 to base 10.');
 						});
 					});
@@ -140,7 +140,7 @@ describe('binHexOctDecQuestion(randomStream, params)', function() {
 							params.spaceBinary = false; 
 						}); 
 						it('should not add spaces to the binary number', function() {
-							var q = new binHexOctDec.binHexOctDecQuestion(mockRS, params);
+							var q = new binHexOctDec.generate(mockRS, params);
 							expect(q.question).to.equal('Convert ' + binaryString + ' from base 2 to base 10.');
 						});
 					});
@@ -149,9 +149,9 @@ describe('binHexOctDecQuestion(randomStream, params)', function() {
 							params = { conversions: [ { radix:{ from:2 , to:10 }, range:{ min:decimalVal, max:decimalVal } } ]};
 						}); 
 						it('should format as though spaceBinary == true', function() {
-							var q = new binHexOctDec.binHexOctDecQuestion(mockRS, params);
+							var q = new binHexOctDec.generate(mockRS, params);
 							params.spaceBinary = true;
-							var qSpaceBinary = new binHexOctDec.binHexOctDecQuestion(mockRS, params);
+							var qSpaceBinary = new binHexOctDec.generate(mockRS, params);
 							expect(q).to.eql(qSpaceBinary);
 						});
 					});
@@ -165,7 +165,7 @@ describe('binHexOctDecQuestion(randomStream, params)', function() {
 							params.spaceBinary = true; 
 						});
 						it('should format the binary answer so that digits are in groups of 3', function() {
-							var q = new binHexOctDec.binHexOctDecQuestion(mockRS, params);
+							var q = new binHexOctDec.generate(mockRS, params);
 							expect(q.answer).to.equal(binaryStringOct);
 						});
 					});
@@ -175,7 +175,7 @@ describe('binHexOctDecQuestion(randomStream, params)', function() {
 							params.spaceBinary = false; 
 						});
 						it('should not add spaces to the binary answer', function() {
-							var q = new binHexOctDec.binHexOctDecQuestion(mockRS, params);
+							var q = new binHexOctDec.generate(mockRS, params);
 							expect(q.answer).to.equal(binaryString);
 						});
 					});
@@ -184,9 +184,9 @@ describe('binHexOctDecQuestion(randomStream, params)', function() {
 							params = { conversions: [ { radix:{ from:8 , to:2 }, range:{ min:decimalVal, max:decimalVal } } ]};
 						});
 						it('should format as though spaceBinary == true', function() {
-							var q = new binHexOctDec.binHexOctDecQuestion(mockRS, params);
+							var q = new binHexOctDec.generate(mockRS, params);
 							params.spaceBinary = true;
-							var qSpaceBinary = new binHexOctDec.binHexOctDecQuestion(mockRS, params);
+							var qSpaceBinary = new binHexOctDec.generate(mockRS, params);
 							expect(q).to.eql(qSpaceBinary);
 						});
 					});
@@ -198,7 +198,7 @@ describe('binHexOctDecQuestion(randomStream, params)', function() {
 							params.spaceBinary = true; 
 						});
 						it('should format the binary answer so that digits are in groups of 4', function() {
-							var q = new binHexOctDec.binHexOctDecQuestion(mockRS, params);
+							var q = new binHexOctDec.generate(mockRS, params);
 							expect(q.answer).to.equal(binaryStringHex);
 						});
 					});
@@ -208,7 +208,7 @@ describe('binHexOctDecQuestion(randomStream, params)', function() {
 							params.spaceBinary = false; 
 						});
 						it('should not add spaces to the binary answer', function() {
-							var q = new binHexOctDec.binHexOctDecQuestion(mockRS, params);
+							var q = new binHexOctDec.generate(mockRS, params);
 							expect(q.answer).to.equal(binaryString);
 						});
 					});
@@ -217,9 +217,9 @@ describe('binHexOctDecQuestion(randomStream, params)', function() {
 							params = { conversions: [ { radix:{ from:16 , to:2 }, range:{ min:decimalVal, max:decimalVal } } ]};
 						});
 						it('should format as though spaceBinary == true', function() {
-							var q = new binHexOctDec.binHexOctDecQuestion(mockRS, params);
+							var q = new binHexOctDec.generate(mockRS, params);
 							params.spaceBinary = true;
-							var qSpaceBinary = new binHexOctDec.binHexOctDecQuestion(mockRS, params);
+							var qSpaceBinary = new binHexOctDec.generate(mockRS, params);
 							expect(q).to.eql(qSpaceBinary);
 						});
 					});
@@ -231,7 +231,7 @@ describe('binHexOctDecQuestion(randomStream, params)', function() {
 							params.spaceBinary = true; 
 						}); 
 						it('should not add spaces to the binary answer', function() {
-							var q = new binHexOctDec.binHexOctDecQuestion(mockRS, params);
+							var q = new binHexOctDec.generate(mockRS, params);
 							expect(q.answer).to.equal(binaryString);
 						});
 					});
@@ -241,7 +241,7 @@ describe('binHexOctDecQuestion(randomStream, params)', function() {
 							params.spaceBinary = false; 
 						}); 
 						it('should not add spaces to the binary answer', function() {
-							var q = new binHexOctDec.binHexOctDecQuestion(mockRS, params);
+							var q = new binHexOctDec.generate(mockRS, params);
 							expect(q.answer).to.equal(binaryString);
 						});
 					});
@@ -250,9 +250,9 @@ describe('binHexOctDecQuestion(randomStream, params)', function() {
 							params = { conversions: [ { radix:{ from:10 , to:2 }, range:{ min:decimalVal, max:decimalVal } } ]};
 						}); 
 						it('should format as though spaceBinary == true', function() {
-							var q = new binHexOctDec.binHexOctDecQuestion(mockRS, params);
+							var q = new binHexOctDec.generate(mockRS, params);
 							params.spaceBinary = true;
-							var qSpaceBinary = new binHexOctDec.binHexOctDecQuestion(mockRS, params);
+							var qSpaceBinary = new binHexOctDec.generate(mockRS, params);
 							expect(q).to.eql(qSpaceBinary);
 						});
 					});
@@ -266,7 +266,7 @@ describe('binHexOctDecQuestion(randomStream, params)', function() {
 					retVals = [0, 0, 0, 0, 0, 0, 0];
 				});
 				it('should still work and use the default conversions', function() {
-					var q = new binHexOctDec.binHexOctDecQuestion(mockRS, params);
+					var q = new binHexOctDec.generate(mockRS, params);
 					expect(q.question).to.equal('Convert 0 from base 10 to base 2.');
 					expect(q.answer).to.equal("0");
 				});
@@ -277,7 +277,7 @@ describe('binHexOctDecQuestion(randomStream, params)', function() {
 					retVals = [0, 0, 0, 0];
 				});
 				it('should include "from base 2 to base 10" in the question, and the answer should equal 5', function() {
-					var q = new binHexOctDec.binHexOctDecQuestion(mockRS, params);
+					var q = new binHexOctDec.generate(mockRS, params);
 					expect(q.question).to.include('from base 2 to base 10');
 					expect(q.answer).to.equal("5");
 				});
@@ -288,7 +288,7 @@ describe('binHexOctDecQuestion(randomStream, params)', function() {
 					retVals = [0, 0, 1, 1];
 				});
 				it('should include "from base 5 to base 7" in the question, and the answer should equal 1000', function() {
-					var q = new binHexOctDec.binHexOctDecQuestion(mockRS, params);
+					var q = new binHexOctDec.generate(mockRS, params);
 					expect(q.question).to.include('base 5 to base 7');
 					expect(q.answer).to.equal("2626");
 				});

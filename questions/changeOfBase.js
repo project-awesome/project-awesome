@@ -1,3 +1,4 @@
+module.exports.title = "Change of Base Multiple Choice";
 
 var defaultConversions = [ 
     { radix:{ from: 10, to: 2 }, range:{ min: 0, max: 255} },
@@ -93,7 +94,7 @@ function distractorsFor(fromRad,toRad,from,numberToConvert) {
     return result;
 }
 
-module.exports.changeOfBaseQuestion = function(randomStream, params) {
+module.exports.generate = function(randomStream, params) {
 
     console.log("randomStream at 98 = " + JSON.stringify(randomStream));
 
