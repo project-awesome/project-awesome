@@ -56,7 +56,7 @@ with a contract similar to that of the Random object in Java SE 7
     //The general contract of nextInt is that one int value in the specified range is pseudorandomly generated and returned. All n possible int values are produced with (approximately) equal probability.
     this.nextIntRange = function (n)  {
         if (n <= 0)
-            return null;
+            throw "Illegal Argument to nextIntRange";
 	
         var logBase2 = Math.log(n) / Math.log(2);
         if (Math.floor(logBase2) == logBase2)
