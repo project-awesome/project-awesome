@@ -1,5 +1,3 @@
-#!/usr/bin/env node
-
 var program = require('commander');
 var projectAwesome = require('../');
 var stdinjson = require('./stdinjson');
@@ -70,14 +68,14 @@ program
   program.outputHelp();
 });
 
-program.parse(process.argv);
+module.exports.program = program;
 
-if (!process.argv.slice(2).length) {
-  program.outputHelp();
+module.exports.run = function(argv) {
+  program.parse(argv);
+  if (!argv.slice(2).length) {
+    program.outputHelp();
+  }
 }
-
-
-
 
 
 
