@@ -1,4 +1,4 @@
-var randomModule = require("../random");
+var randomModule = require("random-bits");
 var questionsModule =  require("../questions");
 
 function getQuestions(descriptor, randomStream) {

@@ -1,6 +1,6 @@
 var expect = require("chai").expect;
 var QuizBuilder = require('../../QuizBuilder');
-var randomModule = require("../../random");
+var randomModule = require("random-bits");
 
 describe('QuizBuilder', function() {
 	var qd = {

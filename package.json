@@ -28,7 +28,8 @@
     "colors": "^1.1.2",
     "commander": "^2.9.0",
     "underscore": "^1.8.3",
-    "xml": "^1.0.0"
+    "xml": "^1.0.0",
+    "random": "git+https://git@github.com/project-awesome/pa-random-bits.git"
   },
   "devDependencies": {
     "browserify": "^11.0.0",
