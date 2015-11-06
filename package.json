@@ -29,8 +29,8 @@
     "commander": "^2.9.0",
     "underscore": "^1.8.3",
     "xml": "^1.0.0",
-    "paq-change-of-base-mc": "git+https://git@github.com/project-awesome/paq-change-of-base-mc.git",
-    "random": "git+https://git@github.com/project-awesome/pa-random-bits.git"
+    "paq-change-of-base-mc": "git+https://git@github.com/project-awesome/paq-change-of-base-mc.git#v1.0.0",
+    "random": "git+https://git@github.com/project-awesome/pa-random-bits.git#v1.0.0"
   },
   "devDependencies": {
     "browserify": "^11.0.0",
