@@ -1,13 +1,8 @@
 
 var questionTypes = {
-    "binHexOctDec": {},
-    "changeOfBase": {}
+    "binHexOctDec": require("./binHexOctDec"),
+    "changeOfBase": require("paq-change-of-base-mc")
 };
-
-
-for (qt in questionTypes) {
-    questionTypes[qt].module = require("./" + qt);
-}
 
 module.exports.questionTypes = questionTypes;
 
@@ -28,7 +23,7 @@ function validateQuestionDescriptor(questionDescriptor) {
     } else if (!isValidQuestionType(questionDescriptor.question)) {
         errors.unshift({ type: 'InvalidQuestionType', path:['question'] });
     } else {
-        var parameterErrors = module.exports.questionTypes[questionDescriptor.question].module.validateParameters(questionDescriptor.parameters);
+        var parameterErrors = module.exports.questionTypes[questionDescriptor.question].validateParameters(questionDescriptor.parameters);
         parameterErrors = parameterErrors.map(function(pError) { 
             pError.path = ['parameters'].concat(pError.path);
             return pError;

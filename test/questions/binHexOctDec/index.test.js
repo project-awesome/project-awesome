@@ -11,17 +11,17 @@ describe('binHexOctDec', function() {
 			expect(questions.questionTypes.binHexOctDec).to.be.an("object");
 	    });
 		it('should be that binHexOctDec.generate is a function', function() {
-			expect(questions.questionTypes.binHexOctDec.module.generate).to.exist;
-			expect(questions.questionTypes.binHexOctDec.module.generate).to.be.a("function");
+			expect(questions.questionTypes.binHexOctDec.generate).to.exist;
+			expect(questions.questionTypes.binHexOctDec.generate).to.be.a("function");
 	    });
 		it('should be that binHexOctDec.title is a string', function() {
-			expect(questions.questionTypes.binHexOctDec.module.title).to.exist;
-			expect(questions.questionTypes.binHexOctDec.module.title).to.be.a("string");
+			expect(questions.questionTypes.binHexOctDec.title).to.exist;
+			expect(questions.questionTypes.binHexOctDec.title).to.be.a("string");
 	    });
 
 		it('should be that binHexOctDec.validateParameters is a function', function() {
-			expect(questions.questionTypes.binHexOctDec.module.validateParameters).to.exist;
-			expect(questions.questionTypes.binHexOctDec.module.validateParameters).to.be.a("function");
+			expect(questions.questionTypes.binHexOctDec.validateParameters).to.exist;
+			expect(questions.questionTypes.binHexOctDec.validateParameters).to.be.a("function");
 	    });
 	});
 

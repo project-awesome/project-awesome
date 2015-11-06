@@ -21,7 +21,7 @@ function getQuestions(descriptor, randomStream) {
             //Generate the specified number of the specified type of question, add them to the array
             
             for(var j=0; j<repeat; j++) {
-                var newQuestion = new question.module.generate(randomStream, params);
+                var newQuestion = new question.generate(randomStream, params);
                 questions.push(newQuestion); 
             }
         }
