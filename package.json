@@ -29,7 +29,8 @@
     "commander": "^2.9.0",
     "underscore": "^1.8.3",
     "xml": "^1.0.0",
-    "paq-change-of-base-mc": "git+https://git@github.com/project-awesome/paq-change-of-base-mc.git#v1.0.0",
+    "paq-mc-change-of-base": "git+https://git@github.com/project-awesome/paq-mc-change-of-base.git",
+    "paq-fr-change-of-base": "git+https://git@github.com/project-awesome/paq-fr-change-of-base.git",
     "random": "git+https://git@github.com/project-awesome/pa-random-bits.git#v1.0.0"
   },
   "devDependencies": {
@@ -44,5 +45,6 @@
   },
   "bin": {
     "pa": "bin/index.js"
-  }
+  },
+  "undefined": "qd"
 }
