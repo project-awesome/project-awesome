@@ -17,5 +17,6 @@ Only:
 To run tests, type: 
 
 ```
+npm install
 npm test
 ```
