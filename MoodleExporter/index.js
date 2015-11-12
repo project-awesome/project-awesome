@@ -10,7 +10,6 @@ function paQuestionToMoodleJSON(question) {
 			{ questiontext: [ { text: question.question } ] },
 			{ answernumbering: 'abc' },
 			{ correctfeedback: [ { text: 'Your answer is correct.' } ] },
-			{ partiallycorrectfeedback: [ { text: 'Your answer is partially correct.' } ] },
 			{ incorrectfeedback: [ { text: 'Your answer is incorrect.' } ] }
 		];
 		for (var i = 0; question.choices.length > i; i++) {
@@ -24,7 +23,7 @@ function paQuestionToMoodleJSON(question) {
 		}
 		return moodleMultichoiceQuestion;
 
-	} else if (question.format == 'input') {
+	} else if (question.format == 'free-response') {
 		var moodleNumericalQuestion = [
 			{ _attr: { type: 'shortanswer'} }, 
 			{ name: [ { text: '*questionName goes here*' } ] },
