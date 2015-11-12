@@ -27,3 +27,21 @@ npm test
 sudo npm install -g
 pa
 ```
+
+Running pa gives a list of the subcommands you can run, e.g. 
+
+```
+pa check ...
+pa generate ...
+etc...
+```
+
+You can add -h to the individual commands of the pa command line tool to see 
+what the options are.  For example:
+
+```
+pa check -h
+pa generate -h
+etc.
+
+```
