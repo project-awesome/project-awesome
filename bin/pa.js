@@ -40,8 +40,8 @@ program
   .on('--help', function() {
     console.log('  Examples:');
     console.log();
-    console.log('    $ pa generate json < myQD.json');
-    console.log('    $ pa generate moodleXML < myQD.json');
+    console.log('    $ pa generate json abcd1234 < myQD.json');
+    console.log('    $ pa generate moodleXML abcd1234 < myQD.json');
   });
 
 program
