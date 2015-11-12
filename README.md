@@ -20,3 +20,10 @@ To run tests, type:
 npm install
 npm test
 ```
+
+# How to run command line tool
+
+```
+sudo npm install -g
+pa
+```
