@@ -4,7 +4,8 @@ var chai = require("chai"),
 	pa = require("../../../bin/pa"), 
 	projectAwesome = require('../../../'),
 	Promise = require('bluebird'),
-	stdinjson = require('../../../bin/stdinjson');
+	stdinjson = require('../../../bin/stdinjson'),
+	pa_test_helper = require('./pa_test_helper');
 
 var sinonStubPromise = require('sinon-stub-promise');
 sinonStubPromise(sinon);
@@ -13,50 +14,16 @@ chai.should();
 chai.use(sinonChai);
 var expect = chai.expect;
 
-function run(name, args) {
-	var argv = [ 'node', 'test'];
-	if (name) {
-		argv.push(name);
-		if (args && args.length > 0)
-			argv = argv.concat(args);
-	}
-	pa.run(argv);
-}
-
-function getCommand(name) {
-	for (var i = 0; pa.program.commands.length > i; i++)
-		if (pa.program.commands[i]._name === name)
-			return pa.program.commands[i];
-	throw "Command Not Found: " + name + " not found in pa.program.commands";
-}
-
-function expectCommandExists(name) {
-	getCommand(name);
-}
-
-function expectArguments(command, args) {
-	var err = "Expected Equal Arguments";
-	if (args.length != command._args.length) throw err;
-	for (var i = 0; command._args > i; i++)
-		expect(command._args[i]).to.equal(args[i]);
-}
-
-function expectDecription(command, description) {
-	if (command._description !== description)
-		throw "Expected Description. expected: " + description + "  got: " + command._description; 
-}
-
-
 
 	
 	describe('generate', function() {
 		it('should exist', function() {
-			expectCommandExists('generate');
+			pa_test_helper.expectCommandExists(pa,'generate');
 		});
 		describe('arguments', function() {
 			it('should have required "type" and "seed"', function() {
-				var generate = getCommand('generate');
-				expectArguments(generate, [
+				var generate = pa_test_helper.getCommand(pa,'generate');
+				pa_test_helper.expectArguments(generate, [
 					{ required: true, name: 'type', variadic: false },
 		     		{ required: true, name: 'seed', variadic: false }
 		     	]);
@@ -64,8 +31,8 @@ function expectDecription(command, description) {
 		});
 		describe('description', function() {
 			it('should be as defined', function() {
-				var generate = getCommand('generate');
-				expectDecription(generate, 'Generates given type.');
+				var generate = pa_test_helper.getCommand(pa,'generate');
+				pa_test_helper.expectDescription(generate, 'Generates given type.');
 			});
 		});
 		describe('action', function() {
@@ -85,7 +52,7 @@ function expectDecription(command, description) {
 			describe('when stdinjson rejects', function() {
 				it('should write the error + newline to stderr', function() {
 					stdinjsonStub.rejects("stdinjsonReject");
-					run('generate', ['a', 'b']);
+					pa_test_helper.run(pa,'generate', ['a', 'b']);
 					expect(stderrStub.calledWith("stdinjsonReject" + "\n")).to.be.true;
 				});
 			});
@@ -94,7 +61,7 @@ function expectDecription(command, description) {
 					stdinjsonStub.resolves("stdinjsonResolve");
 				});
 				it('should call projectAwesome.generate with the appropriate parameters', function() {
-					run('generate', ['a', 'b']);
+						pa_test_helper.run(pa,'generate', ['a', 'b']);
 					expect(generateStub.calledWith('a', 'stdinjsonResolve', 'b')).to.be.true;
 				});
 				describe('when projectAwesome.generate throws an error', function() {
@@ -102,7 +69,7 @@ function expectDecription(command, description) {
 						generateStub.throws("generateThrow");
 					});
 					it('should write error + newline to stderr', function() {
-						run('generate', ['a', 'b']);
+							pa_test_helper.run(pa,'generate', ['a', 'b']);
 						expect(stderrStub.calledWith("generateThrow" + "\n")).to.be.true;
 					});
 				});
@@ -112,7 +79,7 @@ function expectDecription(command, description) {
 					});
 					it('should stringify then write result + newline to stdout', function() {
 						stringifyStub.returns("stringifyReturn");
-						run('generate', ['a', 'b']);
+						pa_test_helper.run(pa,'generate', ['a', 'b']);
 						expect(stringifyStub.calledWith({"generate":"return"})).to.be.true;
 						expect(stdoutStub.calledWith("stringifyReturn" + "\n")).to.be.true;
 					});
@@ -122,7 +89,7 @@ function expectDecription(command, description) {
 						generateStub.returns("generateStub");
 					});
 					it('should stringify then write result + newline to stdout', function() {
-						run('generate', ['a', 'b']);
+							pa_test_helper.run(pa,'generate', ['a', 'b']);
 						expect(stdoutStub.calledWith("generateStub" + "\n")).to.be.true;
 					});
 				});

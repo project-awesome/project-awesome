@@ -4,7 +4,8 @@ var chai = require("chai"),
 	pa = require("../../../bin/pa"), 
 	projectAwesome = require('../../../'),
 	Promise = require('bluebird'),
-	stdinjson = require('../../../bin/stdinjson');
+	stdinjson = require('../../../bin/stdinjson'),
+	pa_test_helper = require('./pa_test_helper');
 
 var sinonStubPromise = require('sinon-stub-promise');
 sinonStubPromise(sinon);
@@ -12,40 +13,6 @@ sinonStubPromise(sinon);
 chai.should();
 chai.use(sinonChai);
 var expect = chai.expect;
-
-function run(name, args) {
-	var argv = [ 'node', 'test'];
-	if (name) {
-		argv.push(name);
-		if (args && args.length > 0)
-			argv = argv.concat(args);
-	}
-	pa.run(argv);
-}
-
-function getCommand(name) {
-	for (var i = 0; pa.program.commands.length > i; i++)
-		if (pa.program.commands[i]._name === name)
-			return pa.program.commands[i];
-	throw "Command Not Found: " + name + " not found in pa.program.commands";
-}
-
-function expectCommandExists(name) {
-	getCommand(name);
-}
-
-function expectArguments(command, args) {
-	var err = "Expected Equal Arguments";
-	if (args.length != command._args.length) throw err;
-	for (var i = 0; command._args > i; i++)
-		expect(command._args[i]).to.equal(args[i]);
-}
-
-function expectDecription(command, description) {
-	if (command._description !== description)
-		throw "Expected Description. expected: " + description + "  got: " + command._description; 
-}
-
 
 describe('version', function() {
 	it('should be "0.0.1"', function() {
@@ -62,12 +29,8 @@ describe('when no command provided', function() {
 		outputHelpStub.restore();
 	});
 	it('should default to --help', function() {
-		run();
+		pa_test_helper.run(pa);
 		expect(outputHelpStub.calledOnce).to.be.true;
 	});
 });
 
-describe('commands', function() {
-
-
-});

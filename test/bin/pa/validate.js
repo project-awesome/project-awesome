@@ -4,7 +4,8 @@ var chai = require("chai"),
 	pa = require("../../../bin/pa"), 
 	projectAwesome = require('../../../'),
 	Promise = require('bluebird'),
-	stdinjson = require('../../../bin/stdinjson');
+	stdinjson = require('../../../bin/stdinjson'),
+	pa_test_helper = require('./pa_test_helper');
 
 var sinonStubPromise = require('sinon-stub-promise');
 sinonStubPromise(sinon);
@@ -13,57 +14,23 @@ chai.should();
 chai.use(sinonChai);
 var expect = chai.expect;
 
-function run(name, args) {
-	var argv = [ 'node', 'test'];
-	if (name) {
-		argv.push(name);
-		if (args && args.length > 0)
-			argv = argv.concat(args);
-	}
-	pa.run(argv);
-}
-
-function getCommand(name) {
-	for (var i = 0; pa.program.commands.length > i; i++)
-		if (pa.program.commands[i]._name === name)
-			return pa.program.commands[i];
-	throw "Command Not Found: " + name + " not found in pa.program.commands";
-}
-
-function expectCommandExists(name) {
-	getCommand(name);
-}
-
-function expectArguments(command, args) {
-	var err = "Expected Equal Arguments";
-	if (args.length != command._args.length) throw err;
-	for (var i = 0; command._args > i; i++)
-		expect(command._args[i]).to.equal(args[i]);
-}
-
-function expectDecription(command, description) {
-	if (command._description !== description)
-		throw "Expected Description. expected: " + description + "  got: " + command._description; 
-}
-
-
 
 	describe('validate', function() {
 		it('should exist', function() {
-			expectCommandExists('validate');
+			pa_test_helper.expectCommandExists(pa,'validate');
 		});
 		describe('arguments', function() {
 			it('should have required "type"', function() {
-				var validate = getCommand('validate');
-				expectArguments(validate, [
+				var validate = pa_test_helper.getCommand(pa,'validate');
+				pa_test_helper.expectArguments(validate, [
 					{ required: true, name: 'type', variadic: false }
 		     	]);
 			});
 		});
 		describe('description', function() {
 			it('should be as defined', function() {
-				var validate = getCommand('validate');
-				expectDecription(validate, 'Gives validation errors.');
+				var validate = pa_test_helper.getCommand(pa,'validate');
+				pa_test_helper.expectDescription(validate, 'Gives validation errors.');
 			});
 		});
 		describe('action', function() {
@@ -84,7 +51,7 @@ function expectDecription(command, description) {
 			describe('when stdinjson rejects', function() {
 				it('should write the error + newline to stderr', function() {
 					stdinjsonStub.rejects("stdinjsonReject");
-					run('validate', ['a']);
+					pa_test_helper.run(pa,'validate', ['a']);
 					expect(stderrStub.calledWith("stdinjsonReject" + "\n")).to.be.true;
 				});
 			});
@@ -93,7 +60,7 @@ function expectDecription(command, description) {
 					stdinjsonStub.resolves("stdinjsonResolve");
 				});
 				it('should call projectAwesome.validate with the appropriate parameters', function() {
-					run('validate', ['a']);
+					pa_test_helper.run(pa,'validate', ['a']);
 					expect(validateStub.calledWith('a', 'stdinjsonResolve')).to.be.true;
 				});
 				describe('when projectAwesome.validate throws an error', function() {
@@ -101,7 +68,7 @@ function expectDecription(command, description) {
 						validateStub.throws("validateThrow");
 					});
 					it('should write error + newline to stderr', function() {
-						run('validate', ['a']);
+						pa_test_helper.run(pa,'validate', ['a']);
 						expect(stderrStub.calledWith("validateThrow" + "\n")).to.be.true;
 					});
 				});
@@ -111,7 +78,7 @@ function expectDecription(command, description) {
 						stringifyStub.returns("stringifyReturn");
 					});
 					it('should stringify then write result + newline to stdout', function() {
-						run('validate', ['a']);
+						pa_test_helper.run(pa,'validate', ['a']);
 						expect(stringifyStub.calledWith("validateReturn")).to.be.true;
 						expect(stdoutStub.calledWith("stringifyReturn" + "\n")).to.be.true;
 					});
