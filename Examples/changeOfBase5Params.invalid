@@ -10,7 +10,7 @@
 	    			"radix": { "from": 2, "to": 16 }
 	    		},
 	    		{
-	    			"range": { "min": 1, "max": 255 },
+	    			"range": { "min": 1, "max": 255 }
 	    			"radix": { "from": 16, "to": 2 }
 	    		}
 	    	]
