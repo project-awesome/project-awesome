@@ -25,6 +25,23 @@ program
   });
 
 program
+  .command('list <type> ')
+  .description('Lists valid values for a given type.')
+  .action(function(type, value, options) {
+    try {
+      process.stdout.write(projectAwesome.list(type) + "\n");
+    } catch (err) {
+      process.stderr.write(err + "\n");
+    }
+  })
+  .on('--help', function() {
+    console.log('  Examples:');
+    console.log();
+    console.log('    $ pa list questionType');
+  });
+
+
+program
   .command('generate <type> <seed>')
   .description('Generates given type.')
   .action(function(type, seed, options) {
