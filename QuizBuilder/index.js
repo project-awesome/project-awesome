@@ -1,7 +1,7 @@
 var randomModule = require("random-bits");
 var questionsModule =  require("../questions");
 
-function getQuestions(descriptor, randomStream) {
+module.exports.getQuestions = function(descriptor, randomStream) {
     var questions = [];
     var n = descriptor["questions"].length;
 
@@ -59,27 +59,42 @@ function getQuestions(descriptor, randomStream) {
     return questions; 
 };
 
-function build(qd, seed) {
-    var result = validateQuizDescriptor(qd);
+module.exports.build = function(qd, seed) {
+    var result = module.exports.validateQuizDescriptor(qd);
     if (result.length > 0)
         throw new Error("Invalid Quiz Descriptor");
-    if (!checkSeed(seed)) 
+    if (!module.exports.checkSeed(seed)) 
         throw new Error("Invalid Seed: " + seed);
+    if (typeof qd === 'string')
+        qd = JSON.parse(qd);
     
     var quiz = {};
     quiz.seed = seed;
     var s = parseInt(seed, 16);
     var randomStream = new randomModule.random(s);
-    quiz.questions = getQuestions(qd, randomStream);
+    quiz.questions = module.exports.getQuestions(qd, randomStream);
 	return quiz;
 }
 
-function validateQuizDescriptor(qd) {
+module.exports.validateQuizDescriptorString = function(qdString) {
+    var qd;
+    try {
+        qd = JSON.parse(qdString);
+    } catch(e) {
+        return [{type:'InvalidJSON', path:[]}];
+    }
+    return module.exports.validateQuizDescriptor(qd);
+}
+
+module.exports.validateQuizDescriptor = function(qd) {
+    if (typeof qd === 'string')
+        return module.exports.validateQuizDescriptorString(qd);
+    
     var errors = [];
     if (qd === undefined)
         return [{type:'UndefinedQuizDescriptor', path:[]}];
     if (typeof qd !== 'object')
-        return [{type:'ExpectedObjectError', path:[]}];
+        return [{type:'ExpectedObjectOrStringError', path:[]}];
 
     if (!('version' in qd))
         errors.unshift({ type: 'RequiredError', path:['version']});
@@ -104,15 +119,9 @@ function validateQuizDescriptor(qd) {
     return errors;
 }
 
-function checkSeed(seed) {
+module.exports.checkSeed = function(seed) {
     return (typeof seed === 'string' && seed.match(/^[a-fA-F0-9]{8}$/) !== null && seed.length == 8);
 }
-
-
-module.exports.validateQuizDescriptor = validateQuizDescriptor;
-module.exports.getQuestions = getQuestions;
-module.exports.build = build;
-module.exports.checkSeed = checkSeed;
 
 
 
