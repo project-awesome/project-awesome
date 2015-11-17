@@ -1,18 +1,11 @@
-var chai = require("chai"),
-	sinon = require("sinon"),
-	sinonChai = require("sinon-chai"),
-	pa = require("../../../bin/pa"), 
+var pa = require("../../../bin/pa"), 
 	projectAwesome = require('../../../'),
-	Promise = require('bluebird'),
-	stdinjson = require('../../../bin/stdinjson'),
 	pa_test_helper = require('./pa_test_helper');
 
-var sinonStubPromise = require('sinon-stub-promise');
-sinonStubPromise(sinon);
+var chai = require("chai"),
+	sinon = require("sinon"),
+	expect = chai.expect;
 
-chai.should();
-chai.use(sinonChai);
-var expect = chai.expect;
 
 describe('check', function() {
 		it('should exist', function() {

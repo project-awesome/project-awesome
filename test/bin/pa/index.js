@@ -1,18 +1,9 @@
-var chai = require("chai"),
-	sinon = require("sinon"),
-	sinonChai = require("sinon-chai"),
-	pa = require("../../../bin/pa"), 
-	projectAwesome = require('../../../'),
-	Promise = require('bluebird'),
-	stdinjson = require('../../../bin/stdinjson'),
+var pa = require("../../../bin/pa"),
 	pa_test_helper = require('./pa_test_helper');
 
-var sinonStubPromise = require('sinon-stub-promise');
-sinonStubPromise(sinon);
-
-chai.should();
-chai.use(sinonChai);
-var expect = chai.expect;
+var chai = require("chai"),
+	sinon = require("sinon"),
+	expect = chai.expect;
 
 describe('version', function() {
 	it('should be "0.0.1"', function() {
