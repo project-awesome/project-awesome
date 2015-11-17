@@ -1,14 +1,11 @@
 var chai = require("chai"),
 	sinon = require("sinon"),
-	sinonChai = require("sinon-chai"),
-	projectAwesome = require('../'),
+	expect = chai.expect;
+
+var projectAwesome = require('../'),
 	MoodleExporter = require('../MoodleExporter'),
-	questions = require('../questions'),
 	QuizBuilder = require('../QuizBuilder');
 
-chai.should();
-chai.use(sinonChai);
-var expect = chai.expect;
 
 
 
