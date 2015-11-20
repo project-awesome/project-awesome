@@ -31,7 +31,7 @@
     "xml": "^1.0.0",
     "paq-mc-change-of-base": "git+https://git@github.com/project-awesome/paq-mc-change-of-base.git",
     "paq-fr-change-of-base": "git+https://git@github.com/project-awesome/paq-fr-change-of-base.git",
-    "random": "git+https://git@github.com/project-awesome/pa-random-bits.git#v1.0.0"
+    "random-bits": "git+https://git@github.com/project-awesome/pa-random-bits.git#v1.0.0"
   },
   "devDependencies": {
     "browserify": "^11.0.0",
