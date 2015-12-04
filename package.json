@@ -24,15 +24,23 @@
   },
   "homepage": "https://github.com/project-awesome/project-awesome#readme",
   "dependencies": {
+    "bluebird": "^2.10.2",
+    "colors": "^1.1.2",
+    "commander": "^2.9.0",
     "underscore": "^1.8.3",
-    "xml": "^1.0.0"
+    "xml": "^1.0.0",
+    "paq-mc-change-of-base": "git+https://git@github.com/project-awesome/paq-mc-change-of-base.git",
+    "paq-fr-change-of-base": "git+https://git@github.com/project-awesome/paq-fr-change-of-base.git",
+    "random-bits": "git+https://git@github.com/project-awesome/pa-random-bits.git#v1.0.0"
   },
   "devDependencies": {
     "browserify": "^11.0.0",
     "chai": "^3.2.0",
     "mocha": "^2.2.5",
     "sinon": "^1.15.4",
-    "sinon-chai": "^2.8.0",
     "xml2js": "^0.4.10"
+  },
+  "bin": {
+    "pa": "bin/index.js"
   }
 }

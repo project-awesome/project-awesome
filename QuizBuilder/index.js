@@ -1,8 +1,7 @@
-var randomModule = require("../random");
+var randomModule = require("random-bits");
 var questionsModule =  require("../questions");
-var isSeedValid = require('../validators/QuizValidator.js').isSeedValid;
 
-function getQuestions(descriptor, randomStream) {
+module.exports.getQuestions = function(descriptor, randomStream) {
     var questions = [];
     var n = descriptor["questions"].length;
 
@@ -22,7 +21,7 @@ function getQuestions(descriptor, randomStream) {
             //Generate the specified number of the specified type of question, add them to the array
             
             for(var j=0; j<repeat; j++) {
-                var newQuestion = new question.f(randomStream, params);
+                var newQuestion = question.generate(randomStream, params);
                 questions.push(newQuestion); 
             }
         }
@@ -60,25 +59,42 @@ function getQuestions(descriptor, randomStream) {
     return questions; 
 };
 
-function build(descriptor, hexStringSeed) {
-    if (!isSeedValid(hexStringSeed)) 
-        throw new Error('Invalid Seed: ' + hexStringSeed + ' is not an 8 digit hexadecimal');
+module.exports.build = function(qd, seed) {
+    var result = module.exports.validateQuizDescriptor(qd);
+    if (result.length > 0)
+        throw new Error("Invalid Quiz Descriptor");
+    if (!module.exports.checkSeed(seed)) 
+        throw new Error("Invalid Seed: " + seed);
+    if (typeof qd === 'string')
+        qd = JSON.parse(qd);
     
     var quiz = {};
-    quiz.seed = hexStringSeed;
-    var s = parseInt(hexStringSeed, 16);
+    quiz.seed = seed;
+    var s = parseInt(seed, 16);
     var randomStream = new randomModule.random(s);
-
-    quiz.questions = getQuestions(descriptor, randomStream);
+    quiz.questions = module.exports.getQuestions(qd, randomStream);
 	return quiz;
 }
 
-function validateQuizDescriptor(qd) {
+module.exports.validateQuizDescriptorString = function(qdString) {
+    var qd;
+    try {
+        qd = JSON.parse(qdString);
+    } catch(e) {
+        return [{type:'InvalidJSON', path:[]}];
+    }
+    return module.exports.validateQuizDescriptor(qd);
+}
+
+module.exports.validateQuizDescriptor = function(qd) {
+    if (typeof qd === 'string')
+        return module.exports.validateQuizDescriptorString(qd);
+    
     var errors = [];
     if (qd === undefined)
         return [{type:'UndefinedQuizDescriptor', path:[]}];
     if (typeof qd !== 'object')
-        return [{type:'ExpectedObjectError', path:[]}];
+        return [{type:'ExpectedObjectOrStringError', path:[]}];
 
     if (!('version' in qd))
         errors.unshift({ type: 'RequiredError', path:['version']});
@@ -103,10 +119,9 @@ function validateQuizDescriptor(qd) {
     return errors;
 }
 
-
-module.exports.validateQuizDescriptor = validateQuizDescriptor;
-module.exports.getQuestions = getQuestions;
-module.exports.build = build;
+module.exports.checkSeed = function(seed) {
+    return (typeof seed === 'string' && seed.match(/^[a-fA-F0-9]{8}$/) !== null && seed.length == 8);
+}
 
 
 

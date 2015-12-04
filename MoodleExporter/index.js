@@ -1,18 +1,15 @@
 var QuizBuilder = require('../QuizBuilder');
 var xml = require('xml');
 
-function paQuestionToMoodleJSON(question, questionName) {
-	if (questionName === undefined)
-		throw new Error("Question Format Conversion Error: questionName bust be defined.");
+function paQuestionToMoodleJSON(question) {
 	if (question.format == 'multiple-choice') {
 		
 		var moodleMultichoiceQuestion = [
 			{ _attr: { type: 'multichoice'} }, 
-			{ name: [ { text: questionName } ] },
+			{ name: [ { text: '*questionName goes here*' } ] },
 			{ questiontext: [ { text: question.question } ] },
 			{ answernumbering: 'abc' },
 			{ correctfeedback: [ { text: 'Your answer is correct.' } ] },
-			{ partiallycorrectfeedback: [ { text: 'Your answer is partially correct.' } ] },
 			{ incorrectfeedback: [ { text: 'Your answer is incorrect.' } ] }
 		];
 		for (var i = 0; question.choices.length > i; i++) {
@@ -26,10 +23,10 @@ function paQuestionToMoodleJSON(question, questionName) {
 		}
 		return moodleMultichoiceQuestion;
 
-	} else if (question.format == 'input') {
+	} else if (question.format == 'free-response') {
 		var moodleNumericalQuestion = [
 			{ _attr: { type: 'shortanswer'} }, 
-			{ name: [ { text: questionName } ] },
+			{ name: [ { text: '*questionName goes here*' } ] },
 			{ questiontext: [ { text: question.question } ] },
 			{ answer: [
 					{ _attr: { fraction: '100' } },
@@ -43,21 +40,20 @@ function paQuestionToMoodleJSON(question, questionName) {
 	}
 }
 
-function generateMoodleXML(questionType, count, questionName, seed) {
-	if (questionType != 'changeOfBase' && questionType != 'binHexOctDec') 
-		throw new Error("Question Type Conversion Error: " + questionType + " to Moodle conversion is not yet implemented.");
-	var qd = {
-	    "version" : "0.1",
-	    "questions": [{
-		    "question": questionType,
-		    "repeat": count,
-		}]
-	};
+function generateMoodleXML(qd, seed) {
+	var result = QuizBuilder.validateQuizDescriptor(qd);
+	if (result.length > 0)
+		throw new Error("Invalid Quiz Descriptor");
+	if (!QuizBuilder.checkSeed(seed)) 
+		throw new Error("Invalid Seed: " + seed);
+
+
+
 	var paQuiz = QuizBuilder.build(qd, seed);
 	var moodleQuizJSON = {};
 
 	moodleQuizJSON.quiz = paQuiz.questions.map(function(q) {
-		return { question: paQuestionToMoodleJSON(q, questionName) };
+		return { question: paQuestionToMoodleJSON(q) };
 	});
 
 	return xml([moodleQuizJSON]);
