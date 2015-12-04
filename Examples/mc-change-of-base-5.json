@@ -1,7 +1,7 @@
 {
     "version" : "0.1",
     "questions": [{
-	    "question": "binHexOctDec",
+	    "question": "mc-change-of-base",
 	    "repeat": 5
 	}]
 }

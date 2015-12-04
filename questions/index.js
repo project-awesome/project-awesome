@@ -1,7 +1,7 @@
 
 var questionTypes = {
-    "binHexOctDec": require("paq-fr-change-of-base"),
-    "changeOfBase": require("paq-mc-change-of-base")
+    "fr-change-of-base": require("paq-fr-change-of-base"),
+    "mc-change-of-base": require("paq-mc-change-of-base")
 };
 
 module.exports.questionTypes = questionTypes;

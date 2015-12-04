@@ -21,7 +21,7 @@ program
     console.log('  Examples:');
     console.log();
     console.log('    $ pa check seed abcd1234');
-    console.log('    $ pa check questionType binHexOctDec');
+    console.log('    $ pa check questionType fr-change-of-base');
   });
 
 program
