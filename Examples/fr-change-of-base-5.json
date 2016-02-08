@@ -1,7 +1,7 @@
 {
     "version" : "0.1",
     "questions": [{
-	    "question": "changeOfBase",
+	    "question": "fr-change-of-base",
 	    "repeat": 5
 	}]
 }

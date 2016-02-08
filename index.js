@@ -2,7 +2,19 @@ var MoodleExporter = require('./MoodleExporter');
 var questions = require('./questions');
 var QuizBuilder = require('./QuizBuilder');
 
-function check(type, value) {
+
+module.exports.list = function (type) {
+	var listers = {
+		"questionType" : function () {
+			return Object.keys(questions.questionTypes);
+		}
+	};
+	if (!(type in listers)) 
+		throw "Illegal Argument: " + type;
+	return listers[type]();
+}
+
+module.exports.check = function(type, value) {
 	var checkers = {
 		"seed": QuizBuilder.checkSeed,
 		"questionType": questions.isValidQuestionType
@@ -12,7 +24,7 @@ function check(type, value) {
 	return checkers[type](value);
 }
 
-function generate(type, qd, seed) {
+module.exports.generate = function(type, qd, seed) {
 	var generators = {
 		"json": QuizBuilder.build,
 		"moodleXML": MoodleExporter.generateMoodleXML
@@ -22,7 +34,7 @@ function generate(type, qd, seed) {
 	return generators[type](qd, seed);
 }
 
-function validate(type, value) {
+module.exports.validate = function(type, value) {
 	var validators = {
 		"qd": QuizBuilder.validateQuizDescriptor
 	};
@@ -31,9 +43,6 @@ function validate(type, value) {
 	return validators[type](value);
 }
 
-module.exports.check = check;
-module.exports.generate = generate;
-module.exports.validate = validate;
 
 
 

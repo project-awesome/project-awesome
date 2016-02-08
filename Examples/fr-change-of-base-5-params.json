@@ -1,0 +1,19 @@
+{
+    "version" : "0.1",
+    "questions": [{
+	    "question": "fr-change-of-base",
+	    "repeat": 5,
+	    "parameters": {
+	    	"conversions": [
+	    		{ 
+	    			"range": { "min": 1, "max": 255 },
+	    			"radix": { "from": 2, "to": 16 }
+	    		},
+	    		{
+	    			"range": { "min": 1, "max": 255 },
+	    			"radix": { "from": 16, "to": 2 }
+	    		}
+	    	]
+	    }
+	}]
+}

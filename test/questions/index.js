@@ -11,7 +11,7 @@ describe('questions', function () {
     describe('isValidQuestionType(questionType)', function () {
 
         it('should return true when the question type is a property in questionTypes', function () {
-            expect(questions.isValidQuestionType('binHexOctDec')).to.be.true;
+            expect(questions.isValidQuestionType('fr-change-of-base')).to.be.true;
         });
 
         it('should return false for one that does not exist', function () {
@@ -27,7 +27,7 @@ describe('questions', function () {
                 before(function () {
                     questionDescriptor = {
                         repeat: 10,
-                        question: 'binHexOctDec',
+                        question: 'fr-change-of-base',
                         parameters: {
                             conversions: [
                                 {radix: {from: 2, to: 10}, range: {min: 0, max: 1024}}
@@ -47,7 +47,7 @@ describe('questions', function () {
                 before(function () {
                     questionDescriptor = {
                         repeat: 10,
-                        question: 'binHexOctDec'
+                        question: 'fr-change-of-base'
                     }
                 });
                 it('should return an empty array', function () {
@@ -173,7 +173,7 @@ describe('questions', function () {
                     var errors;
                     before(function () {
                         errors = questions.validateQuestionDescriptor({
-                            question: 'binHexOctDec'
+                            question: 'fr-change-of-base'
                         });
                     });
                     it('should return an array of length 1', function () {
@@ -196,7 +196,7 @@ describe('questions', function () {
                     before(function () {
                         errors = questions.validateQuestionDescriptor({
                             repeat: 1.5,
-                            question: 'binHexOctDec'
+                            question: 'fr-change-of-base'
                         });
                     });
                     it('should return an array of length 1', function () {
@@ -219,7 +219,7 @@ describe('questions', function () {
                     before(function () {
                         errors = questions.validateQuestionDescriptor({
                             repeat: 0,
-                            question: 'binHexOctDec'
+                            question: 'fr-change-of-base'
                         });
                     });
                     it('should return an array of length 1', function () {
@@ -245,7 +245,7 @@ describe('questions', function () {
                     before(function () {
                         errors = questions.validateQuestionDescriptor({
                             repeat: 10,
-                            question: 'binHexOctDec',
+                            question: 'fr-change-of-base',
                             parameters: {
                                 spaceBinary: 'true'
                             }
