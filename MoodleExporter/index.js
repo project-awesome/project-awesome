@@ -6,7 +6,7 @@ function paQuestionToMoodleJSON(question) {
 		
 		var moodleMultichoiceQuestion = [
 			{ _attr: { type: 'multichoice' } },
-			{ name: [ { text: question.title } ] },
+			{ name: [ { text: "stub" } ] },
 			{ questiontext: [ { text: question.question } ] },
 			{ answernumbering: 'abc' },
 			{ correctfeedback: [ { text: 'Your answer is correct.' } ] },
