@@ -66,6 +66,13 @@ describe('MoodleExporter', function() {
 						expect(xmlResult.quiz.question.length).to.equal(count);
 					});
 				});
+                
+                describe('questions have titles', function() {
+					it('should have a title', function() {
+						expect(xmlResult.quiz.question[0].name[0].text[0]).to.equal("Change of Base Multiple Choice");
+					});
+                });
+
 			});
 
 
