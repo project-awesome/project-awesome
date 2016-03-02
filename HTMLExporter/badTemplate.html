@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+    <head>
+    </head>
+    <body>
+        <h1>Computer Science Quiz</h1>
+        {{#questions}}
+        <div class="question">
+            {{#if mc}}
+            <p>{{flower}}</p>
+                {{#choices}}
+                    <p>{{#letterChoice @index}}{{/letterChoice}}. {{this}}</p>
+                {{/choices}}
+            {{else}}
+                <p>{{this.question}}</p>
+                <p><br><br><br></p>
+            {{/if}}
+        </div>
+        {{/questions}}
+    </body>
+</html>
