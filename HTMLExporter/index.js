@@ -1,15 +1,10 @@
 var QuizBuilder = require('../QuizBuilder');
 var handlebars = require('handlebars');
 var fs = require('fs');
+var quizTemplate = fs.readFileSync('HTMLExporter/quizTemplate.html', 'utf8');
 
 
-function generateHTML(qd, seed, quizTemplate) {
-    var result = QuizBuilder.validateQuizDescriptor(qd);
-	if (result.length > 0)
-		throw new Error("Invalid Quiz Descriptor");
-	if (!QuizBuilder.checkSeed(seed)) 
-		throw new Error("Invalid Seed: " + seed);
-
+function generateHTML(qd, seed) {
 
 	var paQuiz = QuizBuilder.build(qd, seed);
 
@@ -23,7 +18,7 @@ function generateHTML(qd, seed, quizTemplate) {
     })
     
     var data = {"questions":paQuiz.questions};
-    var text = fs.readFileSync(quizTemplate, 'utf8');
+    var text = quizTemplate;
     
     var template = handlebars.compile(text);
     var html = template(data);
@@ -31,16 +26,5 @@ function generateHTML(qd, seed, quizTemplate) {
     fs.writeFileSync('quizResult.html', html);
     return html;
 }
-
-/*
-generateHTML({
-    "version" : "0.1",
-    "questions": [{
-	    "question": "mc-change-of-base",
-	    "repeat": 5
-	}]
-}, "abcd1234", 'badTemplate.html'
-);
-*/
 
 module.exports.generateHTML = generateHTML;
