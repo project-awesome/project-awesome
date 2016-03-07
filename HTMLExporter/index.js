@@ -23,7 +23,6 @@ function generateHTML(qd, seed) {
     var template = handlebars.compile(text);
     var html = template(data);
     
-    fs.writeFileSync('quizResult.html', html);
     return html;
 }
 
