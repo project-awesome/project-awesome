@@ -1,6 +1,6 @@
 var expect = require("chai").expect;
 var HTMLExporter = require('../../HTMLExporter');
-var expected = 'quizResult.html';
+var expected = 'test/HTMLExporter/quizResult.html';
 var fs = require('fs');
 
 describe('HTMLExporter', function() {
