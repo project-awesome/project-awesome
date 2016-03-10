@@ -3,52 +3,43 @@ var MoodleExporter = require('../../MoodleExporter');
 var xml2js = require('xml2js');
 
 describe('MoodleExporter', function () {
-    var seed = 'abcd1234';
-
-    describe('generateMoodleXML(questionType, count, questionName)', function () {
-
+    var validSeed = 'abcd1234';
+    var validQD = {
+        "version": "0.1",
+        "questions": [{
+            "question": "mc-change-of-base",
+            "repeat": 2,
+        }]
+    };
+    describe('generateMoodleXML(qd, seed)', function () {
         describe('throwing errors', function () {
-
-            describe('unimplemented questionType', function () {
-
+            describe('when qd is invalid questionType', function () {
                 it('should throw an error.', function () {
-                    expect(function () { MoodleExporter.generateMoodleXML('someRandomQuestionType', 1, 'Question Name', seed) })
-					.to.throw(Error);
+                    expect(function () { 
+                        MoodleExporter.generateMoodleXML({ "invalid": "qd" }, validSeed) 
+                    }).to.throw(Error);
                 });
 
             });
-
             describe('invalid seed', function () {
-
                 it("should throw an error", function () {
-                    expect(function () { MoodleExporter.generateMoodleXML('mc-change-of-base', 1, 'Question Name', '1234'); })
-					.to.throw(Error);
+                    expect(function () { 
+                        MoodleExporter.generateMoodleXML(validQD, "invalid-seed"); 
+                    }).to.throw(Error);
                 });
-
             });
         });
 
         describe('successful conversion', function () {
             var xmlResult, xmlString;
-            var questionType, count, questionName;
-
-
             describe('general requirements', function () {
-
                 beforeEach(function (done) {
-                    questionType = 'mc-change-of-base';
-                    count = 2;
-                    questionName = 'Sample Question Name';
-
-                    var qd = {
-                        "version": "0.1",
-                        "questions": [{
-                            "question": questionType,
-                            "repeat": count,
-                        }]
-                    };
-
-                    xmlString = MoodleExporter.generateMoodleXML(qd, seed);
+                    try {
+                        xmlString = MoodleExporter.generateMoodleXML(validQD, validSeed);
+                    } catch(e) {
+                        console.log(e);
+                        throw e;
+                    }
                     xml2js.parseString(xmlString, function (err, result) {
                         xmlResult = result;
                         done();
@@ -63,37 +54,29 @@ describe('MoodleExporter', function () {
 
                 describe('xml question', function () {
                     it('should have the # of questions specified by the count parameter', function () {
-                        expect(xmlResult.quiz.question.length).to.equal(count);
+                        expect(xmlResult.quiz.question.length).to.equal(2);
                     });
                 });
 
             });
-
+            
             describe('multiple question types', function () {
 
                 beforeEach(function (done) {
-                    mcQuestionType = 'mc-change-of-base';
-                    frQuestionType = 'fr-change-of-base';
-                    //count = 2;
-                    questionName = 'Sample Question Name';
 
                     var qd = {
                         "version": "0.1",
                         "questions": [{
-                            "question": mcQuestionType,
+                            "question": "mc-change-of-base",
                             "repeat": 1,
                         },
                         {
-                            "question": frQuestionType,
-                            "repeat": 1,
-                        },
-                        {
-                            "question": mcQuestionType,
+                            "question": "fr-change-of-base",
                             "repeat": 1,
                         }]
                     };
 
-                    xmlString = MoodleExporter.generateMoodleXML(qd, seed);
+                    xmlString = MoodleExporter.generateMoodleXML(qd, validSeed);
                     xml2js.parseString(xmlString, function (err, result) {
                         xmlResult = result;
                         done();
@@ -111,13 +94,6 @@ describe('MoodleExporter', function () {
                 describe('second question title', function () {
                     it('should be Change of Base Free Response', function () {
                         expect(xmlResult.quiz.question[1].name[0].text[0]).to.equal("Change of Base Free Response");
-                    });
-                });
-
-
-                describe('third question title', function () {
-                    it('should be Change of Base Multiple Choice', function () {
-                        expect(xmlResult.quiz.question[2].name[0].text[0]).to.equal("Change of Base Multiple Choice");
                     });
                 });
 
@@ -140,7 +116,7 @@ describe('MoodleExporter', function () {
                                 "repeat": count,
                             }]
                         };
-                        xmlString = MoodleExporter.generateMoodleXML(qd, seed);
+                        xmlString = MoodleExporter.generateMoodleXML(qd, validSeed);
                         xml2js.parseString(xmlString, function (err, result) {
                             xmlResult = result;
                             done();
@@ -174,7 +150,7 @@ describe('MoodleExporter', function () {
                                 "repeat": count,
                             }]
                         };
-                        xmlString = MoodleExporter.generateMoodleXML(qd, seed);
+                        xmlString = MoodleExporter.generateMoodleXML(qd, validSeed);
                         xml2js.parseString(xmlString, function (err, result) {
                             xmlResult = result;
                             done();
