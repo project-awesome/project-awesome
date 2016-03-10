@@ -23,6 +23,7 @@
   },
   "homepage": "https://github.com/project-awesome/project-awesome#readme",
   "dependencies": {
+    "ajv": "^3.8.3",
     "bluebird": "^2.10.2",
     "colors": "^1.1.2",
     "commander": "^2.9.0",
