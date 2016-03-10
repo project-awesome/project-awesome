@@ -43,7 +43,7 @@ function paQuestionToMoodleJSON(question) {
 function generateMoodleXML(qd, seed) {
 	var result = QuizBuilder.validateQuizDescriptor(qd);
 	if (result.length > 0)
-		throw new Error("Invalid Quiz Descriptor");
+		throw new Error(JSON.stringify(result));
 	if (!QuizBuilder.checkSeed(seed)) 
 		throw new Error("Invalid Seed: " + seed);
 
