@@ -50,10 +50,10 @@ describe('generate', function () {
 
     });
 
-    describe('HTML', function () {
+    describe('html', function () {
 
         it('should call HTMLExporter.generateHTML with appropriate parameter and return result', function () {
-            var val = projectAwesome.generate('HTML', 'qdValue', 'seedValue');
+            var val = projectAwesome.generate('html', 'qdValue', 'seedValue');
             expect(generateHTMLStub.calledWith('qdValue', 'seedValue')).to.be.true;
             expect(val).to.equal("generateHTMLReturn");
         });
