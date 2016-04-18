@@ -3,6 +3,7 @@ var projectAwesome = require('../');
 var colors = require('colors');
 var fs = require('fs');
 
+
 program
   .version('0.0.1')
 
@@ -43,11 +44,10 @@ program
 
 program
   .command('generate <type> <seed>')
-  .description('Generates given type!!')
+  .description('Generates given type.')
   .action(function(type, seed, options) {
     try {
       
-      //var qdString = fs.readFileSync('/dev/stdin').toString();
       var size = fs.fstatSync(process.stdin.fd).size;
       var qdString = size > 0 ? fs.readSync(process.stdin.fd, size)[0] : '';
       
@@ -72,9 +72,9 @@ program
   .description('Gives validation errors.')
   .action(function(type, options) {
     
-    //var qdString = fs.readFileSync('/dev/stdin').toString();
-      var size = fs.fstatSync(process.stdin.fd).size;
-      var qdString = size > 0 ? fs.readSync(process.stdin.fd, size)[0] : '';
+    var qdString = fs.readFileSync('/dev/stdin').toString();
+    //var size = fs.fstatSync(process.stdin.fd).size;
+    //var qdString = size > 0 ? fs.readSync(process.stdin.fd, size)[0] : '';
     
     var validation = projectAwesome.validate(type, qdString);
     process.stdout.write(JSON.stringify(validation) + "\n");
