@@ -72,9 +72,8 @@ program
   .description('Gives validation errors.')
   .action(function(type, options) {
     
-    var qdString = fs.readFileSync('/dev/stdin').toString();
-    //var size = fs.fstatSync(process.stdin.fd).size;
-    //var qdString = size > 0 ? fs.readSync(process.stdin.fd, size)[0] : '';
+    var size = fs.fstatSync(process.stdin.fd).size;
+    var qdString = size > 0 ? fs.readSync(process.stdin.fd, size)[0] : '';
     
     var validation = projectAwesome.validate(type, qdString);
     process.stdout.write(JSON.stringify(validation) + "\n");
