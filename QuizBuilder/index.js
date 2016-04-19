@@ -86,6 +86,7 @@ exports.validateQuizDescriptorString = function(qdString) {
     return exports.validateQuizDescriptor(qd);
 }
 
+// This is the schema for quiz descriptors, expressed using http://json-schema.org/
 
 var qdSchema = {
     type: 'object',
