@@ -47,10 +47,9 @@ program
   .description('Generates given type.')
   .action(function(type, seed, options) {
     try {
-      
       var size = fs.fstatSync(process.stdin.fd).size;
       var qdString = size > 0 ? fs.readSync(process.stdin.fd, size)[0] : '';
-      
+    
       var quiz = projectAwesome.generate(type, qdString, seed);
       if (typeof quiz === 'object')
         quiz = JSON.stringify(quiz, null, '    ');
