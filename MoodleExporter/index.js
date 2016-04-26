@@ -5,8 +5,8 @@ function paQuestionToMoodleJSON(question) {
 	if (question.format == 'multiple-choice') {
 		
 		var moodleMultichoiceQuestion = [
-			{ _attr: { type: 'multichoice'} }, 
-			{ name: [ { text: '*questionName goes here*' } ] },
+			{ _attr: { type: 'multichoice' } },
+			{ name: [ { text: question.title } ] },
 			{ questiontext: [ { text: question.question } ] },
 			{ answernumbering: 'abc' },
 			{ correctfeedback: [ { text: 'Your answer is correct.' } ] },
@@ -26,7 +26,7 @@ function paQuestionToMoodleJSON(question) {
 	} else if (question.format == 'free-response') {
 		var moodleNumericalQuestion = [
 			{ _attr: { type: 'shortanswer'} }, 
-			{ name: [ { text: '*questionName goes here*' } ] },
+			{ name: [ { text: question.title } ] },
 			{ questiontext: [ { text: question.question } ] },
 			{ answer: [
 					{ _attr: { fraction: '100' } },
@@ -43,7 +43,7 @@ function paQuestionToMoodleJSON(question) {
 function generateMoodleXML(qd, seed) {
 	var result = QuizBuilder.validateQuizDescriptor(qd);
 	if (result.length > 0)
-		throw new Error("Invalid Quiz Descriptor");
+		throw new Error(JSON.stringify(result));
 	if (!QuizBuilder.checkSeed(seed)) 
 		throw new Error("Invalid Seed: " + seed);
 

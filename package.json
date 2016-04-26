@@ -4,7 +4,6 @@
   "description": "Library to create practice questions for Computer Science problems",
   "main": "index.js",
   "scripts": {
-    "pretest": "cd html; browserify -r ./pa.js > pa-bundle.js",
     "test": "mocha --recursive"
   },
   "repository": {
@@ -24,14 +23,16 @@
   },
   "homepage": "https://github.com/project-awesome/project-awesome#readme",
   "dependencies": {
+    "ajv": "^3.8.3",
     "bluebird": "^2.10.2",
     "colors": "^1.1.2",
     "commander": "^2.9.0",
-    "underscore": "^1.8.3",
-    "xml": "^1.0.0",
-    "paq-mc-change-of-base": "git+https://git@github.com/project-awesome/paq-mc-change-of-base.git",
+    "handlebars": "^4.0.5",
     "paq-fr-change-of-base": "git+https://git@github.com/project-awesome/paq-fr-change-of-base.git",
-    "random-bits": "git+https://git@github.com/project-awesome/pa-random-bits.git#v1.0.0"
+    "paq-mc-change-of-base": "git+https://git@github.com/project-awesome/paq-mc-change-of-base.git",
+    "random-bits": "git+https://git@github.com/project-awesome/pa-random-bits.git#v1.0.0",
+    "underscore": "^1.8.3",
+    "xml": "^1.0.0"
   },
   "devDependencies": {
     "browserify": "^11.0.0",

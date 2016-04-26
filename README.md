@@ -13,6 +13,12 @@ Only:
 * generation of questions and answers from a qd and key
 * formatting of questions/answers into various formats (TODO: check this.  Does this happen here, or in the other part of the app?)
 
+# How to get started
+
+1. Fork this module to your own github.com space.
+2. cd into project-awesome, and run the tests (See item below.
+3. TODO: What happens after that?
+
 # How to Run Tests
 To run tests, type: 
 

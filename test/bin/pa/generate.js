@@ -28,13 +28,13 @@ var chai = require("chai"),
 			});
 		});
 		describe('action', function() {
-			var sandbox, generateStub, stdoutStub, stderrStub, readFileStub, stringifyStub;
+			var sandbox, generateStub, stdoutStub, stderrStub, stringifyStub, fstatSync, readSyncStub;
 			beforeEach(function() {
 				sandbox = sinon.sandbox.create();
-				readFileStub = sandbox.stub(fs, 'readFileSync')
-				.returns({ 
-					toString: function() { return "file-contents-double"; } 
-				});
+				
+				fstatSyncStub = sandbox.stub(fs, 'fstatSync').returns({"size":1});
+				readSyncStub = sandbox.stub(fs, 'readSync').returns(['file-contents-double']);
+				
 				generateStub = sandbox.stub(projectAwesome, 'generate');
 				stdoutStub = sandbox.stub(process.stdout, 'write');
 				stderrStub = sandbox.stub(process.stderr, 'write');
