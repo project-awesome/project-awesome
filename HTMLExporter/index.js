@@ -1,8 +1,27 @@
 var QuizBuilder = require('../QuizBuilder');
 var handlebars = require('handlebars');
 var fs = require('fs');
-var quizTemplate = fs.readFileSync('HTMLExporter/quizTemplate.html', 'utf8');
-
+var quizTemplate = "<!DOCTYPE html>\n" 
+	+ "<html>\n"
+	+ "    <head>\n"
+	+ "    </head>\n"
+	+ "    <body>\n"
+	+ "        <h1>Computer Science Quiz</h1>\n"
+	+ "        {{#questions}}\n"
+	+ "        <div class=\"question\">\n"
+	+ "            {{#if mc}}\n"
+	+ "            <p>{{this.question}}</p>\n"
+	+ "                {{#choices}}\n"
+	+ "                    <p>{{#letterChoice @index}}{{/letterChoice}}. {{this}}</p>\n"
+	+ "                {{/choices}}\n"
+	+ "            {{else}}\n"
+	+ "                <p>{{this.question}}</p>\n"
+	+ "                <p><br><br><br></p>\n"
+	+ "            {{/if}}\n"
+	+ "        </div>\n"
+	+ "        {{/questions}}\n"
+	+ "    </body>\n"
+	+ "</html>";
 
 function generateHTML(qd, seed) {
 
