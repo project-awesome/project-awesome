@@ -3,6 +3,7 @@ var projectAwesome = require('../');
 var colors = require('colors');
 var fs = require('fs');
 
+
 program
   .version('0.0.1')
 
@@ -46,7 +47,9 @@ program
   .description('Generates given type.')
   .action(function(type, seed, options) {
     try {
-      var qdString = fs.readFileSync('/dev/stdin').toString();
+      var size = fs.fstatSync(process.stdin.fd).size;
+      var qdString = size > 0 ? fs.readSync(process.stdin.fd, size)[0] : '';
+    
       var quiz = projectAwesome.generate(type, qdString, seed);
       if (typeof quiz === 'object')
         quiz = JSON.stringify(quiz, null, '    ');
@@ -60,13 +63,17 @@ program
     console.log();
     console.log('    $ pa generate json abcd1234 < myQD.json');
     console.log('    $ pa generate moodleXML abcd1234 < myQD.json');
+    console.log('    $ pa generate html abcd1234 < myQD.json');
   });
 
 program
   .command('validate <type>')
   .description('Gives validation errors.')
   .action(function(type, options) {
-    var qdString = fs.readFileSync('/dev/stdin').toString();
+    
+    var size = fs.fstatSync(process.stdin.fd).size;
+    var qdString = size > 0 ? fs.readSync(process.stdin.fd, size)[0] : '';
+    
     var validation = projectAwesome.validate(type, qdString);
     process.stdout.write(JSON.stringify(validation) + "\n");
   })

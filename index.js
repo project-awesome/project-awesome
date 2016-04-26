@@ -1,4 +1,5 @@
 var MoodleExporter = require('./MoodleExporter');
+var HTMLExporter = require('./HTMLExporter');
 var questions = require('./questions');
 var QuizBuilder = require('./QuizBuilder');
 
@@ -27,7 +28,8 @@ module.exports.check = function(type, value) {
 module.exports.generate = function(type, qd, seed) {
 	var generators = {
 		"json": QuizBuilder.build,
-		"moodleXML": MoodleExporter.generateMoodleXML
+		"moodleXML": MoodleExporter.generateMoodleXML,
+		"html": HTMLExporter.generateHTML
 	};
 	if (!(type in generators))
 		throw "Illegal Argument: " + type;
