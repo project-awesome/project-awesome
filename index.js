@@ -2,6 +2,7 @@ var MoodleExporter = require('./MoodleExporter');
 var HTMLExporter = require('./HTMLExporter');
 var questions = require('./questions');
 var formats = require('./formats');
+var checkers = require('./checkers');
 var QuizBuilder = require('./QuizBuilder');
 
 
@@ -12,6 +13,9 @@ module.exports.list = function (type) {
 		},
 		"quizFormat" : function (){
 			return Object.keys(formats.quizFormats);
+		},
+		"checkableType" : function(){
+			return Object.keys(checkers.checkers);
 		}
 	};
 	if (!(type in listers)) 

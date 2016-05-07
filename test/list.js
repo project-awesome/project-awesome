@@ -4,7 +4,8 @@ var chai = require("chai"),
 
 var projectAwesome = require('../'),
 	questions = require('../questions'),
-	formats = require('../formats');
+	formats = require('../formats'),
+	checkers = require('../checkers');;
 
 describe('list', function() {
 
@@ -32,6 +33,14 @@ describe('list', function() {
 				 result = projectAwesome.list('quizFormat');
 				 expect(result).to.be.a('Array');
 				 expect(result).to.eql(Object.keys(formats.quizFormats));
+			});	
+		});
+
+		describe('list checkableType', function() {
+			it('should list the quiz formats', function() {
+				 result = projectAwesome.list('checkableType');
+				 expect(result).to.be.a('Array');
+				 expect(result).to.eql(Object.keys(checkers.checkers));
 			});	
 		});
 
