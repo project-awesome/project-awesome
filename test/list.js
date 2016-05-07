@@ -3,7 +3,8 @@ var chai = require("chai"),
 	expect = chai.expect;
 
 var projectAwesome = require('../'),
-	questions = require('../questions');
+	questions = require('../questions'),
+	formats = require('../formats');
 
 describe('list', function() {
 
@@ -23,6 +24,14 @@ describe('list', function() {
 				 result = projectAwesome.list('questionType');
 				 expect(result).to.be.a('Array');
 				 expect(result).to.eql(Object.keys(questions.questionTypes));
+			});	
+		});
+
+		describe('list quizFormat', function() {
+			it('should list the quiz formats', function() {
+				 result = projectAwesome.list('quizFormat');
+				 expect(result).to.be.a('Array');
+				 expect(result).to.eql(Object.keys(formats.quizFormats));
 			});	
 		});
 

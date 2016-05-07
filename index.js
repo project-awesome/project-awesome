@@ -1,6 +1,7 @@
 var MoodleExporter = require('./MoodleExporter');
 var HTMLExporter = require('./HTMLExporter');
 var questions = require('./questions');
+var formats = require('./formats');
 var QuizBuilder = require('./QuizBuilder');
 
 
@@ -8,6 +9,9 @@ module.exports.list = function (type) {
 	var listers = {
 		"questionType" : function () {
 			return Object.keys(questions.questionTypes);
+		},
+		"quizFormat" : function (){
+			return Object.keys(formats.quizFormats);
 		}
 	};
 	if (!(type in listers)) 
@@ -25,15 +29,10 @@ module.exports.check = function(type, value) {
 	return checkers[type](value);
 }
 
-module.exports.generate = function(type, qd, seed) {
-	var generators = {
-		"json": QuizBuilder.build,
-		"moodleXML": MoodleExporter.generateMoodleXML,
-		"html": HTMLExporter.generateHTML
-	};
-	if (!(type in generators))
+module.exports.generate = function(type, qd, seed) {	
+	if (!(type in formats.quizFormats))
 		throw "Illegal Argument: " + type;
-	return generators[type](qd, seed);
+	return formats.quizFormats[type](qd, seed);
 }
 
 module.exports.validate = function(type, value) {
