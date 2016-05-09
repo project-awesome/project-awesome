@@ -5,7 +5,8 @@ var chai = require("chai"),
 var projectAwesome = require('../'),
 	MoodleExporter = require('../MoodleExporter'),
 	QuizBuilder = require('../QuizBuilder'),
-    HTMLExporter = require('../HTMLExporter');
+    HTMLExporter = require('../HTMLExporter'),
+    formats = require('../formats');
 
 
 
@@ -25,9 +26,9 @@ describe('generate', function () {
     var buildStub, generateMoodleXMLStub;
 
     beforeEach(function () {
-        buildStub = sandbox.stub(QuizBuilder, 'build').returns("buildReturn");
-        generateMoodleXMLStub = sandbox.stub(MoodleExporter, 'generateMoodleXML').returns("generateMoodleXMLReturn");
-        generateHTMLStub = sandbox.stub(HTMLExporter, 'generateHTML').returns("generateHTMLReturn");
+        buildStub = sandbox.stub(formats.quizFormats, 'json').returns("buildReturn");
+        generateMoodleXMLStub = sandbox.stub(formats.quizFormats, 'moodleXML').returns("generateMoodleXMLReturn");
+        generateHTMLStub = sandbox.stub(formats.quizFormats, 'html').returns("generateHTMLReturn");
     });
 
     describe('json', function () {

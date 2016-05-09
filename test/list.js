@@ -3,7 +3,10 @@ var chai = require("chai"),
 	expect = chai.expect;
 
 var projectAwesome = require('../'),
-	questions = require('../questions');
+	questions = require('../questions'),
+	formats = require('../formats'),
+	checkers = require('../checkers'),
+	listers = require('../listers');
 
 describe('list', function() {
 
@@ -23,6 +26,30 @@ describe('list', function() {
 				 result = projectAwesome.list('questionType');
 				 expect(result).to.be.a('Array');
 				 expect(result).to.eql(Object.keys(questions.questionTypes));
+			});	
+		});
+
+		describe('list quizFormat', function() {
+			it('should list the quiz formats', function() {
+				 result = projectAwesome.list('quizFormat');
+				 expect(result).to.be.a('Array');
+				 expect(result).to.eql(Object.keys(formats.quizFormats));
+			});	
+		});
+
+		describe('list checkableType', function() {
+			it('should list the checkable types', function() {
+				 result = projectAwesome.list('checkableType');
+				 expect(result).to.be.a('Array');
+				 expect(result).to.eql(Object.keys(checkers.checkers));
+			});	
+		});
+
+		describe('list listableType', function() {
+			it('should list the listable types', function() {
+				 result = projectAwesome.list('listableType');
+				 expect(result).to.be.a('Array');
+				 expect(result).to.eql(Object.keys(listers.listers));
 			});	
 		});
 

@@ -4,6 +4,7 @@ var chai = require("chai"),
 
 var projectAwesome = require('../'),
 	questions = require('../questions'),
+	checkers = require('../checkers'),
 	QuizBuilder = require('../QuizBuilder');
 
 
@@ -21,8 +22,8 @@ describe('check', function() {
 
 		var checkSeedStub, isValidQuestionTypeStub;
 		beforeEach(function() {
-			checkSeedStub = sandbox.stub(QuizBuilder, 'checkSeed').returns("checkSeedReturn");
-			isValidQuestionTypeStub = sandbox.stub(questions, 'isValidQuestionType').returns("isValidQuestionTypeReturn");
+			checkSeedStub = sandbox.stub(checkers.checkers, 'seed').returns("checkSeedReturn");
+			isValidQuestionTypeStub = sandbox.stub(checkers.checkers, 'questionType').returns("isValidQuestionTypeReturn");
 		});
 		describe('seed', function() {
 			it('should call QuizBuilder.checkSeed with appropriate parameter and return result', function() {
