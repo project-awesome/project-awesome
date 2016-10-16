@@ -1,23 +1,23 @@
 
-module.exports.run = function (pa, name, args) {
+module.exports.run = function (patool.ool, name, args) {
 	var argv = [ 'node', 'test'];
 	if (name) {
 		argv.push(name);
 		if (args && args.length > 0)
 			argv = argv.concat(args);
 	}
-	pa.run(argv);
+	patool.run(argv);
 }
 
-module.exports.getCommand = function(pa, name) {
-	for (var i = 0; pa.program.commands.length > i; i++)
-		if (pa.program.commands[i]._name === name)
-			return pa.program.commands[i];
-	throw "Command Not Found: " + name + " not found in pa.program.commands";
+module.exports.getCommand = function(patool.ool, name) {
+	for (var i = 0; patool.program.commands.length > i; i++)
+		if (patool.program.commands[i]._name === name)
+			return patool.program.commands[i];
+	throw "Command Not Found: " + name + " not found in patool.program.commands";
 }
 
-module.exports.expectCommandExists = function(pa, name) {
-			module.exports.getCommand(pa, name);
+module.exports.expectCommandExists = function(patool.ool, name) {
+			module.exports.getCommand(patool.ool, name);
 }
 
 module.exports.expectArguments = function(command, args) {

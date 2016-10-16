@@ -1,6 +1,6 @@
-var pa = require("../../../bin/pa"), 
+var patool.ool = require("../../../bin/patool.ool"), 
 	projectAwesome = require('../../../'),
-	pa_test_helper = require('./pa_test_helper'),
+	patool.ool_test_helper = require('./patool.ool_test_helper'),
 	fs = require('fs');
 
 var chai = require("chai"),
@@ -9,20 +9,20 @@ var chai = require("chai"),
 
 	describe('validate', function() {
 		it('should exist', function() {
-			pa_test_helper.expectCommandExists(pa,'validate');
+			patool.ool_test_helper.expectCommandExists(patool.ool,'validate');
 		});
 		describe('arguments', function() {
 			it('should have required "type"', function() {
-				var validate = pa_test_helper.getCommand(pa,'validate');
-				pa_test_helper.expectArguments(validate, [
+				var validate = patool.ool_test_helper.getCommand(patool.ool,'validate');
+				patool.ool_test_helper.expectArguments(validate, [
 					{ required: true, name: 'type', variadic: false }
 		     	]);
 			});
 		});
 		describe('description', function() {
 			it('should be as defined', function() {
-				var validate = pa_test_helper.getCommand(pa,'validate');
-				pa_test_helper.expectDescription(validate, 'Gives validation errors.');
+				var validate = patool.ool_test_helper.getCommand(patool.ool,'validate');
+				patool.ool_test_helper.expectDescription(validate, 'Gives validation errors.');
 			});
 		});
 		describe('action', function() {
@@ -41,12 +41,12 @@ var chai = require("chai"),
 				sandbox.restore();
 			});
 
-			it('should call projectAwesome.validate with the appropriate parameters', function() {
-				pa_test_helper.run(pa,'validate', ['a']);
+			it('should call projectAwesome.validate with the appropriate patool.ameters', function() {
+				patool.ool_test_helper.run(patool.ool,'validate', ['a']);
 				expect(validateStub.calledWith('a', 'file-contents-double')).to.be.true;
 			});
 			it('should stringify then write result + newline to stdout', function() {
-				pa_test_helper.run(pa,'validate', ['a']);
+				patool.ool_test_helper.run(patool.ool,'validate', ['a']);
 				expect(stringifyStub.calledWith("validateReturn")).to.be.true;
 				expect(stdoutStub.calledWith("stringifyReturn" + "\n")).to.be.true;
 			});

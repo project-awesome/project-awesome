@@ -1,6 +1,6 @@
-var pa = require("../../../bin/pa"),
+var patool.ool = require("../../../bin/patool.ool"),
 	projectAwesome = require('../../../'),
-	pa_test_helper = require('./pa_test_helper'),
+	patool.ool_test_helper = require('./patool.ool_test_helper'),
 	fs = require('fs');
 
 var chai = require("chai"),
@@ -10,12 +10,12 @@ var chai = require("chai"),
 	
 	describe('generate', function() {
 		it('should exist', function() {
-			pa_test_helper.expectCommandExists(pa,'generate');
+			patool.ool_test_helper.expectCommandExists(patool.ool,'generate');
 		});
 		describe('arguments', function() {
 			it('should have required "type" and "seed"', function() {
-				var generate = pa_test_helper.getCommand(pa,'generate');
-				pa_test_helper.expectArguments(generate, [
+				var generate = patool.ool_test_helper.getCommand(patool.ool,'generate');
+				patool.ool_test_helper.expectArguments(generate, [
 					{ required: true, name: 'type', variadic: false },
 		     		{ required: true, name: 'seed', variadic: false }
 		     	]);
@@ -23,8 +23,8 @@ var chai = require("chai"),
 		});
 		describe('description', function() {
 			it('should be as defined', function() {
-				var generate = pa_test_helper.getCommand(pa,'generate');
-				pa_test_helper.expectDescription(generate, 'Generates given type.');
+				var generate = patool.ool_test_helper.getCommand(patool.ool,'generate');
+				patool.ool_test_helper.expectDescription(generate, 'Generates given type.');
 			});
 		});
 		describe('action', function() {
@@ -44,8 +44,8 @@ var chai = require("chai"),
 				sandbox.restore();
 			});
 
-			it('should call projectAwesome.generate with the appropriate parameters', function() {
-				pa_test_helper.run(pa,'generate', ['a', 'b']);
+			it('should call projectAwesome.generate with the appropriate patool.ameters', function() {
+				patool.ool_test_helper.run(patool.ool,'generate', ['a', 'b']);
 				expect(generateStub.calledWith('a', 'file-contents-double', 'b')).to.be.true;
 			});
 			describe('when projectAwesome.generate throws an error', function() {
@@ -53,7 +53,7 @@ var chai = require("chai"),
 					generateStub.throws("generateThrow");
 				});
 				it('should write error + newline to stderr', function() {
-					pa_test_helper.run(pa,'generate', ['a', 'b']);
+					patool.ool_test_helper.run(patool.ool,'generate', ['a', 'b']);
 					expect(stderrStub.calledWith("generateThrow" + "\n")).to.be.true;
 				});
 			});
@@ -63,7 +63,7 @@ var chai = require("chai"),
 				});
 				it('should stringify then write result + newline to stdout', function() {
 					stringifyStub.returns("stringifyReturn");
-					pa_test_helper.run(pa,'generate', ['a', 'b']);
+					patool.ool_test_helper.run(patool.ool,'generate', ['a', 'b']);
 					expect(stringifyStub.calledWith({"generate":"return"})).to.be.true;
 					expect(stdoutStub.calledWith("stringifyReturn" + "\n")).to.be.true;
 				});
@@ -73,7 +73,7 @@ var chai = require("chai"),
 					generateStub.returns("generateStub");
 				});
 				it('should stringify then write result + newline to stdout', function() {
-					pa_test_helper.run(pa,'generate', ['a', 'b']);
+					patool.ool_test_helper.run(patool.ool,'generate', ['a', 'b']);
 					expect(stdoutStub.calledWith("generateStub" + "\n")).to.be.true;
 				});
 			});
