@@ -1,4 +1,4 @@
 #!/usr/bin/env node
 
-var pa = require('./pa');
-pa.run(process.argv);
+var patool = require('./patool');
+patool.run(process.argv);

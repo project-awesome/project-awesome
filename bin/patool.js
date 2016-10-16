@@ -21,8 +21,8 @@ program
   .on('--help', function() {
     console.log('  Examples:');
     console.log();
-    console.log('    $ pa check seed abcd1234');
-    console.log('    $ pa check questionType fr-change-of-base');
+    console.log('    $ patool check seed abcd1234');
+    console.log('    $ patool check questionType fr-change-of-base');
   });
 
 program
@@ -38,7 +38,7 @@ program
   .on('--help', function() {
     console.log('  Examples:');
     console.log();
-    console.log('    $ pa list questionType');
+    console.log('    $ patool list questionType');
   });
 
 
@@ -61,9 +61,9 @@ program
   .on('--help', function() {
     console.log('  Examples:');
     console.log();
-    console.log('    $ pa generate json abcd1234 < myQD.json');
-    console.log('    $ pa generate moodleXML abcd1234 < myQD.json');
-    console.log('    $ pa generate html abcd1234 < myQD.json');
+    console.log('    $ patool generate json abcd1234 < myQD.json');
+    console.log('    $ patool generate moodleXML abcd1234 < myQD.json');
+    console.log('    $ patool generate html abcd1234 < myQD.json');
   });
 
 program
@@ -80,13 +80,13 @@ program
   .on('--help', function() {
     console.log('  Examples:');
     console.log();
-    console.log('    $ pa validate qd < myQD.json');
+    console.log('    $ patool validate qd < myQD.json');
   });
 
 program
 .command('*', undefined, { "noHelp": true })
 .action(function(env) {
-  console.log(colors.red("Error") + ": %s is not a pa option", env);
+  console.log(colors.red("Error") + ": %s is not a patool option", env);
   program.outputHelp();
 });
 

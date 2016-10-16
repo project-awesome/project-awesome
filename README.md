@@ -29,25 +29,36 @@ npm test
 
 # How to run command line tool
 
+The "quick and dirty" way to get the command line tool to work (no longer recommended) is to do the following thing:
+
 ```
 sudo npm install -g
-pa
+patool
 ```
 
-Running pa gives a list of the subcommands you can run, e.g. 
+This works, but the problem is that it installs patool into your path permanently, as a permanent global
+part of your system.     A nicer way for development environment is described here: <http://stackoverflow.com/questions/20181072/possible-to-include-a-command-line-in-a-node-module-without-global-install>
+
+This seemed to work for me:
 
 ```
-pa check ...
-pa generate ...
+alias patool=${HOME}/.nvm/versions/node/`nvm current`/bin/patool
+```
+
+Running patool gives a list of the subcommands you can run, e.g. 
+
+```
+patool check ...
+patool generate ...
 etc...
 ```
 
-You can add -h to the individual commands of the pa command line tool to see 
+You can add -h to the individual commands of the patool command line tool to see 
 what the options are.  For example:
 
 ```
-pa check -h
-pa generate -h
+patool check -h
+patool generate -h
 etc.
 
 ```
