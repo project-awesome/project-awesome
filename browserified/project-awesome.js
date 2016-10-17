@@ -32427,18 +32427,32 @@ module.exports.isValidQuestionType = isValidQuestionType;
 
 
 },{"paq-fr-change-of-base":118,"paq-mc-change-of-base":119}],138:[function(require,module,exports){
-var $=require("jquery");
-var pa=require("./index.js");
+exports.$=require("jquery");
+exports.pa=require("./index.js");
 
 exports.printMsg = function() {
     console.log("This is a message from the demo package");
 }
 
-$( document ).ready(function() {
+exports.qd = {
+    "version" : "0.1",
+    "questions": [{
+	"question": "fr-change-of-base",
+	"repeat": 2
+    },
+		  {
+		      "question": "mc-change-of-base",
+		      "repeat": 3
+		  }]
+};
+
+exports.$( document ).ready(function() {
     console.log("ready function called");
-    console.log("pa=" + JSON.stringify(pa));
+    var result= exports.pa.generate("json",JSON.stringify(exports.qd),"abcd1234");
+    console.log("result=" + JSON.stringify(result));
 });
+	      
 
-
+    
 
 },{"./index.js":40,"jquery":113}]},{},[138]);
