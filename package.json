@@ -26,9 +26,10 @@
     "ajv": "^3.8.3",
     "bluebird": "^2.10.2",
     "colors": "^1.1.2",
-    "concat-stream": "^1.5.2",
     "commander": "^2.9.0",
+    "concat-stream": "^1.5.2",
     "handlebars": "^4.0.5",
+    "jquery": "^3.1.1",
     "paq-fr-change-of-base": "git+https://git@github.com/project-awesome/paq-fr-change-of-base.git",
     "paq-mc-change-of-base": "git+https://git@github.com/project-awesome/paq-mc-change-of-base.git",
     "random-bits": "git+https://git@github.com/project-awesome/pa-random-bits.git#v1.0.0",
@@ -37,6 +38,7 @@
   },
   "devDependencies": {
     "browserify": "^11.0.0",
+    "browserify-shim": "^3.8.12",
     "chai": "^3.2.0",
     "mocha": "^2.2.5",
     "mock-stdin": "^0.3.1",
@@ -45,5 +47,15 @@
   },
   "bin": {
     "patool": "bin/index.js"
-  }
+  },
+
+    "browserify": {
+	"transform": [
+	    "browserify-shim"
+	]
+    },
+    "browserify-shim": {
+	"jquery": "$",
+	"project-awesome": "pa"
+    }
 }

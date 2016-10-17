@@ -1,1 +1,2 @@
-window.pa=require("./index");
+
+console.log("This is from to-browserify.js");
