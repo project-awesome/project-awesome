@@ -22205,7 +22205,6 @@ module.exports.isValidQuestionType = isValidQuestionType;
 
 
 },{"paq-fr-change-of-base":117,"paq-mc-change-of-base":118}],137:[function(require,module,exports){
-var pa=require("./index");
-
+window.pa=require("./index");
 
 },{"./index":40}]},{},[137]);

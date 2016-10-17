@@ -1,2 +1,1 @@
-var pa=require("./index");
-
+window.pa=require("./index");
