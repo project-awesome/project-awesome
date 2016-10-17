@@ -1,5 +1,5 @@
 
-module.exports.run = function (patool.ool, name, args) {
+module.exports.run = function (patool, name, args) {
 	var argv = [ 'node', 'test'];
 	if (name) {
 		argv.push(name);
@@ -9,15 +9,15 @@ module.exports.run = function (patool.ool, name, args) {
 	patool.run(argv);
 }
 
-module.exports.getCommand = function(patool.ool, name) {
+module.exports.getCommand = function(patool, name) {
 	for (var i = 0; patool.program.commands.length > i; i++)
 		if (patool.program.commands[i]._name === name)
 			return patool.program.commands[i];
 	throw "Command Not Found: " + name + " not found in patool.program.commands";
 }
 
-module.exports.expectCommandExists = function(patool.ool, name) {
-			module.exports.getCommand(patool.ool, name);
+module.exports.expectCommandExists = function(patool, name) {
+			module.exports.getCommand(patool, name);
 }
 
 module.exports.expectArguments = function(command, args) {

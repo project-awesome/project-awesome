@@ -1,0 +1,11 @@
+{
+    "version" : "0.1",
+    "questions": [{
+	"question": "fr-change-of-base",
+	"repeat": 2
+    },
+		  {
+		      "question": "mc-change-of-base",
+		      "repeat": 3
+		  }]
+}

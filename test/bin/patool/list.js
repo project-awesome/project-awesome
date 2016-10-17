@@ -1,6 +1,6 @@
-var patool.ool= require("../../../bin/patool.ool"), 
+var patool= require("../../../bin/patool"), 
 	projectAwesome = require('../../../'),
-	patool.ool_test_helper = require('./patool.ool_test_helper');
+	patool_test_helper = require('./patool_test_helper');
 
 var chai = require("chai"),
 	sinon = require("sinon"),
@@ -8,20 +8,20 @@ var chai = require("chai"),
 
 describe('list', function() {
 		it('should exist', function() {
-				patool.ool_test_helper.expectCommandExists(patool.ool,'list');
+				patool_test_helper.expectCommandExists(patool,'list');
 		});
 		describe('arguments', function() {
 			it('should have required "type"', function() {
-				var list = patool.ool_test_helper.getCommand(patool.ool,'list');
-				patool.ool_test_helper.expectArguments(list, [
+				var list = patool_test_helper.getCommand(patool,'list');
+				patool_test_helper.expectArguments(list, [
 					{ required: true, name: 'type', variadic: false }
 		     	]);
 			});
 		});
 		describe('description', function() {
 			it('should be as defined', function() {
-				var list = patool.ool_test_helper.getCommand(patool.ool,'list');
-				patool.ool_test_helper.expectDescription
+				var list = patool_test_helper.getCommand(patool,'list');
+				patool_test_helper.expectDescription
 					(list, 'Lists valid values for a given type.');
 			});
 		});
@@ -38,7 +38,7 @@ describe('list', function() {
 					stdoutStub.restore();
 				});
 				it('should call projectAwesome.list(type) and should output result + \n', function() {
-						patool.ool_test_helper.run(patool.ool,'list', ['a']);
+						patool_test_helper.run(patool,'list', ['a']);
 	                expect(listStub.calledOnce).to.be.true;
 	                expect(listStub.calledWith('a')).to.be.true;
 	                expect(stdoutStub.calledOnce).to.be.true;
@@ -56,7 +56,7 @@ describe('list', function() {
 					stderrStub.restore();
 				});
 				it('write error message + \n to stderr', function() {
-						patool.ool_test_helper.run(patool.ool,'list', ['a']);
+						patool_test_helper.run(patool,'list', ['a']);
 	                expect(listStub.calledOnce).to.be.true;
 	                expect(listStub.calledWith('a')).to.be.true;
 	                expect(stderrStub.calledOnce).to.be.true;

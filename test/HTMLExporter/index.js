@@ -43,7 +43,7 @@ describe('HTMLExporter', function() {
             });
         it('should generate quizzes in HTML', function(){
            var result = HTMLExporter.generateHTML(qd, seed);
-           expect(result).to.equal(fs.readFileSync(expected, 'utf8'));
+            expect(result.trim()).to.equal(fs.readFileSync(expected, 'utf-8').trim());
 
         });
         

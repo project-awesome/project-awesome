@@ -26,6 +26,7 @@
     "ajv": "^3.8.3",
     "bluebird": "^2.10.2",
     "colors": "^1.1.2",
+    "concat-stream": "^1.5.2",
     "commander": "^2.9.0",
     "handlebars": "^4.0.5",
     "paq-fr-change-of-base": "git+https://git@github.com/project-awesome/paq-fr-change-of-base.git",
@@ -38,6 +39,7 @@
     "browserify": "^11.0.0",
     "chai": "^3.2.0",
     "mocha": "^2.2.5",
+    "mock-stdin": "^0.3.1",
     "sinon": "^1.15.4",
     "xml2js": "^0.4.10"
   },

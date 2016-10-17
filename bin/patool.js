@@ -2,6 +2,8 @@ var program = require('commander');
 var projectAwesome = require('../');
 var colors = require('colors');
 var fs = require('fs');
+var concat = require('concat-stream');
+
 
 
 program
@@ -47,13 +49,26 @@ program
   .description('Generates given type.')
   .action(function(type, seed, options) {
     try {
-      var size = fs.fstatSync(process.stdin.fd).size;
-      var qdString = size > 0 ? fs.readSync(process.stdin.fd, size)[0] : '';
-    
-      var quiz = projectAwesome.generate(type, qdString, seed);
-      if (typeof quiz === 'object')
-        quiz = JSON.stringify(quiz, null, '    ');
-      process.stdout.write(quiz + "\n");
+
+	// error handling is still on stream
+	process.stdin.on('error',function(err){
+	    console.error(err);
+	});
+	
+	
+	process.stdin.pipe(concat(function(buf){
+	    // buf is a Node Buffer instance which contains the entire data in stream
+	    // if your stream sends textual data, use buf.toString() to get entire stream as string
+	    // See: http://stackoverflow.com/questions/13410960/how-to-read-an-entire-text-stream-in-node-js
+	    var qdString = buf.toString();
+	    
+	    var quiz = projectAwesome.generate(type, qdString, seed);
+	    if (typeof quiz === 'object')
+		quiz = JSON.stringify(quiz, null, '    ');
+	    process.stdout.write(quiz + "\n");
+	    
+	}));
+	
     } catch(e) {
       process.stderr.write(e + "\n");
     }
@@ -70,12 +85,23 @@ program
   .command('validate <type>')
   .description('Gives validation errors.')
   .action(function(type, options) {
-    
-    var size = fs.fstatSync(process.stdin.fd).size;
-    var qdString = size > 0 ? fs.readSync(process.stdin.fd, size)[0] : '';
-    
-    var validation = projectAwesome.validate(type, qdString);
-    process.stdout.write(JSON.stringify(validation) + "\n");
+
+
+      // error handling is still on stream
+      process.stdin.on('error',function(err){
+	  console.error(err);
+      });
+
+      process.stdin.pipe(concat(function(buf){
+	  // buf is a Node Buffer instance which contains the entire data in stream
+	  // if your stream sends textual data, use buf.toString() to get entire stream as string
+	  // See: http://stackoverflow.com/questions/13410960/how-to-read-an-entire-text-stream-in-node-js
+	  var qdString = buf.toString();
+	  var validation = projectAwesome.validate(type, qdString);
+	  process.stdout.write(JSON.stringify(validation) + "\n");
+      }));
+
+
   })
   .on('--help', function() {
     console.log('  Examples:');

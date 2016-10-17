@@ -1,6 +1,6 @@
-var patool.ool = require("../../../bin/patool.ool"), 
+var patool = require("../../../bin/patool"), 
 	projectAwesome = require('../../../'),
-	patool.ool_test_helper = require('./patool.ool_test_helper');
+	patool_test_helper = require('./patool_test_helper');
 
 var chai = require("chai"),
 	sinon = require("sinon"),
@@ -9,12 +9,12 @@ var chai = require("chai"),
 
 describe('check', function() {
 		it('should exist', function() {
-				patool.ool_test_helper.expectCommandExists(patool.ool,'check');
+				patool_test_helper.expectCommandExists(patool,'check');
 		});
 		describe('arguments', function() {
 			it('should have required "type" and "value"', function() {
-					var check = patool.ool_test_helper.getCommand(patool.ool,'check');
-				patool.ool_test_helper.expectArguments(check, [
+					var check = patool_test_helper.getCommand(patool,'check');
+				patool_test_helper.expectArguments(check, [
 					{ required: true, name: 'type', variadic: false },
 		     		{ required: true, name: 'value', variadic: false }
 		     	]);
@@ -22,13 +22,13 @@ describe('check', function() {
 		});
 		describe('description', function() {
 			it('should be as defined', function() {
-					var check = patool.ool_test_helper.getCommand(patool.ool,'check');
-				patool.ool_test_helper.expectDescription(check, 'Checks if value is valid.');
+					var check = patool_test_helper.getCommand(patool,'check');
+				patool_test_helper.expectDescription(check, 'Checks if value is valid.');
 			});
 		});
 		describe('custom help', function() {
 			it('should display examples', function() {
-					patool.ool_test_helper.run(patool.ool,'check', ['a', 'b']);
+					patool_test_helper.run(patool,'check', ['a', 'b']);
 			});
 		});
 		describe('action', function() {
@@ -43,7 +43,7 @@ describe('check', function() {
 					stdoutStub.restore();
 				});
 				it('should call projectAwesome.check(type, value) and should output result + \n', function() {
-						patool.ool_test_helper.run(patool.ool,'check', ['a', 'b']);
+						patool_test_helper.run(patool,'check', ['a', 'b']);
 	                expect(checkStub.calledOnce).to.be.true;
 	                expect(checkStub.calledWith('a', 'b')).to.be.true;
 	                expect(stdoutStub.calledOnce).to.be.true;
@@ -61,7 +61,7 @@ describe('check', function() {
 					stderrStub.restore();
 				});
 				it('write error message + \n to stderr', function() {
-						patool.ool_test_helper.run(patool.ool,'check', ['a', 'b']);
+						patool_test_helper.run(patool,'check', ['a', 'b']);
 	                expect(checkStub.calledOnce).to.be.true;
 	                expect(checkStub.calledWith('a', 'b')).to.be.true;
 	                expect(stderrStub.calledOnce).to.be.true;
