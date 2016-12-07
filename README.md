@@ -39,13 +39,28 @@ patool
 ```
 
 This works, but the problem is that it installs patool into your path permanently, as a permanent global
-part of your system.     A nicer way for development environment is described here: <http://stackoverflow.com/questions/20181072/possible-to-include-a-command-line-in-a-node-module-without-global-install>
+part of your system.     
 
-This seemed to work for me:
+
+To define `patool` as a alias for running the project-awesome command line tool (defined in
+`./bin/index.js` and `./bin/patool.js`), run this bash script:
 
 ```
-alias patool=${HOME}/.nvm/versions/node/`nvm current`/bin/patool
+. define_patool_alias.sh
 ```
+
+Then, you should be able to run `patool` at the command line.  The purpose of the 
+command line `patool` is to provide the minimum necessary interface to working with 
+project-awesome modules (the individual pieces of software that define new question types.)
+
+See more on how to work with `patool`, see the section "Working with `patool`" below.
+
+For more on how to get command line tools working in node, see:
+
+* <https://docs.npmjs.com/files/package.json#bin>
+* <http://stackoverflow.com/questions/20181072/possible-to-include-a-command-line-in-a-node-module-without-global-install>
+
+# Working with `patool`
 
 Running patool gives a list of the subcommands you can run, e.g. 
 
