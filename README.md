@@ -40,12 +40,14 @@ patool
 ```
 
 This works, but the problem is that it installs patool into your path permanently, as a permanent global
-part of your system.     A nicer way for development environment is described here: <http://stackoverflow.com/questions/20181072/possible-to-include-a-command-line-in-a-node-module-without-global-install>
+part of your system.     
 
-This seemed to work for me:
+
+To define `patool` as a alias for running the project-awesome command line tool (defined in
+`./bin/index.js` and `./bin/patool.js`), run this bash script:
 
 ```
-alias patool=${HOME}/.nvm/versions/node/`nvm current`/bin/patool
+. define_patool_alias.sh
 ```
 
 *Before* doing this, you might need to install nvm and that might require
@@ -55,16 +57,19 @@ xcode tools.
     * then use curl command to install nvm curl https://raw.githubusercontent.com/creationix/nvm/v0.31.0/install.sh | bash
     * source .bashrc     (to load nvm)
 
-Since the alias needs to use `nvm current`, you have to have nvm already
-installed.
 
-But it still doesn't work for me since I don't have patool in the bin
-directory of ${HOME}/.nvm/versions/node/`nvm current`/bin.
+Then, you should be able to run `patool` at the command line.  The purpose of the 
+command line `patool` is to provide the minimum necessary interface to working with 
+project-awesome modules (the individual pieces of software that define new question types.)
 
-Tried rerunning npm install and npm test from inside project-awesome 
-directory but that didn't install it there either. 
+See more on how to work with `patool`, see the section "Working with `patool`" below.
 
+For more on how to get command line tools working in node, see:
 
+* <https://docs.npmjs.com/files/package.json#bin>
+* <http://stackoverflow.com/questions/20181072/possible-to-include-a-command-line-in-a-node-module-without-global-install>
+
+# Working with `patool`
 
 Running patool gives a list of the subcommands you can run, e.g. 
 
