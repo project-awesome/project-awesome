@@ -15,6 +15,7 @@ Only:
 
 # How to get started
 
+
 1. If you don't already have npm, install it. 
     * https://nodejs.org/en/download/
 1. Fork this module to your own github.com space.
@@ -47,7 +48,26 @@ This seemed to work for me:
 alias patool=${HOME}/.nvm/versions/node/`nvm current`/bin/patool
 ```
 
+*Before* doing this, you might need to install nvm and that might require
+xcode tools. 
+    * xcode-select --install
+    * get version for next command from https://github.com/creationix/nvm
+    * then use curl command to install nvm curl https://raw.githubusercontent.com/creationix/nvm/v0.31.0/install.sh | bash
+    * source .bashrc     (to load nvm)
+
+Since the alias needs to use `nvm current`, you have to have nvm already
+installed.
+
+But it still doesn't work for me since I don't have patool in the bin
+directory of ${HOME}/.nvm/versions/node/`nvm current`/bin.
+
+Tried rerunning npm install and npm test from inside project-awesome 
+directory but that didn't install it there either. 
+
+
+
 Running patool gives a list of the subcommands you can run, e.g. 
+
 
 ```
 patool check ...
