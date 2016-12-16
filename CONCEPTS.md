@@ -4,13 +4,16 @@
 * outputType    MC vs free-response (for now) vs Parsons, match, ...
 * problemType  content of the question (convert between bases, order of ops)
 
-An instance of a question: a problemType, an outputType, values for
-    each of the parameters, (not just a range)
-     final wording, answer 
-   maybe later -- it will have a difficulty rating that is computing from
-     the problemType, outputType, and the specific values of parameters
+An instance of a question will have: 
+* a problemType
+* an outputType
+* values for each of the parameters (not just a range)
+* final wording (not necessarily stored with question since can be generated from above 3 items)
+* answer (again can be generated from top 3 items but perhaps useful to compute once and store) 
+*  maybe later: a difficulty rating that is computed from the problemType, outputType, and the specific values of parameters
 
 Each problemType has a default outputType, and other supported styles
+
   For example Change of Base is a problemType involving conversion between
   various bases (dec -> oct, etc.). The default outputType might be multiple 
   choice but free-response is also supported. 
@@ -20,15 +23,16 @@ Plus seed yields quiz instance. Varying the seed with the same
 QD, gives a new quiz instance.  (Ostensibly equivalent in difficulty.)
 
 ## Question Descriptor ##
-I'm not as confident about the details here. Have Phill confirm
+I'm not as confident about the details here. Have Phill confirm.
+
 A question descriptor is an element of a quiz descriptor and has some or all 
 of the following:
 
 * a problemType
 * an outputType
 * how many of these questions are on the quiz
-* values for the parameters that this particular *problem generator* requires
-  ** (Note that these are not necessarily the final parameters in the problem)
+* values for the parameters that this particular *problem generator* requires 
+    * Note that these are *not necessarily* the final parameters in the problem
 
 
 ## Research Topics
