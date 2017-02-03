@@ -15,6 +15,7 @@ Only:
 
 # How to get started
 
+
 1. If you don't already have npm, install it. 
     * https://nodejs.org/en/download/
 1. Fork this module to your own github.com space.
@@ -49,6 +50,14 @@ To define `patool` as a alias for running the project-awesome command line tool 
 . define_patool_alias.sh
 ```
 
+*Before* doing this, you might need to install nvm and that might require
+xcode tools. 
+    * xcode-select --install
+    * get version for next command from https://github.com/creationix/nvm
+    * then use curl command to install nvm curl https://raw.githubusercontent.com/creationix/nvm/v0.31.0/install.sh | bash
+    * source .bashrc     (to load nvm)
+
+
 Then, you should be able to run `patool` at the command line.  The purpose of the 
 command line `patool` is to provide the minimum necessary interface to working with 
 project-awesome modules (the individual pieces of software that define new question types.)
@@ -63,6 +72,7 @@ For more on how to get command line tools working in node, see:
 # Working with `patool`
 
 Running patool gives a list of the subcommands you can run, e.g. 
+
 
 ```
 patool check ...
