@@ -4,7 +4,7 @@
 * outputType    MC vs free-response (for now) vs Parsons, match, ...
 * problemType  content of the question (convert between bases, order of ops)
 
-An instance of a question will have: 
+An instance of a question is deterministically associated with:
 * a problemType
 * an outputType
 * values for each of the parameters (not just a range)
