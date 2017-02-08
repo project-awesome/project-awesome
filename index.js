@@ -1,6 +1,6 @@
 var MoodleExporter = require('./MoodleExporter');
 var HTMLExporter = require('./HTMLExporter');
-var questions = require('./questions');
+//var problemTypes = require('./problemTypes');
 var formats = require('./formats');
 var listers = require('./listers');
 var checkers = require('./checkers');

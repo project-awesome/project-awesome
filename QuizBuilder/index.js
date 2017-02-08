@@ -1,5 +1,5 @@
 var randomModule = require("random-bits");
-var questions =  require("../questions");
+var questions =  require("../problemTypes");
 
 exports.getQuestions = function(descriptor, randomStream) {
     var quizQuestions = [];
@@ -15,7 +15,7 @@ exports.getQuestions = function(descriptor, randomStream) {
             var params = (("parameters" in item) ? item.parameters : null);
             var repeat = (("repeat" in item) ? item.repeat : 1);
             
-            var question = ((questionType in questions.questionTypes) ? questions.questionTypes[questionType] : null);
+            var question = ((questionType in questions.problemTypes) ? questions.problemTypes[questionType] : null);
 
             if (question == null) throw "Invalid Question Type: " + questionType + " is not a defined quesiton.";
             //Generate the specified number of the specified type of question, add them to the array
@@ -99,8 +99,8 @@ var qdSchema = {
         },
         'questions': {
             type: 'array',
-            items: {anyOf: Object.keys(questions.questionTypes).map(function (qType) {
-                var qSchema = questions.questionTypes[qType].paramSchema;
+            items: {anyOf: Object.keys(questions.problemTypes).map(function (qType) {
+                var qSchema = questions.problemTypes[qType].paramSchema;
                 if (!qSchema)
                     qSchema = {};
                 return {

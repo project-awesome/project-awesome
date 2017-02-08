@@ -1,21 +1,21 @@
 var expect = require("chai").expect;
-var questions = require("../../questions/index");
+var questions = require("../../problemTypes/index");
 
 describe('questions', function () {
 
-    it('should be that questionTypes exists and is an object', function () {
-        expect(questions.questionTypes).to.exist;
-        expect(questions.questionTypes).to.be.an("object");
+    it('should be that problemTypes exists and is an object', function () {
+        expect(questions.problemTypes).to.exist;
+        expect(questions.problemTypes).to.be.an("object");
     });
 
-    describe('isValidQuestionType(questionType)', function () {
+    describe('isValidProblemType(problemType)', function () {
 
-        it('should return true when the question type is a property in questionTypes', function () {
-            expect(questions.isValidQuestionType('fr-change-of-base')).to.be.true;
+        it('should return true when the problem type is a property in problemTypes', function () {
+            expect(questions.isValidProblemType('fr-change-of-base')).to.be.true;
         });
 
         it('should return false for one that does not exist', function () {
-            expect(questions.isValidQuestionType('nonexistantquestiontype')).to.be.false;
+            expect(questions.isValidProblemType('nonexistantproblemtype')).to.be.false;
         });
 
     });

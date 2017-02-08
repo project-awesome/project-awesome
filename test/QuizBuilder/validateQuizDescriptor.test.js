@@ -1,5 +1,6 @@
-var QuizBuilder = require('../../QuizBuilder'),
-	questionsModule = require('../../questions');
+var QuizBuilder = require('../../QuizBuilder');
+//var QuizBuilder = require('../../QuizBuilder'),
+//	questionsModule = require('../../problemTypes');
 
 var chai = require("chai"),
 	sinon = require("sinon"),

@@ -3,7 +3,7 @@ var chai = require("chai"),
 	expect = chai.expect;
 
 var projectAwesome = require('../'),
-	questions = require('../questions'),
+	//questions = require('../questions'),
 	checkers = require('../checkers'),
 	QuizBuilder = require('../QuizBuilder');
 
