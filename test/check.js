@@ -3,7 +3,7 @@ var chai = require("chai"),
 	expect = chai.expect;
 
 var projectAwesome = require('../'),
-	questions = require('../questions'),
+	//questions = require('../questions'),
 	checkers = require('../checkers'),
 	QuizBuilder = require('../QuizBuilder');
 
@@ -20,10 +20,10 @@ describe('check', function() {
 	});
 
 
-		var checkSeedStub, isValidQuestionTypeStub;
+		var checkSeedStub, isValidProblemTypeStub;
 		beforeEach(function() {
 			checkSeedStub = sandbox.stub(checkers.checkers, 'seed').returns("checkSeedReturn");
-			isValidQuestionTypeStub = sandbox.stub(checkers.checkers, 'questionType').returns("isValidQuestionTypeReturn");
+			isValidProblemTypeStub = sandbox.stub(checkers.checkers, 'problemType').returns("isValidProblemTypeReturn");
 		});
 		describe('seed', function() {
 			it('should call QuizBuilder.checkSeed with appropriate parameter and return result', function() {
@@ -32,11 +32,11 @@ describe('check', function() {
 				expect(val).to.equal("checkSeedReturn");
 			});
 		});
-		describe('questionType', function() {
-			it('should call QuizBuilder.isValidQuestionType with appropriate parameter and return result', function() {
-				var val = projectAwesome.check('questionType', 'qTypeValue');
-				expect(isValidQuestionTypeStub.calledWith('qTypeValue')).to.be.true;
-				expect(val).to.equal("isValidQuestionTypeReturn");
+		describe('problemType', function() {
+			it('should call QuizBuilder.isValidProblemType with appropriate parameter and return result', function() {
+				var val = projectAwesome.check('problemType', 'qTypeValue');
+				expect(isValidProblemTypeStub.calledWith('qTypeValue')).to.be.true;
+				expect(val).to.equal("isValidProblemTypeReturn");
 			});
 		});
 		describe('typedoesntexist', function() {

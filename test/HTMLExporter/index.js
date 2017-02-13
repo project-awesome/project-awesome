@@ -19,13 +19,13 @@ describe('HTMLExporter', function() {
     var badQd = {
         "version" : "0.1",
         "questions": [{
-            "question": "invalid question type",
+            "question": "invalid problemType",
             "repeat": 2
         }]
     };
     describe('generateHTML(question descriptor, seed)', function () {
 
-        describe('when questionType dne', function () {
+        describe('when problemType dne', function () {
 
                 it('should throw an error.', function () {
                     expect(function () { HTMLExporter.generateHTML(badQd, seed) })

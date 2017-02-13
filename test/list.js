@@ -3,7 +3,7 @@ var chai = require("chai"),
 	expect = chai.expect;
 
 var projectAwesome = require('../'),
-	questions = require('../questions'),
+	questions = require('../problemTypes'),
 	formats = require('../formats'),
 	checkers = require('../checkers'),
 	listers = require('../listers');
@@ -21,11 +21,11 @@ describe('list', function() {
 			});	
 		});
 
-		describe('list questionType', function() {
-			it('should list the question types', function() {
-				 result = projectAwesome.list('questionType');
+		describe('list problemType', function() {
+			it('should list the problem types', function() {
+				 result = projectAwesome.list('problemType');
 				 expect(result).to.be.a('Array');
-				 expect(result).to.eql(Object.keys(questions.questionTypes));
+				 expect(result).to.eql(Object.keys(questions.problemTypes));
 			});	
 		});
 

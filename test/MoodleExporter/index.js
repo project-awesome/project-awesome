@@ -13,7 +13,7 @@ describe('MoodleExporter', function () {
     };
     describe('generateMoodleXML(qd, seed)', function () {
         describe('throwing errors', function () {
-            describe('when qd is invalid questionType', function () {
+            describe('when qd is invalid problemType', function () {
                 it('should throw an error.', function () {
                     expect(function () { 
                         MoodleExporter.generateMoodleXML({ "invalid": "qd" }, validSeed) 
@@ -60,7 +60,7 @@ describe('MoodleExporter', function () {
 
             });
             
-            describe('multiple question types', function () {
+            describe('multiple problemTypes', function () {
 
                 beforeEach(function (done) {
 
@@ -105,14 +105,14 @@ describe('MoodleExporter', function () {
                 describe('multiple choice format', function () {
 
                     beforeEach(function (done) {
-                        questionType = 'mc-change-of-base';
+                        problemTypeRequested  = 'mc-change-of-base';
                         count = 2;
                         questionName = 'Sample Question Name';
 
                         var qd = {
                             "version": "0.1",
                             "questions": [{
-                                "question": questionType,
+                                "question": problemTypeRequested,
                                 "repeat": count,
                             }]
                         };
@@ -123,8 +123,9 @@ describe('MoodleExporter', function () {
                         });
                     });
 
-                    describe('xml question type', function () {
-                        it('should have set the question type attribute to multichoice', function () {
+//TODO: fix output type references -- previously may have been question type MC vs free response
+                    describe('xml output type', function () {
+                        it('should have set the output type attribute to multichoice', function () {
                             for (var i = 0; xmlResult.quiz.question.length > i; i++)
                                 expect(xmlResult.quiz.question[i].$.type).to.equal('multichoice');
                         });
@@ -140,13 +141,13 @@ describe('MoodleExporter', function () {
                 describe('input format', function () {
 
                     beforeEach(function (done) {
-                        questionType = 'fr-change-of-base';
+                        problemTypeRequested = 'fr-change-of-base';
                         count = 2;
                         questionName = 'Sample Question Name';
                         var qd = {
                             "version": "0.1",
                             "questions": [{
-                                "question": questionType,
+                                "question": problemTypeRequested,
                                 "repeat": count,
                             }]
                         };
@@ -157,9 +158,11 @@ describe('MoodleExporter', function () {
                         });
                     });
 
-                    describe('xml question type property', function () {
+//TODO: fix output type references -- previously may have been question type MC vs free response
+//TODO: shortanswer vs free-response
+                    describe('xml output type property', function () {
 
-                        it('should have set the question type attribute to shortanswer', function () {
+                        it('should have set the output type attribute to shortanswer', function () {
                             for (var i = 0; xmlResult.quiz.question.length > i; i++)
                                 expect(xmlResult.quiz.question[i].$.type).to.equal('shortanswer');
                         });

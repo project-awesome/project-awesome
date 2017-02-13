@@ -7,7 +7,7 @@ var concat = require('concat-stream');
 
 
 program
-  .version('0.0.1')
+  .version('1.0.0')
 
 
 program
@@ -24,7 +24,7 @@ program
     console.log('  Examples:');
     console.log();
     console.log('    $ patool check seed abcd1234');
-    console.log('    $ patool check questionType fr-change-of-base');
+    console.log('    $ patool check problemType fr-change-of-base');
   });
 
 program
@@ -40,7 +40,7 @@ program
   .on('--help', function() {
     console.log('  Examples:');
     console.log();
-    console.log('    $ patool list questionType');
+    console.log('    $ patool list problemType');
   });
 
 

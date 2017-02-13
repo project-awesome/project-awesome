@@ -1,5 +1,5 @@
 var randomModule = require("random-bits");
-var questions =  require("../questions");
+var problems =  require("../problemTypes");
 
 exports.getQuestions = function(descriptor, randomStream) {
     var quizQuestions = [];
@@ -11,17 +11,18 @@ exports.getQuestions = function(descriptor, randomStream) {
 
         if("question" in item) { //If this object is a question generator
 
-            var questionType = item.question;
+            var problemTypeRequested = item.question;
             var params = (("parameters" in item) ? item.parameters : null);
             var repeat = (("repeat" in item) ? item.repeat : 1);
             
-            var question = ((questionType in questions.questionTypes) ? questions.questionTypes[questionType] : null);
+            var problemTypeObject = ((problemTypeRequested in problems.problemTypes) 
+                                       ? problems.problemTypes[problemTypeRequested] : null);
 
-            if (question == null) throw "Invalid Question Type: " + questionType + " is not a defined quesiton.";
+            if (problemTypeObject == null) throw "Invalid Question Type: " + problemType + " is not a defined problem type.";
             //Generate the specified number of the specified type of question, add them to the array
             
             for(var j=0; j<repeat; j++) {
-                var newQuestion = question.generate(randomStream, params);
+                var newQuestion = problemTypeObject.generate(randomStream, params);
                 quizQuestions.push(newQuestion); 
             }
         }
@@ -99,8 +100,8 @@ var qdSchema = {
         },
         'questions': {
             type: 'array',
-            items: {anyOf: Object.keys(questions.questionTypes).map(function (qType) {
-                var qSchema = questions.questionTypes[qType].paramSchema;
+            items: {anyOf: Object.keys(problems.problemTypes).map(function (qType) {
+                var qSchema = problems.problemTypes[qType].paramSchema;
                 if (!qSchema)
                     qSchema = {};
                 return {

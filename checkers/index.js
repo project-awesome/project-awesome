@@ -1,9 +1,9 @@
 var QuizBuilder = require('../QuizBuilder');
-var questions = require('../questions');
+var questions = require('../problemTypes');
 
 var checkers = {
 		"seed": QuizBuilder.checkSeed,
-		"questionType": questions.isValidQuestionType
+		"problemType": questions.isValidProblemType
 	};
 
 module.exports.checkers = checkers;

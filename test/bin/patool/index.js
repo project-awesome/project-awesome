@@ -6,8 +6,8 @@ var chai = require("chai"),
     expect = chai.expect;
 
 describe('version', function() {
-    it('should be "0.0.1"', function() {
-	expect(patool.program._version).to.equal("0.0.1");
+    it('should be "1.0.0"', function() {
+	expect(patool.program._version).to.equal("1.0.0");
     });
 });
 

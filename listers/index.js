@@ -1,10 +1,10 @@
-var questions = require('../questions');
+var questions = require('../problemTypes');
 var formats = require('../formats');
 var checkers = require('../checkers');
 
 var listers = {
-		"questionType" : function () {
-			return Object.keys(questions.questionTypes);
+		"problemType" : function () {
+			return Object.keys(questions.problemTypes);
 		},
 		"quizFormat" : function (){
 			return Object.keys(formats.quizFormats);
