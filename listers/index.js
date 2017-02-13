@@ -3,7 +3,7 @@ var formats = require('../formats');
 var checkers = require('../checkers');
 
 var listers = {
-		"questionType" : function () {
+		"problemType" : function () {
 			return Object.keys(questions.problemTypes);
 		},
 		"quizFormat" : function (){

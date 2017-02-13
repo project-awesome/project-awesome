@@ -18,7 +18,7 @@
     var pa=require("/pa.js");
 
     $(document).ready(function(){
-        pa.questionsModule.addOptionForEachQuestionType($("#questionType"));
+        pa.questionsModule.addOptionForEachProblemType($("#problemType"));
     });
 
    </script>
@@ -47,9 +47,9 @@
 
         <p>Now design the quiz you want by selecting the question type and number of questions. Or for more complex quizzes, try the <a href="startAdvanced.html">JSON Quiz Builder</a>.</p>
 
-	<!-- This drop down menu is popualted by a call to "addOptionForEachQuestionType"
-	     and the questionTypes are defined in js/questionTypes.js -->
-        <select name="questionType" id="questionType"></select>
+	<!-- This drop down menu is popualted by a call to "addOptionForEachProblemType"
+	     and the problemTypes are defined in js/problemTypes.js -->
+        <select name="problemType" id="problemType"></select>
 
         <p>Select the number of questions you wish your quiz to have. <br>
         Number of questions:
@@ -87,9 +87,9 @@
     <script>
     function makeQuizJSON(){
 
-        //Grab numQuestions and questionType, make quizJSON out of them, stringify.
+        //Grab numQuestions and problemType, make quizJSON out of them, stringify.
         var num = $('#numQuestions').val();
-        var type = $('#questionType').val();
+        var type = $('#problemType').val();
 
         var quizDescriptor = 
         {"version":0.1,

@@ -3,7 +3,7 @@ var questions = require('../problemTypes');
 
 var checkers = {
 		"seed": QuizBuilder.checkSeed,
-		"questionType": questions.isValidProblemType
+		"problemType": questions.isValidProblemType
 	};
 
 module.exports.checkers = checkers;

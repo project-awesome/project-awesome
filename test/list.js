@@ -21,9 +21,9 @@ describe('list', function() {
 			});	
 		});
 
-		describe('list questionType', function() {
-			it('should list the question types', function() {
-				 result = projectAwesome.list('questionType');
+		describe('list problemType', function() {
+			it('should list the problem types', function() {
+				 result = projectAwesome.list('problemType');
 				 expect(result).to.be.a('Array');
 				 expect(result).to.eql(Object.keys(questions.problemTypes));
 			});	
