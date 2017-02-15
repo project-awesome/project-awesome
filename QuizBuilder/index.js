@@ -1,5 +1,6 @@
 var randomModule = require("random-bits");
 var problems =  require("../problemTypes");
+var qdSchema = require("../qdSchema");
 
 exports.getQuestions = function(descriptor, randomStream) {
     var quizQuestions = [];
@@ -87,44 +88,6 @@ exports.validateQuizDescriptorString = function(qdString) {
     return exports.validateQuizDescriptor(qd);
 }
 
-// This is the schema for quiz descriptors, expressed using http://json-schema.org/
-
-var qdSchema = {
-    type: 'object',
-    required: ['version', 'questions'],
-    additionalProperties: false,
-    
-    properties: {
-        'version': {
-            type: 'string',
-        },
-        'questions': {
-            type: 'array',
-            items: {anyOf: Object.keys(problems.problemTypes).map(function (qType) {
-                var qSchema = problems.problemTypes[qType].paramSchema;
-                if (!qSchema)
-                    qSchema = {};
-                return {
-                    type: 'object',
-                    required: ['question'],
-                    additionalProperties: false,
-                    
-                    properties: {
-                        'question': {
-                            type: 'string',
-                            enum: [qType],
-                        },
-                        'repeat': {
-                            type: 'integer',
-                            minimum: 1,
-                        },
-                        'parameters': qSchema,
-                    },
-                };
-            })},
-        },
-    },
-};
 
 var validates = require('ajv')({
     //useDefaults: true,
@@ -132,7 +95,7 @@ var validates = require('ajv')({
     allErrors: true,
     verbose: true,
     format: 'full',
-}).compile(qdSchema);
+}).compile(qdSchema.qdSchema);
 
 
 
