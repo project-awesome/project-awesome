@@ -1,0 +1,15 @@
+{
+	"version": "1.0",
+	"quizElements": [
+             {"label": "Example: shuffle 1 mc cob and 1 fr cob no params"
+	     }, 
+             {"shuffle": [{
+				"problemType": "change-of-base",
+				"outputType": "fr"
+			},
+                        {
+				"problemType": "change-of-base",
+				"outputType": "mc"}]		
+             }
+           ]
+}

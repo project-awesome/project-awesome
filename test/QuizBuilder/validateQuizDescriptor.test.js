@@ -49,7 +49,7 @@ describe('QuizBuilder', function() {
 				var errors;
 				before(function() {
 					errors = QuizBuilder.validateQuizDescriptor({
-						questions: []
+						quizElements: []
 					});
 				});
 				it('should return an array of length 1', function() {
@@ -67,7 +67,7 @@ describe('QuizBuilder', function() {
 				before(function() {
 					errors = QuizBuilder.validateQuizDescriptor({
 						version: true,
-						questions: []
+						quizElements: []
 					});
 				});
 				it('should return an array of length 1', function() {
@@ -81,7 +81,7 @@ describe('QuizBuilder', function() {
 				});
 			});
 		});
-		describe('questions', function() {
+		describe('quizElements', function() {
 			describe('when undefined', function() {
 				var errors;
 				before(function() {
@@ -104,7 +104,7 @@ describe('QuizBuilder', function() {
 				before(function() {
 					errors = QuizBuilder.validateQuizDescriptor({
 						version: "0.1",
-						questions: {}
+						quizElements: {}
 					});
 				});
 				it('should return an array of length 1', function() {
@@ -120,9 +120,9 @@ describe('QuizBuilder', function() {
 			describe('validating question descriptors', function() {
 				// We should write some unit tests for this
 				it('should produce an error', function() {
-					var qdWithInvalidParam = {
+					var qdWithInvalidElements = {
 					    "version" : "0.1",
-					    "questions": [{
+					    "quizElements": [{
 						    "question": "mc-change-of-base",
 						    "repeat": 1,
 						    "parameters": {
@@ -130,7 +130,7 @@ describe('QuizBuilder', function() {
 						    }
 						}]
 					};
-					var errors = QuizBuilder.validateQuizDescriptor(qdWithInvalidParam);
+					var errors = QuizBuilder.validateQuizDescriptor(qdWithInvalidElements);
 					expect(errors.length > 0).to.be.true;
 				});
 			});

@@ -7,20 +7,23 @@ describe('HTMLExporter', function() {
     var seed = 'abcd1234';
     var qd = {
         "version" : "0.1",
-        "questions": [{
-            "question": "fr-change-of-base",
-            "repeat": 2
+        "quizElements": [{ 
+             "repeat": 2,
+             "items" : [{
+                "problemType": "fr-change-of-base"
+              }]
         },
         {
-            "question": "mc-change-of-base",
-            "repeat": 3
+            "repeat": 3,
+            "items" : [{
+                "problemType": "mc-change-of-base"
+            }]
         }]
     };
     var badQd = {
         "version" : "0.1",
-        "questions": [{
-            "question": "invalid problemType",
-            "repeat": 2
+        "quizElements": [{
+            "problemType": "invalid problemType",
         }]
     };
     describe('generateHTML(question descriptor, seed)', function () {

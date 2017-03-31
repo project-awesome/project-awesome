@@ -1,0 +1,24 @@
+{
+"version": "1.0",
+"quizElements": [
+    {"label": "Example: repeat 3 mc cob 2 fr cob no params"}, 
+    {"repeat": {
+        "count": 2,
+        "items": [
+            { "problemType": "change-of-base",
+              "outputType": "fr"
+            }
+          ]
+        }
+    },
+    {"repeat": {
+        "count": 3,
+        "items": [
+            { "problemType": "change-of-base",
+              "outputType": "mc"
+            }
+          ]
+        }
+    }
+  ]
+}

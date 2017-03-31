@@ -1,0 +1,44 @@
+{
+  "version": "1.0",
+  "quizElements": [
+    {
+      "label": "Example: all 5 elements"
+    },
+    {
+      "problemType": "change-of-base"
+    },
+    {
+      "shuffle": [
+        {
+          "label": "either"
+        },
+        {
+          "label": "order"
+        }
+      ]
+    },
+    {
+      "repeat": 3,
+      "items": [
+        {
+          "label": "ho"
+        }
+      ]
+    },
+    {
+      "choose": 2,
+      "items": [
+        {
+          "label": "A: select 2 of 3"
+        },
+        {
+          "label": "B select 2 of 3"
+        },
+        {
+          "label": "C select 2 of 3"
+        }
+        ]
+    }
+    
+  ]
+}
