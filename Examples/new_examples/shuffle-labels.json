@@ -1,0 +1,12 @@
+{
+	"version": "1.0",
+	"quizElements": [
+             {"label": "First Label"
+	     }, 
+             {"shuffle": [{ "label": "Label A" },
+                          { "label": "Label B" },
+                          { "label": "Label C" }
+                         ]
+             }
+           ]
+}

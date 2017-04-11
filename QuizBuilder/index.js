@@ -41,17 +41,28 @@ handleQuizElement = function(quizElement, randomStream) {
         return newQuestions;
     }
     else if("shuffle" in quizElement) { //
-        // shuffle the order of the items in the array
-        // then call handleQuizElement on each one
-        return [{"error": "shuffle not yet implemented in handleQuizElement"}];
+        randomStream.shuffle(quizElement["shuffle"]);
+        var newQuestions = [];
+        for (i=0; i < quizElement["shuffle"].length ; i++) {
+            newQuestions = newQuestions.concat(handleQuizElement(quizElement["shuffle"][i], randomStream));
+        }
+        return newQuestions;
     }
     else if("choose" in quizElement) { //
+        var newQuestions = [];
         // get out the value for choose call it count
-        // if count > length of items: print warning message with quiz
-        //                             and set count to length of items
+        var count = quizElement["choose"];
+        if (count > quizElement["items"].length) {
+           newQuestions.concat({"warning": "choose requested count greater than provided items"}) 
+           count = quizElement["items"].length;
+        }
         // shuffle the order of the items in the array
+        randomStream.shuffle(quizElement["items"]);
         // for the first count of them, call handleQuizElement
-        return [{"error": "choose not yet implemented in handleQuizElement"}];
+        for (i=0; i < count; i++) {
+            newQuestions = newQuestions.concat(handleQuizElement(quizElement["items"][i], randomStream));
+        }
+        return newQuestions;
     } else {
         
         return [{"error": "unknown case in handleQuizElement"}];
