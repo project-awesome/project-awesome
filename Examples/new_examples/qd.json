@@ -4,14 +4,14 @@
     {"label": "Example: repeat 3 mc cob 2 fr cob no params"}, 
     {"repeat": 2, "items": [
             { "problemType": "change-of-base",
-              "outputType": "fr"
+              "params" : {"outputType": "fr"}
             }
           ]
         },
     {"repeat": 3,
         "items": [
             { "problemType": "change-of-base",
-              "outputType": "mc"
+              "params": {"outputType": "mc"}
             }
           ]
     }

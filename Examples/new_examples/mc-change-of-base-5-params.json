@@ -6,8 +6,8 @@
 			"repeat": 5,
 			"items": [{
 				"problemType": "change-of-base",
-				"outputType": "mc",
 				"params": {
+				    "outputType": "mc",
 					"conversions": [{
 						"range": {
 							"min": 1,

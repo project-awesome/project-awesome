@@ -36,9 +36,6 @@ exports.qdSchema = {
         "problemType": {
           "type": "string"
         },
-        "outputType": {
-          "type": "string"
-        },
         "params": {
           "type": "object"
         }
