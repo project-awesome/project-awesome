@@ -4,62 +4,57 @@ var qdSchema = require("../qdSchema");
 
 exports.getQuestions = function(descriptor, randomStream) {
     var quizQuestions = [];
-    var n = descriptor["questions"].length;
+    var n = descriptor["quizElements"].length;
 
-    for(var i = 0; i < n; ++i) {
+    for(var i = 0; i < n; i++) {
 
-        var item = descriptor.questions[i];
-
-        if("question" in item) { //If this object is a question generator
-
-            var problemTypeRequested = item.question;
-            var params = (("parameters" in item) ? item.parameters : null);
-            var repeat = (("repeat" in item) ? item.repeat : 1);
-            
-            var problemTypeObject = ((problemTypeRequested in problems.problemTypes) 
-                                       ? problems.problemTypes[problemTypeRequested] : null);
-
-            if (problemTypeObject == null) throw "Invalid Question Type: " + problemType + " is not a defined problem type.";
-            //Generate the specified number of the specified type of question, add them to the array
-            
-            for(var j=0; j<repeat; j++) {
-                var newQuestion = problemTypeObject.generate(randomStream, params);
-                quizQuestions.push(newQuestion); 
-            }
-        }
-
-        /*  
-        //Allows you to provide an array of question-generating objects (just like a quiz) to generate n questions
-        //and choose k of those n at random.
-
-        if("chooseK" in item) {
-            var k = item.chooseK;
-            var itemsArray = (("items" in item) ? item.items : []);
-            var newArray = produceArrayOfQuestions(itemsArray, randomStream); //Recursively parse the array passed to chooseK
-            //After this finishes newArray should consist solely of question objects
-            
-            randomStream.shuffle(newArray);
-            questions = questions.concat(newArray.slice(0,k)); //Grab the first k elements and add them to the questions array
-        } // chooseK
+        var item = descriptor.quizElements[i];
+        var newQuestions = handleQuizElement(item, randomStream);
+        quizQuestions = quizQuestions.concat(newQuestions);
         
-        //Allows you to shuffle a list of questions.
-        //Essentially equivalent to a chooseK where K is the total number of questions generated,
-        //but this is a little clearer and nicer than having to use that trick.
-
-        if("shuffle" in item) {
-            var itemsArray = (("items" in item) ? item.items : []);
-            var newArray = produceArrayOfQuestions(itemsArray, randomStream);
-            
-            randomStream.shuffle(newArray);
-            questions = questions.concat(newArray);     
-        } // shuffle
-        
-        */
-
     }
-
-    return quizQuestions; 
+    return quizQuestions;
 };
+    
+// quizElement is json fragment for either a problem,label,repeat,shuffle or choose
+// return an array of new questions (even if there is only 1)
+handleQuizElement = function(quizElement, randomStream) {
+    var newQuestions = [];
+    if("problemType" in quizElement) { // this is a single question
+        var problemTypeRequested = quizElement.problemType;
+        var problemTypeObject = ((problemTypeRequested in problems.problemTypes) 
+                                       ? problems.problemTypes[problemTypeRequested] : null);
+        if (problemTypeObject == null) throw "Invalid Question Type: " + problemTypeRequested + " is not a defined problem type.";
+        //Generate an actual question, add it to the array
+        var newQuestion = problemTypeObject.generate(randomStream, quizElement);
+        return [newQuestion]; 
+    }
+    else if ("label" in quizElement) { //
+        return [quizElement];
+    }
+    else if("repeat" in quizElement) { //
+        // get out the value for repeat call it count
+        // take the whole array of items and repeat it count times
+        // then call handleQuizElement on each one
+        return [{"error": "repeat not yet implemented in handleQuizElement"}];
+    }
+    else if("shuffle" in quizElement) { //
+        // shuffle the order of the items in the array
+        // then call handleQuizElement on each one
+        return [{"error": "shuffle not yet implemented in handleQuizElement"}];
+    }
+    else if("choose" in quizElement) { //
+        // get out the value for choose call it count
+        // if count > length of items: print warning message with quiz
+        //                             and set count to length of items
+        // shuffle the order of the items in the array
+        // for the first count of them, call handleQuizElement
+        return [{"error": "choose not yet implemented in handleQuizElement"}];
+    } else {
+        return [{"error": "unknown case in handleQuizElement"}];
+    }
+}
+
 
 exports.build = function(qd, seed) {
     var result = exports.validateQuizDescriptor(qd);

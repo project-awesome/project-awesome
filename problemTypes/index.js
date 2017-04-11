@@ -1,7 +1,8 @@
 
 var problemTypes= {
     "fr-change-of-base": require("paq-fr-change-of-base"),
-    "mc-change-of-base": require("paq-mc-change-of-base")
+    "mc-change-of-base": require("paq-mc-change-of-base"),
+    "change-of-base": require("paq-change-of-base")
 };
 
 module.exports.problemTypes = problemTypes;
