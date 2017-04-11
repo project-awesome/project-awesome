@@ -33,10 +33,12 @@ handleQuizElement = function(quizElement, randomStream) {
         return [quizElement];
     }
     else if("repeat" in quizElement) { //
-        // get out the value for repeat call it count
-        // take the whole array of items and repeat it count times
-        // then call handleQuizElement on each one
-        return [{"error": "repeat not yet implemented in handleQuizElement"}];
+        var count = quizElement["repeat"];
+        var newQuestions = [];
+        for (i=0; i < count; i++) {
+            newQuestions = newQuestions.concat(handleQuizElement(quizElement["items"][0], randomStream));
+        }
+        return newQuestions;
     }
     else if("shuffle" in quizElement) { //
         // shuffle the order of the items in the array
@@ -51,6 +53,7 @@ handleQuizElement = function(quizElement, randomStream) {
         // for the first count of them, call handleQuizElement
         return [{"error": "choose not yet implemented in handleQuizElement"}];
     } else {
+        
         return [{"error": "unknown case in handleQuizElement"}];
     }
 }
