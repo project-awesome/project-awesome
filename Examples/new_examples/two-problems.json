@@ -1,0 +1,8 @@
+{
+	"version": "1.0",
+	"quizElements": [
+        { "label": "Example Label - mc cob repeat params" }, 
+        { "problemType": "change-of-base" },
+        { "problemType": "change-of-base" }
+    ]
+}
