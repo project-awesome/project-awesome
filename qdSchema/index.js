@@ -21,7 +21,7 @@ exports.qdSchema = {
       "type": "array",
       "items": {
         "$ref": "#/definitions/quizElement"
-      }
+      }    
     }
   },
   "definitions": {
@@ -54,14 +54,19 @@ exports.qdSchema = {
       },
       "additionalProperties": false
     },
-    "shuffle": {
-      "id": "#shuffle",
+    "repeat": {
+      "id": "#repeat",
+      "type": "object",
       "required": [
-        "shuffle"
+        "repeat",
+        "items"
       ],
       "additionalProperties": false,
       "properties": {
-        "shuffle": {
+        "repeat": {
+          "type": "integer"
+        },
+        "items": {
           "type": "array",
           "items": {
             "$ref": "#/definitions/quizElement"
@@ -89,19 +94,15 @@ exports.qdSchema = {
         }
       }
     },
-    "repeat": {
-      "id": "#repeat",
+    "shuffle": {
+      "id": "#shuffle",
       "type": "object",
       "required": [
-        "repeat",
-        "items"
+        "shuffle"
       ],
       "additionalProperties": false,
       "properties": {
-        "repeat": {
-          "type": "integer"
-        },
-        "items": {
+        "shuffle": {
           "type": "array",
           "items": {
             "$ref": "#/definitions/quizElement"
@@ -111,7 +112,10 @@ exports.qdSchema = {
     },
     "quizElement": {
       "id": "#quizElement",
-      "type": "object",
+      "type": [
+        "object",
+        "array"
+      ],
       "oneOf": [
         {
           "$ref": "#/definitions/problem"
@@ -123,12 +127,22 @@ exports.qdSchema = {
           "$ref": "#/definitions/repeat"
         },
         {
+          "$ref": "#/definitions/choose"
+        },
+        {
           "$ref": "#/definitions/shuffle"
         },
         {
-          "$ref": "#/definitions/choose"
+          "$ref": "#/definitions/quizElementList"
         }
       ]
+    },
+    "quizElementList": {
+      "id": "#quizElementList",
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/quizElement"
+      }
     }
   }
 }
