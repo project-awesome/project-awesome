@@ -30,6 +30,7 @@
     "concat-stream": "^1.5.2",
     "handlebars": "^4.0.5",
     "jquery": "^3.1.1",
+    "paq-C-pointer-types": "git+https://git@github.com/MichelleCraig/paq-C-pointer-types.git",
     "paq-change-of-base": "git+https://git@github.com/MichelleCraig/paq-change-of-base.git",
     "paq-fr-change-of-base": "git+https://git@github.com/project-awesome/paq-fr-change-of-base.git",
     "paq-mc-change-of-base": "git+https://git@github.com/project-awesome/paq-mc-change-of-base.git",
