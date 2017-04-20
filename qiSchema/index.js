@@ -1,61 +1,42 @@
 // This is the schema for quiz instances, expressed using http://json-schema.org/
 exports.qiSchema = {
   "type": "object",
-  "required": [
-    "errors",
-    "warnings",
-    "quizElements"
-  ],
+  "required": [ "errors", "warnings", "seed", "version", "quizElements" ],
   "additionalProperties": false,
   "properties": {
-    "version": {
-      "type": "string"
-    },
-    "errors": {
-      "type": "array",
-      "items": {
-        "type": "string"
-      }    
-    },
-    "warnings": {
-      "type": "array",
-      "items": {
-        "type": "string"
-      }
-    },
-    "quizElements": {
-      "type": "array",
-      "items": {
-        "$ref": "#/definitions/quizElement"
-      }    
-    }
+    "seed": { "type": "string" },
+    "version": { "type": "string" },
+    "errors": { "type": "array", "items": { "type": "string" } },
+    "warnings": { "type": "array", "items": { "type": "string" } },
+    "quizElements": { "type": "array", "items": { "$ref": "#/definitions/quizElement" } }
   },
   "definitions": {
     "label": {
       "id": "#label",
       "type": "object",
       "required": [ "label" ],
-      "properties": { "label": { "type": "string" } },
+      "properties": { "label": { "type": "string" },
+                      "warnings": {"type": "array", "items": {"type":"string"}}
+                     },
       "additionalProperties": false
     },
-    "mc-question": {
+          "mc-question": {
       "id": "#mc-question",
       "type": "object",
       "additionalProperties": false,
       "required": [
-        "outputType","problemType","points","questionText","distractors","answer","answerIndex"
+        "outputType","problemType","questionText","distractors","answer","answerIndex"
       ],
       "properties": {
-        "outputType": { "type": "string" },
+        "outputType": {"type": "string", "pattern":"mc"},
         "problemType": { "type": "string" },
-        "points": { "type": "number" },
         "questionText": { "type": "string" },
-        "distractors": {
-          "type": "array",
-          "items": { "type": "string" }
+        "distractors": { "type": "array", "items": { "type": "string" }
         },
         "answer": { "type": "string" },
-        "answerIndex": { "type": "integer" }
+        "answerIndex": { "type": "integer" },
+        "points": { "type": "number" },
+        "warnings": {"type": "array", "items": {"type":"string"}}
       }
     },
     "fr-question": {
@@ -63,14 +44,15 @@ exports.qiSchema = {
       "type": "object",
       "additionalProperties": false,
       "required": [
-        "outputType","problemType","points","questionText","answer"
+        "outputType","problemType","questionText","answer"
       ],
       "properties": {
-        "outputType": { "type": "string" },
+        "outputType": {"type": "string", "pattern":"fr"},
         "problemType": { "type": "string" },
-        "points": { "type": "number" },
         "questionText": { "type": "string" },
-        "answer": { "type": "string" }
+        "answer": { "type": "string" },
+        "points": { "type": "number" },
+        "warnings": {"type": "array", "items": {"type":"string"}}
       }
     },
     "custom-question": {
@@ -78,13 +60,14 @@ exports.qiSchema = {
       "type": "object",
       "additionalProperties": true,
       "required": [
-        "outputType","problemType","points","questionText"
+        "outputType","problemType","questionText"
       ],
       "properties": {
-        "outputType": { "type": "string" },
+        "outputType": {"type": "string", "pattern":"custom"},
         "problemType": { "type": "string" },
-        "points": { "type": "number" },
         "questionText": { "type": "string" },
+        "points": { "type": "number" },
+        "warnings": {"type": "array", "items": {"type":"string"}}
       }
     },
     "quizElement": {

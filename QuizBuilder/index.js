@@ -20,11 +20,14 @@ exports.getQuestions = function(descriptor, randomStream) {
 // return an array of new questions (even if there is only 1)
 handleQuizElement = function(quizElement, randomStream) {
     var newQuestions = [];
-    if("problemType" in quizElement) { // this is a single question
+    if("problemType" in quizElement) { // this is a single question 
+                                       // that might be a set of labels and questions
         var problemTypeRequested = quizElement.problemType;
         var problemTypeObject = ((problemTypeRequested in problems.problemTypes) 
                                        ? problems.problemTypes[problemTypeRequested] : null);
-        if (problemTypeObject == null) throw "Invalid Question Type: " + problemTypeRequested + " is not a defined problem type.";
+        if (problemTypeObject == null) 
+         throw "Invalid Question Type: " + problemTypeRequested + " is not a defined problem type.";
+
         //Generate an actual question, add it to the array
         var newQuestion = problemTypeObject.generate(randomStream, quizElement);
         return [newQuestion]; 
@@ -50,9 +53,10 @@ handleQuizElement = function(quizElement, randomStream) {
     }
     else if("choose" in quizElement) { //
         var newQuestions = [];
-        // get out the value for choose call it count
         var count = quizElement["choose"];
         if (count > quizElement["items"].length) {
+           // this is not handled properly 
+           //  -- filed issue #26 about this in project-awesome/project-awesome repo
            newQuestions.concat({"warning": "choose requested count greater than provided items"}) 
            count = quizElement["items"].length;
         }
@@ -63,6 +67,17 @@ handleQuizElement = function(quizElement, randomStream) {
             newQuestions = newQuestions.concat(handleQuizElement(quizElement["items"][i], randomStream));
         }
         return newQuestions;
+    } else if(quizElement instanceof Array) {
+
+        // for now this flattens any inner lists
+        // probably we want to keep some notion of nesting in the final JSON so that various
+        // formatters (HTML, latex) can add nested numbering 
+        // we should talk about this XXX
+        var newQuestions = [];
+        for (i=0; i< quizElement.length; i++) {
+            newQuestions = newQuestions.concat(handleQuizElement(quizElement[i], randomStream));
+        }
+        return newQuestions;
     } else {
         
         return [{"error": "unknown case in handleQuizElement"}];
@@ -71,7 +86,12 @@ handleQuizElement = function(quizElement, randomStream) {
 
 
 exports.build = function(qd, seed) {
+    var quiz = {};
+    quiz.errors = [];
+    quiz.warnings = [];
+
     var result = exports.validateQuizDescriptor(qd);
+    // needs attention for error handling XXX
     if (result.length > 0)
         throw new Error("Invalid Quiz Descriptor");
     if (!exports.checkSeed(seed)) 
@@ -79,11 +99,11 @@ exports.build = function(qd, seed) {
     if (typeof qd === 'string')
         qd = JSON.parse(qd);
     
-    var quiz = {};
     quiz.seed = seed;
     var s = parseInt(seed, 16);
     var randomStream = new randomModule.random(s);
-    quiz.questions = exports.getQuestions(qd, randomStream);
+    quiz.quizElements = exports.getQuestions(qd, randomStream);
+    quiz.version = qd.version;
 	return quiz;
 }
 
