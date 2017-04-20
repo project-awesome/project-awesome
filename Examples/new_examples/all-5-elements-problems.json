@@ -1,0 +1,60 @@
+{
+  "version": "1.0",
+  "quizElements": [
+    {
+      "label": "Example: all 5 elements"
+    },
+    {
+      "problemType": "change-of-base",
+      "points": 3
+    },
+    {
+      "shuffle": [
+        {
+          "problemType": "change-of-base",
+          "points" : 2,
+          "params": { "conversions": [{ "radix": { "from": 2, "to": 16 },
+                                        "range": { "min":0, "max":255 }}]}
+        },
+        {
+          "problemType": "change-of-base",
+          "points" : 3,
+          "params": { "conversions": [{ "radix": { "from": 16, "to": 2 },
+                                        "range": { "min":0, "max":255 }}]}
+        }
+      ]
+    },
+    {
+      "repeat": 3,
+      "items": [
+        {
+          "problemType": "change-of-base",
+          "params": { "conversions": [{ "radix": { "from": 8, "to": 2 },
+                                        "range": { "min":0, "max":255 }}]},
+          "points": 4
+        }
+      ]
+    },
+    {
+      "choose": 2,
+      "items": [
+        {
+          "label": "A: select 2 of 3"
+        },
+        {
+          "problemType": "change-of-base",
+          "params": { "conversions": [{ "radix": { "from": 8, "to": 2 },
+                                        "range": { "min":0, "max":255 }}]},
+          "points": 4
+        },
+        {
+          "label": "B select 2 of 3"
+        },
+        {
+          "label": "C select 2 of 3"
+        }
+        ]
+    }
+    
+  ]
+}

@@ -1,0 +1,11 @@
+{
+"version": "1.0",
+"quizElements": [
+            { "problemType": "change-of-base",
+              "params" : {"outputType": "fr"}
+            },
+            { "problemType": "change-of-base",
+              "params" : {"outputType": "mc"}
+            }
+  ]
+}
