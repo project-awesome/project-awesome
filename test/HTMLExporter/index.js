@@ -10,13 +10,14 @@ describe('HTMLExporter', function() {
         "quizElements": [{ 
              "repeat": 2,
              "items" : [{
-                "problemType": "fr-change-of-base"
+                "problemType": "change-of-base"
               }]
         },
         {
             "repeat": 3,
             "items" : [{
-                "problemType": "mc-change-of-base"
+                "problemType": "change-of-base",
+                "params": {"outputType": "mc"}
             }]
         }]
     };
