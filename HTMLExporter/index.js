@@ -7,19 +7,19 @@ var quizTemplate = "<!DOCTYPE html>\n"
 	+ "    </head>\n"
 	+ "    <body>\n"
 	+ "        <h1>Computer Science Quiz</h1>\n"
-	+ "        {{#questions}}\n"
+	+ "        {{#quizElements}}\n"
 	+ "        <div class=\"question\">\n"
 	+ "            {{#if mc}}\n"
-	+ "            <p>{{this.question}}</p>\n"
-	+ "                {{#choices}}\n"
+	+ "            <p>{{this.questionText}}</p>\n"
+	+ "                {{#distractors}}\n"
 	+ "                    <p>{{#letterChoice @index}}{{/letterChoice}}. {{this}}</p>\n"
-	+ "                {{/choices}}\n"
+	+ "                {{/distractors}}\n"
 	+ "            {{else}}\n"
-	+ "                <p>{{this.question}}</p>\n"
+	+ "                <p>{{this.questionText}}</p>\n"
 	+ "                <p><br><br><br></p>\n"
 	+ "            {{/if}}\n"
 	+ "        </div>\n"
-	+ "        {{/questions}}\n"
+	+ "        {{/quizElements}}\n"
 	+ "    </body>\n"
 	+ "</html>";
 
@@ -27,8 +27,8 @@ function generateHTML(qd, seed) {
 
 	var paQuiz = QuizBuilder.build(qd, seed);
 
-    paQuiz.questions.forEach(function(q) {
-    q.mc = q.format == "multiple-choice";
+    paQuiz.quizElements.forEach(function(q) {
+    q.mc = q.outputType == "mc";
 }, this);
 
     var letters = ["A", "B", "C", "D", "E"];
@@ -36,7 +36,7 @@ function generateHTML(qd, seed) {
         return letters[index];
     })
     
-    var data = {"questions":paQuiz.questions};
+    var data = {"quizElements":paQuiz.quizElements};
     var text = quizTemplate;
     
     var template = handlebars.compile(text);
