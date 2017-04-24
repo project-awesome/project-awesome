@@ -2,6 +2,7 @@
 "version": "1.0",
 "quizElements": [
     { "problemType": "C-pointer-types",
+       "title": "QD provided type",
       "points": 2
     }
   ]

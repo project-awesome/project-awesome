@@ -6,9 +6,11 @@ describe('MoodleExporter', function () {
     var validSeed = 'abcd1234';
     var validQD = {
         "version": "0.1",
-        "questions": [{
-            "question": "mc-change-of-base",
-            "repeat": 2,
+        "quizElements": [{
+             "repeat": 2,
+             "items" : [{
+                "problemType": "change-of-base"
+              }]
         }]
     };
     describe('generateMoodleXML(qd, seed)', function () {
@@ -66,13 +68,13 @@ describe('MoodleExporter', function () {
 
                     var qd = {
                         "version": "0.1",
-                        "questions": [{
-                            "question": "mc-change-of-base",
-                            "repeat": 1,
+                        "quizElements": [{
+                            "problemType": "change-of-base",
+                            "title": "Title supplied in QD",
+                            "params": {"outputType":"mc"}
                         },
                         {
-                            "question": "fr-change-of-base",
-                            "repeat": 1,
+                            "problemType": "change-of-base",
                         }]
                     };
 
@@ -85,15 +87,15 @@ describe('MoodleExporter', function () {
 
                 
                 describe('first question title', function () {
-                    it('should be Change of Base Multiple Choice', function () {
-                        expect(xmlResult.quiz.question[0].name[0].text[0]).to.equal("Change of Base Multiple Choice");
+                    it('should be Title supplied in QD', function () {
+                        expect(xmlResult.quiz.question[0].name[0].text[0]).to.equal("Title supplied in QD");
                     });
                 });
 
 
                 describe('second question title', function () {
-                    it('should be Change of Base Free Response', function () {
-                        expect(xmlResult.quiz.question[1].name[0].text[0]).to.equal("Change of Base Free Response");
+                    it('should be Change of Base', function () {
+                        expect(xmlResult.quiz.question[1].name[0].text[0]).to.equal("Change of Base");
                     });
                 });
 
@@ -105,15 +107,13 @@ describe('MoodleExporter', function () {
                 describe('multiple choice format', function () {
 
                     beforeEach(function (done) {
-                        problemTypeRequested  = 'mc-change-of-base';
-                        count = 2;
-                        questionName = 'Sample Question Name';
 
                         var qd = {
                             "version": "0.1",
-                            "questions": [{
-                                "question": problemTypeRequested,
-                                "repeat": count,
+                            "quizElements": [{
+                                "repeat": 22,
+                                "items" : [{"problemType": "change-of-base",
+                                            "params": {"outputType": "mc"}}]
                             }]
                         };
                         xmlString = MoodleExporter.generateMoodleXML(qd, validSeed);
@@ -133,7 +133,7 @@ describe('MoodleExporter', function () {
 
                     describe('xml question title', function () {
                         it('should be Change of Base Multiple Choice', function () {
-                            expect(xmlResult.quiz.question[0].name[0].text[0]).to.equal("Change of Base Multiple Choice");
+                            expect(xmlResult.quiz.question[0].name[0].text[0]).to.equal("Change of Base");
                         });
                     });
                 });
@@ -141,14 +141,13 @@ describe('MoodleExporter', function () {
                 describe('input format', function () {
 
                     beforeEach(function (done) {
-                        problemTypeRequested = 'fr-change-of-base';
-                        count = 2;
-                        questionName = 'Sample Question Name';
                         var qd = {
                             "version": "0.1",
-                            "questions": [{
-                                "question": problemTypeRequested,
-                                "repeat": count,
+                            "quizElements": [{
+                                "repeat": 2,
+                                "items": [{
+                                "problemType": 'change-of-base',
+                                "title": "Problem Title"}]
                             }]
                         };
                         xmlString = MoodleExporter.generateMoodleXML(qd, validSeed);
@@ -162,7 +161,7 @@ describe('MoodleExporter', function () {
 //TODO: shortanswer vs free-response
                     describe('xml output type property', function () {
 
-                        it('should have set the output type attribute to shortanswer', function () {
+                        it('should have set the output type attribute to fr', function () {
                             for (var i = 0; xmlResult.quiz.question.length > i; i++)
                                 expect(xmlResult.quiz.question[i].$.type).to.equal('shortanswer');
                         });
@@ -170,8 +169,8 @@ describe('MoodleExporter', function () {
                     });
 
                     describe('xml question title', function () {
-                        it('should be Change of Base Free Response', function () {
-                            expect(xmlResult.quiz.question[0].name[0].text[0]).to.equal("Change of Base Free Response");
+                        it('should be Problem Title', function () {
+                            expect(xmlResult.quiz.question[0].name[0].text[0]).to.equal("Problem Title");
                         });
                     });
 

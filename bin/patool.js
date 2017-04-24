@@ -40,6 +40,7 @@ program
   .on('--help', function() {
     console.log('  Examples:');
     console.log();
+    console.log('    $ patool list listableType');
     console.log('    $ patool list problemType');
   });
 

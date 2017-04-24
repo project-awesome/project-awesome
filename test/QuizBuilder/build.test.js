@@ -50,9 +50,9 @@ describe('QuizBuilder', function() {
 			it('should be an object', function() {
 				expect(res).to.be.an('object');
 			});
-			describe('questions', function() {
+			describe('quizElements', function() {
 				it('should be assign result of getQuestions', function() {
-					expect(res.questions).to.equal("questions-double");
+					expect(res.quizElements).to.equal("questions-double");
 				});
 			});
 			describe('seed', function() {

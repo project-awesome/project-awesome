@@ -2,10 +2,14 @@
 "version": "1.0",
 "quizElements": [
             { "problemType": "change-of-base",
-              "params" : {"outputType": "fr"}
-            },
+              "params" : {"outputType": "mc",
+
+
+                        "conversions": [{ "radix": { "from": 2, "to": 16 },
+                                        "range": { "min":0, "max":255 }}]}
+        },
             { "problemType": "change-of-base",
-              "params" : {"outputType": "mc"}
+              "params" : {"outputType": "fr"}
             }
   ]
 }

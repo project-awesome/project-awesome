@@ -1,6 +1,5 @@
 var expect = require("chai").expect;
 var HTMLExporter = require('../../HTMLExporter');
-var expected = 'test/HTMLExporter/quizResult.html';
 var fs = require('fs');
 
 describe('HTMLExporter', function() {
@@ -24,7 +23,7 @@ describe('HTMLExporter', function() {
     var badQd = {
         "version" : "0.1",
         "quizElements": [{
-            "problemType": "invalid problemType",
+            "problemType": "nonExistantProblemType",
         }]
     };
     describe('generateHTML(question descriptor, seed)', function () {
@@ -33,7 +32,7 @@ describe('HTMLExporter', function() {
 
                 it('should throw an error.', function () {
                     expect(function () { HTMLExporter.generateHTML(badQd, seed) })
-					.to.throw(Error);
+					.to.throw('Invalid Question Type: nonExistantProblemType is not a defined problem type.');
                 });
 
             });
@@ -45,11 +44,16 @@ describe('HTMLExporter', function() {
                 });
 
             });
-        it('should generate quizzes in HTML', function(){
+/*        
+  For now, while we are in flux about so much of the HTML format, don't
+  include this type of test which would need constant updating.
+
+         it('should generate quizzes in HTML', function(){
+           var expected = 'test/HTMLExporter/quizResult.html';
            var result = HTMLExporter.generateHTML(qd, seed);
             expect(result.trim()).to.equal(fs.readFileSync(expected, 'utf-8').trim());
-
         });
+*/
         
     })
         
