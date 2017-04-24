@@ -30,6 +30,7 @@ exports.qiSchema = {
       "properties": {
         "outputType": {"type": "string", "pattern":"mc"},
         "problemType": { "type": "string" },
+        "title": { "type": "string" },
         "questionText": { "type": "string" },
         "distractors": { "type": "array", "items": { "type": "string" }
         },
@@ -51,6 +52,7 @@ exports.qiSchema = {
         "problemType": { "type": "string" },
         "questionText": { "type": "string" },
         "answer": { "type": "string" },
+        "title": { "type": "string" },
         "points": { "type": "number" },
         "warnings": {"type": "array", "items": {"type":"string"}}
       }
@@ -66,6 +68,7 @@ exports.qiSchema = {
         "outputType": {"type": "string", "pattern":"custom"},
         "problemType": { "type": "string" },
         "questionText": { "type": "string" },
+        "title": { "type": "string" },
         "points": { "type": "number" },
         "warnings": {"type": "array", "items": {"type":"string"}}
       }

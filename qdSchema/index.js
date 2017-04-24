@@ -39,6 +39,9 @@ exports.qdSchema = {
         "points": {
           "type": "number"
         },
+        "title": {
+          "type": "string"
+        },
         "params": {
           "type": "object"
         }

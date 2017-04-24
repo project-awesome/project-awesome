@@ -26,7 +26,7 @@ handleQuizElement = function(quizElement, randomStream) {
         var problemTypeObject = ((problemTypeRequested in problems.problemTypes) 
                                        ? problems.problemTypes[problemTypeRequested] : null);
         if (problemTypeObject == null) 
-         throw "Invalid Question Type: " + problemTypeRequested + " is not a defined problem type.";
+          throw (new Error("Invalid Question Type: " + problemTypeRequested + " is not a defined problem type."));
 
         //Generate an actual question, add it to the array
         var newQuestion = problemTypeObject.generate(randomStream, quizElement);

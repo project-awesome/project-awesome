@@ -1,0 +1,21 @@
+{
+"version": "1.0",
+"quizElements": [
+    { "label": "To test titles and points, passed through or supplied"},
+    { "problemType": "change-of-base",
+      "title": "Title supplied by quiz Descriptor",
+      "points": 2,
+      "params" : {"outputType": "fr"}
+    },
+    { "problemType": "change-of-base",
+      "params": {"outputType": "mc"},
+      "points": 4
+    },
+    { "problemType": "C-pointer-types",
+      "title": "Title given by quiz Descriptor",
+      "points": 1
+    },
+    { "problemType": "C-pointer-types"
+    }
+  ]
+}
