@@ -1,6 +1,8 @@
 var QuizBuilder = require('../QuizBuilder');
 var xml = require('xml');
 
+var cloze = require('./cloze');
+
 function paQuestionToMoodleJSON(question) {
     // If neither the quizDescriptor nor problem generator supplied a title
     if ( !("title" in question)) {
@@ -69,7 +71,6 @@ function generateMoodleXML(qd, seed) {
 	return xml([moodleQuizJSON]);
 
 }
-
 
 module.exports.generateMoodleXML = generateMoodleXML;
 

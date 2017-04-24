@@ -13,6 +13,7 @@ describe('MoodleExporter', function () {
               }]
         }]
     };
+
     describe('generateMoodleXML(qd, seed)', function () {
         describe('throwing errors', function () {
             describe('when qd is invalid problemType', function () {
