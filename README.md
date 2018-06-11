@@ -55,10 +55,11 @@ To define `patool` as a alias for running the project-awesome command line tool 
 
 *Before* doing this, you might need to install nvm and that might require
 xcode tools. 
-    * xcode-select --install
-    * get version for next command from https://github.com/creationix/nvm
-    * then use curl command to install nvm curl https://raw.githubusercontent.com/creationix/nvm/v0.31.0/install.sh | bash
-    * source .bashrc     (to load nvm)
+
+   * `xcode-select --install`
+   * get version for next command from https://github.com/creationix/nvm
+   * then use `curl` command to install `nvm curl https://raw.githubusercontent.com/creationix/nvm/v0.31.0/install.sh | bash`
+   * `source .bashrc`     (to load nvm)
 
 
 Then, you should be able to run `patool` at the command line.  The purpose of the 
