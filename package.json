@@ -57,5 +57,10 @@
     "browserify-shim": {
 	"jquery": "$",
 	"project-awesome": "pa"
-    }
+    },
+
+  "scripts": {
+    "bundle": "browserify -t [ browserify-shim --global ] pa.js > browserified/project-awesome-browserified.js"
+  }
+
 }

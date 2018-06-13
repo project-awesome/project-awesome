@@ -1,0 +1,35 @@
+<html>
+<head>
+<script
+  src="https://code.jquery.com/jquery-3.3.1.js"
+  integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
+  crossorigin="anonymous"></script>
+
+</head>
+<body>
+
+  <div id="putHere">
+    </div>
+  <script src="../browserified/project-awesome-browserified.js"></script>
+  <script>
+    $( document ).ready(function() {
+
+    qd= {
+    "version" : "0.1",
+    "questions": [{
+	    "question": "fr-change-of-base",
+	    "repeat": 5
+	}]
+    }
+
+    
+    console.log("ready function called");
+    var result= pa.generate("html",JSON.stringify(qd),"abcd1234");
+    console.log(result);
+    $("#putHere").append("<ol>" + result + "</ol>"); 
+   });
+
+  </script>
+
+</body>
+</html>

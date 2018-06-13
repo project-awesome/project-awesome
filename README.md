@@ -92,3 +92,18 @@ patool generate -h
 etc.
 
 ```
+
+# Browserify
+
+Use
+
+```
+npm run bundle
+```
+
+to access the bundle command that is defined in the `scripts` part of `package.json`.
+
+Following this example: <https://gist.github.com/kottenator/0623cf601ea167f31cfb3150d8b25b10>
+
+Note that the `pa.js` script is the the one that gets browserified.
+
